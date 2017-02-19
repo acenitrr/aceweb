@@ -20,7 +20,7 @@ from login.views import import_login_table,email_verification,signup_view
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^import/',import_login_table),
-    url(r'^verify_email',email_verification),
+    url(r'^verify_email/(?P<value>.+)$',email_verification),
     url(r'^signup/',signup_view),
 
 ]

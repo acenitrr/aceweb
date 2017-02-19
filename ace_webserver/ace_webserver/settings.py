@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'alumni',
     'tinymce',
     'login',
-    'keys',
+    'custom_key',
 ]
 
 MIDDLEWARE = [

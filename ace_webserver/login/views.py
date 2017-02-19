@@ -9,12 +9,17 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.contrib.auth import authenticate, login,logout
 from django.core.mail import EmailMessage,get_connection
-from keys.models import *
+from custom_key.models import *
 from django.core.mail.backends.smtp import EmailBackend
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
+#Group_id distributions
+# 1 - student
+# 2 - faculty
+# 3 - alumni
+# 4 - developer
 @login_required
 @csrf_exempt
 def import_login_table(request):
@@ -22,7 +27,7 @@ def import_login_table(request):
 		user=str(request.user)
 		try:
 			login_data_row=login_data.objects.get(login_id=str(user))
-			if login_data_row.group_id=='admin':
+			if login_data_row.group_id==5:
 			    if request.method == "POST":
 			    	print "27"
 			        form = UploadFileForm(request.POST,request.FILES)
@@ -41,32 +46,32 @@ def import_login_table(request):
 		return HttpResponse("page not found")
 
 
-def email_verification(request):
+def email_verification(request,value):
 	try:
-		#email=str(request.GET.get('email'))
-		#tp=str(request.GET.get('otp'))
-		#group_id=str(request.GET.get('group_id'))
-		email_decoded_json=jwt.decode(email,'secret',algorithms=['HS256'])
+		print value
+		email_decoded_json=jwt.decode(value,'abc123',algorithms =['HS256'])
+		print email_decoded_json
 		email=email_decoded_json['email']
 		roll_no=email_decoded_json['roll_no']
 		# otp=jwt.decode(otp,'secret',algorithms=['HS256'])
 		print email
-		print otp
+		print roll_no
+		# print otp
 		try:
 			login_data_row=login_data.objects.get(email=email)
-			if login_data_row.otp==otp:
-				setattr(login_data_row,'email_flag',True)
-				login_data_row.save()
-				if group_id=="student":
-					return HttpResponse("student signup")
-				else:
-					if group_id=="faculty":
-						return HttpResponse("faculty signup")
-					else:
-						if group_id=="alumni":
-							return HttpResponse("alumni signup")
+			group_id=login_data_row.group_id
+			setattr(login_data_row,'email_flag',True)
+			login_data_row.save()
+			if group_id=="student":
+				return HttpResponse("student signup")
 			else:
-				return HttpResponse("email verification not done")
+				if group_id=="faculty":
+					return HttpResponse("faculty signup")
+				else:
+					if group_id=="alumni":
+						return HttpResponse("alumni signup")
+					else:
+						return HttpResponse("ok")
 		except:
 			return HttpResponse("email_id and otp not get")
 	except:
@@ -111,28 +116,40 @@ def signup_view(request):
 		if request.method=='POST':
 			try:
 				print "try"
+				# roll_no='151258'
 				roll_no=str(request.POST.get('roll_no'))
 				print roll_no
+				# name='arpit'
 				name=str(request.POST.get('name'))
 				print name
 				mobile=str(request.POST.get('mobile'))
 				email=str(request.POST.get('email'))
+				# email='arpitj938@gmail.com'
 				print email
-				otp=str(random.randint(111111,999999))
 				try:
 					print "try 1"
 					login_data_row=login_data.objects.get(login_id=roll_no)
 					group_id=str(login_data_row.group_id)
-					if login_data_row.email is None:
+					print group_id
+					if login_data_row.email_flag==True:
+						print 'your account is registered already'
+						# return HttpResponse("your account is registered already")
+						return HttpResponse(request,"signup.html",{'msg':'your account is registered already'})	
+					else:
 						print roll_no
 						setattr(login_data_row,'otp',int(otp))
 						setattr(login_data_row,'email',str(email))
 						login_data_row.save()
-						key_data_row=keys_data.objects.get(flag=True)
-						email_json={'id':email,
-						'roll_no':roll_no}
-						email_encoded_url=jwt.encode(email,'abc123s',algorithms=['HS256'])
-						link=""+"/verify_email/"+email_encoded_url
+						host_email=str(custom_keys_data.objects.get(key='host').value)
+						port_email=custom_keys_data.objects.get(key='port').value
+						username_email=str(custom_keys_data.objects.get(key='username').value)
+						password_email=str(custom_keys_data.objects.get(key='password').value)
+						print host_email
+						email_json={'email':str(email),
+						'roll_no':str(roll_no)}
+						email_encoded_url=jwt.encode(email_json,'abc123',algorithm='HS256')
+						print email_encoded_url
+						link=request.scheme+"://"+request.get_host()+"/verify_email/"+email_encoded_url
 						body="""welcome %s to Association of Computer engg.
 
 kindly click on the link below to complete email verifications
@@ -141,19 +158,16 @@ kindly click on the link below to complete email verifications
 Thanks and Regards,
 ACE , NIT Raipur"""
 						print body % (name,link)
-						backend = EmailBackend(host=str(key_data_row.host), port=int(key_data_row.port), username=str(key_data_row.username), 
-			                       password=str(key_data_row.password), use_tls=True, fail_silently=True)
+						backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
+			                       password=str(password_email), use_tls=True, fail_silently=True)
 						EmailMsg=EmailMessage("ACE",body % (name,link),'no-reply@gmail.com',[email] ,connection=backend)
 						EmailMsg.send()
 						return HttpResponse("done")
-					else:
-						if login_data_row.email_flag==True:
-							return HttpResponse(request,"signup.html",{'msg':'your account is registered already'})
-						else:
-							return HttpResponse(request,"signup.html",{'msg':'your account is pending for email verification'})
 				except:
+					print 'enroll_no is not valid'
 					return render(request,"signup.html",{'msg':'enroll_no is not valid'})
 			except:
+				print 'enroll_no not get'
 				return render(request,"signup.html",{'msg':'enroll_no not get'})
 		else:
 			return render(request,"signup.html")
