@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'tinymce',
     'login',
     'custom_key',
+    'internal_key',
 ]
 
 MIDDLEWARE = [

@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.core.mail import EmailMessage,get_connection
 from custom_key.models import *
 from django.core.mail.backends.smtp import EmailBackend
+from internal_key.models import *
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
@@ -49,7 +50,9 @@ def import_login_table(request):
 def email_verification(request,value):
 	try:
 		print value
-		email_decoded_json=jwt.decode(value,'abc123',algorithms =['HS256'])
+		jwt_key=str(internal_key_data.objects.get(key='jwt_key').value)
+		print jwt_key
+		email_decoded_json=jwt.decode(value,jwt_key,algorithms =['HS256'])
 		print email_decoded_json
 		email=email_decoded_json['email']
 		roll_no=email_decoded_json['roll_no']
@@ -147,7 +150,8 @@ def signup_view(request):
 						print host_email
 						email_json={'email':str(email),
 						'roll_no':str(roll_no)}
-						email_encoded_url=jwt.encode(email_json,'abc123',algorithm='HS256')
+						jwt_key=str(internal_key_data.objects.get(key='jwt_key').value)
+						email_encoded_url=jwt.encode(email_json,jwt_key,algorithm='HS256')
 						print email_encoded_url
 						link=request.scheme+"://"+request.get_host()+"/verify_email/"+email_encoded_url
 						body="""welcome %s to Association of Computer engg.
