@@ -154,17 +154,11 @@ def signup_view(request):
 						email_encoded_url=jwt.encode(email_json,jwt_key,algorithm='HS256')
 						print email_encoded_url
 						link=request.scheme+"://"+request.get_host()+"/verify_email/"+email_encoded_url
-						body="""welcome %s to Association of Computer engg.
-
-kindly click on the link below to complete email verifications
-%s
-
-Thanks and Regards,
-ACE , NIT Raipur"""
-						print body % (name,link)
+						email_body=str(email_send_data.objects.get(key='email_verify').email_data)
+						print email_body % (name,link)
 						backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
 			                       password=str(password_email), use_tls=True, fail_silently=True)
-						EmailMsg=EmailMessage("ACE",body % (name,link),'no-reply@gmail.com',[email] ,connection=backend)
+						EmailMsg=EmailMessage("ACE",email_body % (name,link),'no-reply@gmail.com',[email] ,connection=backend)
 						EmailMsg.send()
 						return HttpResponse("done")
 				except:
