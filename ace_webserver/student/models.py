@@ -15,15 +15,18 @@ class student_data(models.Model):
 	# 	(7,"7th semester"),
 	# 	(8,"8th semester"),
 	# 	)
-	sem=models.SmallIntegerField(default=0)
+	sem=models.IntegerField(default=0)
 	mobile=models.CharField(max_length=10,blank=True,null=True)
 	email=models.CharField(max_length=200,blank=True,null=True)
 	linkedin_url=models.CharField(max_length=500,blank=True,null=True)
 	github_url=models.CharField(max_length=500,blank=True,null=True)
 	photo=models.ImageField(upload_to='student_images/',default="default.png")
 
+	def __unicode__(self):
+		return str(self.roll_no)
+
 class skill_data(models.Model):
-	roll_no=models.DecimalField(decimal_places=0,max_digits=10,default=0)
+	roll_no=models.ForeignKey(student_data)
 	skill=models.CharField(max_length=200,blank=True,null=True)
 
 

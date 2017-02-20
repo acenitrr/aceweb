@@ -16,5 +16,7 @@ class alumni_data(models.Model):
 	designation=models.CharField(max_length=300,blank=True,null=True)
 	email=models.CharField(max_length=300,blank=True,null=True)
 	other=models.TextField(blank=True,null=True)
+	modified= models.DateTimeField(auto_now=True,auto_now_add=False)
+	created= models.DateTimeField(auto_now=False,auto_now_add=True)
 
 # Create your models here.

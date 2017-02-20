@@ -17,13 +17,21 @@ class faculty_data(models.Model):
 	email=models.CharField(max_length=300,blank=True,null=True)
 	mobile=models.CharField(max_length=20,blank=True,null=True)
 	photo=models.ImageField(upload_to="faculty_images/",default="media/default.png")
-
-class area_of_interest_data(models.Model):
-	faculty_id=models.SmallIntegerField(primary_key=True)
-	area_of_interest=models.CharField(max_length=300,blank=True,null=True)
-
-class other_details_data(models.Model):
-	faculty_id=models.SmallIntegerField(primary_key=True)
+	modified= models.DateTimeField(auto_now=True,auto_now_add=False)
+	created= models.DateTimeField(auto_now=False,auto_now_add=True)
 	other_details=HTMLField()
+	area_of_interest=models.CharField(max_length=300,blank=True,null=True)
+	
+# class area_of_interest_data(models.Model):
+# 	faculty_id=models.SmallIntegerField(primary_key=True)
+# 	area_of_interest=models.CharField(max_length=300,blank=True,null=True)
+# 	modified= models.DateTimeField(auto_now=True,auto_now_add=False)
+# 	created= models.DateTimeField(auto_now=False,auto_now_add=True)
 
-# Create your models here.
+# class other_details_data(models.Model):
+# 	faculty_id=models.SmallIntegerField(primary_key=True)
+
+# 	modified= models.DateTimeField(auto_now=True,auto_now_add=False)
+# 	created= models.DateTimeField(auto_now=False,auto_now_add=True)
+
+# # Create your models here.

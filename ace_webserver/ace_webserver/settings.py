@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'login',
     'custom_key',
     'internal_key',
+    'notice',
+    'announcement',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
