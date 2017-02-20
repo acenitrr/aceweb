@@ -12,6 +12,9 @@ from django.core.mail import EmailMessage,get_connection
 from custom_key.models import *
 from django.core.mail.backends.smtp import EmailBackend
 from internal_key.models import *
+from student.models import *
+from faculty.models import *
+from alumni.models import *
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
@@ -65,13 +68,13 @@ def email_verification(request,value):
 			group_id=login_data_row.group_id
 			setattr(login_data_row,'email_flag',True)
 			login_data_row.save()
-			if group_id=="student":
+			if group_id==1:
 				return HttpResponse("student signup")
 			else:
-				if group_id=="faculty":
+				if group_id==2:
 					return HttpResponse("faculty signup")
 				else:
-					if group_id=="alumni":
+					if group_id==3:
 						return HttpResponse("alumni signup")
 					else:
 						return HttpResponse("ok")
@@ -132,17 +135,47 @@ def signup_view(request):
 				try:
 					print "try 1"
 					login_data_row=login_data.objects.get(login_id=roll_no)
-					group_id=str(login_data_row.group_id)
+					group_id=login_data_row.group_id
 					print group_id
 					if login_data_row.email_flag==True:
 						print 'your account is registered already'
 						# return HttpResponse("your account is registered already")
-						return HttpResponse(request,"signup.html",{'msg':'your account is registered already'})	
+						return render(request,"signup.html",{'msg':'your account is registered already'})	
 					else:
 						print roll_no
-						setattr(login_data_row,'otp',int(otp))
+						if group_id==1:
+							try:
+								student_data_row=student_data.objects.get(roll_no=roll_no)
+								setattr(student_data_row,'name',str(name))
+								setattr(student_data_row,'mobile',str(mobile))
+								setattr(student_data_row,'email',str(email))
+								student_data_row.save()
+							except:
+								student_data.objects.create(roll_no=roll_no,name=name,email=email,mobile=mobile)
+								print '148'
+						else:
+							if group_id==2:
+								try:
+									faculty_data_row=faculty_data.objects.get(faculty_id=roll_no)
+									setattr(faculty_data_row,'name',str(name))
+									setattr(faculty_data_row,'mobile',str(mobile))
+									setattr(faculty_data_row,'email',str(email))
+									faculty_data_row.save()
+								except:
+									faculty_data.objects.create(faculty_id=roll_no,name=name,email=email,mobile=mobile)
+							else:
+								if group_id==3:
+									try:
+										alumni_data_row=alumni_data.objects.get(roll_no=roll_no)
+										setattr(alumni_data_row,'name',str(name))
+										setattr(alumni_data_row,'mobile',str(mobile))
+										setattr(alumni_data_row,'email',str(email))
+										alumni_data_row.save()
+									except:
+										alumni_data.objects.create(roll_no=roll_no,name=name,email=email,mobile=mobile)
 						setattr(login_data_row,'email',str(email))
 						login_data_row.save()
+						print '160'
 						host_email=str(custom_keys_data.objects.get(key='host').value)
 						port_email=custom_keys_data.objects.get(key='port').value
 						username_email=str(custom_keys_data.objects.get(key='username').value)

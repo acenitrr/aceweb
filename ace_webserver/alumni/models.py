@@ -1,9 +1,10 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from tinymce.models import HTMLField
 
 class alumni_data(models.Model):
-	enroll_no=models.CharField(primary_key=True,max_length=20,blank=False,null=False)
+	roll_no=models.CharField(primary_key=True,max_length=20,blank=False,null=False)
 	name=models.CharField(max_length=200,blank=True,null=True)
 	mobile=models.CharField(max_length=20,blank=True,null=True)
 	# current_status=(
@@ -15,6 +16,7 @@ class alumni_data(models.Model):
 	company_institue=models.CharField(max_length=300,blank=True,null=True)
 	designation=models.CharField(max_length=300,blank=True,null=True)
 	email=models.CharField(max_length=300,blank=True,null=True)
-	other=models.TextField(blank=True,null=True)
+	other=HTMLField()
+	photo=models.ImageField(upload_to="alumni_images/",default="default.png")
 
 # Create your models here.

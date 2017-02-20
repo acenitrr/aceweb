@@ -16,7 +16,7 @@ class faculty_data(models.Model):
 	education=models.CharField(max_length=300,blank=True,null=True)
 	email=models.CharField(max_length=300,blank=True,null=True)
 	mobile=models.CharField(max_length=20,blank=True,null=True)
-	photo=models.ImageField(upload_to="faculty_images/",default="media/default.png")
+	photo=models.ImageField(upload_to="faculty_images/",default="default.png")
 
 class area_of_interest_data(models.Model):
 	faculty_id=models.SmallIntegerField(primary_key=True)
