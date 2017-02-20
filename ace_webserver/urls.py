@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from login.views import import_login_table,email_verification,signup_view
 
-urlpatterns = [
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^import/',import_login_table),
