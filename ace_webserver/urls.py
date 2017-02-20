@@ -18,10 +18,17 @@ from django.contrib import admin
 from login.views import import_login_table,email_verification,signup_view
 
 urlpatterns = [
+urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^import/',import_login_table),
     url(r'^verify_email/(?P<value>.+)/$',email_verification),
     url(r'^signup/',signup_view),
+    #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
+    #url(r'^profile_search/',signup_view),
+    #url(r'^notice/$',signup_view),
+    #url(r'^announcement/',signup_view),
+    #url(r'^syllabus/$',signup_view),
+    #url(r'^academics/',signup_view),
 
 ]
 admin.site.site_header = "CSE Administration"#"Code Nicely's Administration"
