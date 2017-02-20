@@ -6,7 +6,17 @@
 	</title>
 </head>
 <body >
-	<p id='demo'></p>
+	{{photo|safe}}
+	roll_no= {{login_id|safe}}
+	name= {{name|safe}}
+	semester= {{sem|safe}}
+	mobile= {{mobile|safe}}
+	email id={{email|safe}}
+	github url= {{github_url|safe}}
+	linkedin url= {{linkedin_url|safe}}
+	<br><br>
+	{{edit|safe}}
+skills=<p id='demo'></p>
  <script>
  window.onload = function() {
   myFunction();

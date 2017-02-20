@@ -49,14 +49,47 @@ def signup_student(request):
 			return render(request,'signup_student.html')
 
 
+@login_required
+def student_profile(request,roll_no):
+	try:
+		JSON_response={}
+		login_id=str(request.user)
+		if login_id==roll_no:
+			JSON_response['login_id']=login_id
+			student_data_row=student_data.objects.get(roll_no=roll_no)
+			JSON_response['name']=student_data_row.name
+			JSON_response['mobile']=student_data_row.mobile
+			JSON_response['email']=student_data_row.email
+			JSON_response['sem']=student_data_row.sem
+			photo=str(student_data_row.photo)
+			photo_url='<img src='+'"/media/'+photo+'"'+'>'
+			JSON_response['photo']=photo_url
+			print photo_url
+			JSON_response['skill']=student_data_row.skill
+			JSON_response['linkedin_url']=student_data_row.linkedin_url
+			JSON_response['github_url']=student_data_row.github_url
+			edit='<a href="'+str(request.scheme+'://'+request.get_host()+'/edit_student_profile/')+'">edit your profile</a>'
+			JSON_response['edit']=edit
+		else:
+			print login_id
 
-def user_profile(request):
-	login_id=str(request.user)
-	print login_id
-	student_data_row=student_data.objects.get(roll_no=login_id)
-	skill=str(student_data_row.skill)
-	print skill
-	return render(request,'show_profile.html',{'skill':skill})
+			JSON_response['login_id']=login_id
+			student_data_row=student_data.objects.get(roll_no=roll_no)
+			JSON_response['name']=student_data_row.name
+			JSON_response['mobile']=student_data_row.mobile
+			JSON_response['email']=student_data_row.email
+			JSON_response['sem']=student_data_row.sem
+			photo=str(student_data_row.photo)
+			photo_url='<img src='+'"/media/'+photo+'"'+'>'
+			JSON_response['photo']=photo_url
+			print photo_url
+			JSON_response['skill']=student_data_row.skill
+			JSON_response['linkedin_url']=student_data_row.linkedin_url
+			JSON_response['github_url']=student_data_row.github_url
+		print JSON_response
+		return render(request,'show_profile.html',JSON_response)
+	except:
+		return HttpResponse("failed")
 
 
 
