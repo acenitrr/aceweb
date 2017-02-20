@@ -23,7 +23,8 @@ class UploadFileForm(forms.Form):
 # 1 - student
 # 2 - faculty
 # 3 - alumni
-# 4 - developer
+# 4 - admin
+# 5 - developer
 @login_required
 @csrf_exempt
 def import_login_table(request):
@@ -186,14 +187,16 @@ def signup_view(request):
 						jwt_key=str(internal_key_data.objects.get(key='jwt_key').value)
 						email_encoded_url=jwt.encode(email_json,jwt_key,algorithm='HS256')
 						print email_encoded_url
-						# <a href="sdgsd">verify_email</a>
 						link=str(request.scheme+"://"+request.get_host()+"/verify_email/"+email_encoded_url)
 						url='<a href='+link+'>verify email</a>'
+						image='<img src='+'"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTEgRR_jTgKgGkHyVYFbXHg51pzhpWmx1bsgREGMcV621HdH39q"'+'>'
+						print url
+						# email_body=str(custom_keys_data.objects.get(key='email_test').value)
 						email_body=str(email_send_data.objects.get(key='email_verify').email_data)
-						print email_body % (name,url)
+						print email_body % (image,name,url)
 						backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
 			                       password=str(password_email), use_tls=True, fail_silently=True)
-						EmailMsg=EmailMessage("ACE",email_body % (name,url),'no-reply@gmail.com',[email] ,connection=backend)
+						EmailMsg=EmailMessage("ACE",email_body % (image,name,url) ,'no-reply@gmail.com',[email] ,connection=backend)
 						EmailMsg.content_subtype = "html"
 						EmailMsg.send()
 						return HttpResponse("done")

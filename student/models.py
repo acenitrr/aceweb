@@ -21,13 +21,14 @@ class student_data(models.Model):
 	linkedin_url=models.CharField(max_length=500,blank=True,null=True)
 	github_url=models.CharField(max_length=500,blank=True,null=True)
 	photo=models.ImageField(upload_to='student_images/',default="default.png")
-
-	def __unicode__(self):
-		return str(self.roll_no)
-
-class skill_data(models.Model):
-	roll_no=models.ForeignKey(student_data)
 	skill=models.CharField(max_length=200,blank=True,null=True)
+
+# 	def __unicode__(self):
+# 		return str(self.roll_no)
+
+# class skill_data(models.Model):
+# 	roll_no=models.ForeignKey(student_data)
+# 	skill=models.CharField(max_length=200,blank=True,null=True)
 
 
 

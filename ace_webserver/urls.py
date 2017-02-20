@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from login.views import import_login_table,email_verification,signup_view
+from student.views import user_profile
 
 
 urlpatterns = [
@@ -23,6 +24,8 @@ urlpatterns = [
     url(r'^import/',import_login_table),
     url(r'^verify_email/(?P<value>.+)/$',email_verification),
     url(r'^signup/',signup_view),
+    url(r'^view/',user_profile),
+
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
     #url(r'^profile_search/',signup_view),
     #url(r'^notice/$',signup_view),

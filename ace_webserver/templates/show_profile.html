@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+	<title>
+		profile
+	</title>
+</head>
+<body >
+	<p id='demo'></p>
+ <script>
+ window.onload = function() {
+  myFunction();
+};
+function myFunction() {
+	// document.getElementById("demo").innerHTML = skills;
+
+    var str ='{{skill|escapejs}}' ;
+    var res = str.split("&");
+    document.getElementById("demo").innerHTML = res;
+}
+</script>
+</body>
+
+</html>
