@@ -72,8 +72,7 @@ def student_profile(request,roll_no):
 			JSON_response['edit']=edit
 		else:
 			print login_id
-
-			JSON_response['login_id']=login_id
+			JSON_response['login_id']=roll_no
 			student_data_row=student_data.objects.get(roll_no=roll_no)
 			JSON_response['name']=student_data_row.name
 			JSON_response['mobile']=student_data_row.mobile
