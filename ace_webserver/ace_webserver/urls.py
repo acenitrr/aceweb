@@ -24,6 +24,9 @@ urlpatterns = [
     url(r'^signup/',signup_view),
 
 ]
+admin.site.site_header = "CSE Administration"#"Code Nicely's Administration"
+admin.site.index_title = 'ACE Website'
+admin.site.site_title = 'CSE'
 
 from django.conf import settings
 from django.conf.urls.static import static
