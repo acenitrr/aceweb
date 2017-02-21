@@ -88,7 +88,40 @@ def student_profile(request,roll_no):
 		print JSON_response
 		return render(request,'show_profile.html',JSON_response)
 	except:
-		return HttpResponse("failed")
+		return HttpResponse("Wrong roll_no entered")
+
+
+@login_required
+def student_group_profile(request):
+	try:
+		key=str(request.GET.get('key'))
+		value=str(request.GET.get('value'))
+		if(key=='roll_no'):
+			link='/student_view/'+value
+			return HttpResponseRedirect(str(link))
+		else:
+			if key=='name':
+				count = student_data.objects.filter(name=value).count()
+				if count==0:
+					return render(request,'profile.html',{'msg':'no profile found for such name'})
+				else:
+					for o in student_data.objects.filter(name=value):
+						return HttpResponse('profile html code will be passed as context in render')
+			else:
+				if key=='sem':
+					count = student_data.objects.filter(sem=value).count()
+					if count==0:
+						return render(request,'profile.html',{'msg':'please enter correct semester'})
+					else:
+						for o in student_data.objects.filter(sem=value):
+							return HttpResponse('profile html code will be passed as context in render')
+				else:
+					return HttpResponse('please choose field from give list')
+	except:
+		return HttpResponse('something occur please try again')
+
+
+			
 
 
 

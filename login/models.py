@@ -16,6 +16,5 @@ class login_data(models.Model):
 	otp= models.CharField(max_length=10,blank=True,null=True)
 	email=models.CharField(max_length=200,blank=True,null=True)
 	email_flag=models.BooleanField(default=False)
-	content_flag=models.BooleanField(default=False)
 
 # Create your models here.

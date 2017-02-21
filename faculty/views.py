@@ -91,6 +91,15 @@ def faculty_profile(request,faculty_id):
 		return HttpResponse("failed")
 
 
+@login_required
+def faculty_group_profile(request):
+	try:
+		for o in faculty_data.objects.all():
+			return HttpResponse('whole faculty data will be passed at once')
+	except:
+		return HttpResponse('something occur please try again')
+
+
 
 # Create your views here.
 

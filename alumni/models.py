@@ -13,11 +13,12 @@ class alumni_data(models.Model):
 	# 	("3","other"),
 	# 	)
 	current_status=models.CharField(max_length=300,blank=True,null=True)
+	batch=models.CharField(max_length=4,blank=True,null=True)
 	company_institue=models.CharField(max_length=300,blank=True,null=True)
 	designation=models.CharField(max_length=300,blank=True,null=True)
 	email=models.CharField(max_length=300,blank=True,null=True)
 	other=HTMLField()
 	modified= models.DateTimeField(auto_now=True,auto_now_add=False)
 	created= models.DateTimeField(auto_now=False,auto_now_add=True)
-	photo=models.ImageField(upload_to="faculty_images/",default="default.png")
+	photo=models.ImageField(upload_to="alumni_images/",default="default.png")
 # Create your models here.

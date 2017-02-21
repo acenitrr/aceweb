@@ -16,8 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from login.views import import_login_table,email_verification,signup_view
-from student.views import student_profile
-from faculty.views import faculty_profile
+from student.views import student_profile,student_group_profile
+from faculty.views import faculty_profile,faculty_group_profile
 
 
 urlpatterns = [
@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^signup/',signup_view),
     url(r'^student_view/(?P<roll_no>.+)/$',student_profile),
     url(r'^faculty_view/(?P<faculty_id>.+)/$',faculty_profile),
+    url(r'^students_profile/$',student_group_profile),
+    url(r'^faculty_profile/$',faculty_group_profile),
 
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
     #url(r'^profile_search/',signup_view),
