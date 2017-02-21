@@ -6,48 +6,85 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import os
 
-# @csrf_exempt
-# def signup_alumni(request):
-# 	if request.user.is_authenticated():
-# 		return render (request,'welcome.html')
-# 	else:
-# 		if request.method=="POST":
-# 			try:
-# 				response={}
-# 				login_id=str(request.POST.get('roll_no'))
-# 				current_status=str(request.POST.get('current_status'))
-# 				batch=str(request.POST.get('batch'))
-# 				company_institue=str(request.POST.get('company_institue'))
-# 				# image=request.FILES.get('photo').name
-# 				# try:
-# 				# 	folder = 'media/student_images/'+roll_no+'/'
-# 				# 	os.mkdir(os.path.join(folder))
-# 				# 	break
-# 				# except:
-# 				# 	response['success']=False
-# 				# print "image=",image
-# 				# fout = open(folder+image, 'w')
-# 				# file_content = request.FILES.get('photo').read()
-# 				# fout.write(file_content)
-# 				# fout.close()
-# 				designation=str(request.POST.get('designation'))
-# 				other=str(request.POST.get('other'))
-# 				password=str(request.POST.get('password'))
-# 				try:
-# 					student_data_row=student_data.objects.get(roll_no=login_id)
-# 					setattr(student_data_row,'sem',str(sem))
-# 					setattr(student_data_row,'github_url',str(github_url))
-# 					setattr(student_data_row,'linkedin_url',str(linkedin_url))
-# 					setattr(student_data_row,'skill',str(skill))
-# 					#image pending
-# 					student_data_row.save()
-# 					User.objects.create_user(username=login_id,password=password)
-# 				except:
-# 					return HttpResponse('Invalid login id')
-# 			except:
-# 				return HttpResponse("Data not get")
-# 		else:
-# 			return render(request,'signup_student.html')
+@csrf_exempt
+def signup_new_alumni(request):
+	if request.user.is_authenticated():
+		return render (request,'welcome.html')
+	else:
+		if request.method=="POST":
+			try:
+				response={}
+				login_id=str(request.POST.get('roll_no'))
+				current_status=str(request.POST.get('current_status'))
+				batch=str(request.POST.get('batch'))
+				company_institue=str(request.POST.get('company_institue'))
+				# image=request.FILES.get('photo').name
+				# try:
+				# 	folder = 'media/student_images/'+roll_no+'/'
+				# 	os.mkdir(os.path.join(folder))
+				# 	break
+				# except:
+				# 	response['success']=False
+				# print "image=",image
+				# fout = open(folder+image, 'w')
+				# file_content = request.FILES.get('photo').read()
+				# fout.write(file_content)
+				# fout.close()
+				designation=str(request.POST.get('designation'))
+				other=str(request.POST.get('other'))
+				password=str(request.POST.get('password'))
+				try:
+					alumni_data_row=alumni_data.objects.get(roll_no=login_id)
+					setattr(alumni_data_row,'current_status',str(current_status))
+					setattr(alumni_data_row,'github_url',str(github_url))
+					setattr(alumni_data_row,'linkedin_url',str(linkedin_url))
+					setattr(alumni_data_row,'batch',str(batch))
+					setattr(alumni_data_row,'company_institue',str(company_institue))
+					setattr(alumni_data_row,'designation',str(designation))
+					setattr(alumni_data_row,'other',str(other))
+					setattr(alumni_data_row,'flag',True)
+					#image pending
+					alumni_data_row.save()
+					User.objects.create_user(username=login_id,password=password)
+				except:
+					return HttpResponse('Invalid login id')
+			except:
+				return HttpResponse("Data not get")
+		else:
+			return render(request,'signup_alumni1.html')
+
+@csrf_exempt
+def signup_alumni(request):
+	if request.user.is_authenticated():
+		return render (request,'welcome.html')
+	else:
+		if request.method=="POST":
+			try:
+				response={}
+				login_id=str(request.POST.get('roll_no'))
+				current_status=str(request.POST.get('current_status'))
+				batch=str(request.POST.get('batch'))
+				company_institue=str(request.POST.get('company_institue'))
+				designation=str(request.POST.get('designation'))
+				other=str(request.POST.get('other'))
+				try:
+					alumni_data_row=alumni_data.objects.get(roll_no=login_id)
+					setattr(alumni_data_row,'current_status',str(current_status))
+					setattr(alumni_data_row,'github_url',str(github_url))
+					setattr(alumni_data_row,'linkedin_url',str(linkedin_url))
+					setattr(alumni_data_row,'batch',str(batch))
+					setattr(alumni_data_row,'company_institue',str(company_institue))
+					setattr(alumni_data_row,'designation',str(designation))
+					setattr(alumni_data_row,'other',str(other))
+					setattr(alumni_data_row,'flag',True)
+					#image pending
+					alumni_data_row.save()
+				except:
+					return HttpResponse('Invalid login id')
+			except:
+				return HttpResponse("Data not get")
+		else:
+			return render(request,'signup_alumni1.html')
 
 
 @login_required

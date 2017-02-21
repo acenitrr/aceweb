@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'internal_key',
     'notice',
     'announcement',
+    'forgot_password',
 ]
 
 MIDDLEWARE_CLASSES = [

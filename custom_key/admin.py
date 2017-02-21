@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import *
 
-class custom_keys_dataAdmin(admin.ModelAdmin):
+class custom_key_dataAdmin(admin.ModelAdmin):
 	list_display=["key","value"]
 
-admin.site.register(custom_keys_data,custom_keys_dataAdmin)
+admin.site.register(custom_key_data,custom_key_dataAdmin)
 
 class email_send_dataAdmin(admin.ModelAdmin):
 	list_display=["key","email_data"]
