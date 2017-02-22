@@ -16,8 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from login.views import import_login_table,email_verification,signup_view
-from student.views import student_profile,student_group_profile
-from faculty.views import faculty_profile,faculty_group_profile
+from student.views import student_profile,student_group_profile,edit_student_profile
+from faculty.views import faculty_profile,faculty_group_profile,edit_faculty_profile
 from forgot_password.views import forgot_password_view,verify_forgot_password
 
 
@@ -32,6 +32,8 @@ urlpatterns = [
     url(r'^faculty_profile/$',faculty_group_profile),
     url(r'^forgot_password/$',forgot_password_view),
     url(r'^verify_forgot_password/(?P<value>.+)/$',verify_forgot_password),
+    url(r'^edit_student_profile/$',edit_student_profile),
+    url(r'^edit_faculty_profile/$',edit_faculty_profile),
 
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
     #url(r'^profile_search/',signup_view),

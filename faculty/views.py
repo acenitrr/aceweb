@@ -100,6 +100,47 @@ def faculty_group_profile(request):
 		return HttpResponse('something occur please try again')
 
 
+@login_required
+@csrf_exempt
+def edit_faculty_profile(request):
+	if request.method=='POST':
+		try:
+			faculty_data_row=faculty_data.objects.get(faculty_id=str(request.user))
+			education=str(request.POST.get('education'))
+			designation=str(request.POST.get('designation'))
+			area_of_interest=str(request.POST.get('area_of_interest'))
+			other_details=str(request.POST.get('other_details'))
+			#image pending
+			setattr(faculty_data_row,'education',education)
+			setattr(faculty_data_row,'company_institue',company_institue)
+			setattr(faculty_data_row,'designation',designation)
+			setattr(faculty_data_row,'area_of_interest',area_of_interest)
+			setattr(faculty_data_row,'other_details',other_details)
+			#resume pending
+			#image pending
+			faculty_data_row.save()
+			return HttpResponse('redirect him to his own profile')
+		except:
+			return HttpResponse('something occur please try again')
+	else:
+		faculty_data_row=faculty_data.objects.get(faculty_id=str(request.user))
+		JSON_response={}
+		JSON_response['faculty_id']=faculty_data_row.faculty_id
+		faculty_data_row=faculty_data.objects.get(faculty_id=faculty_id)
+		JSON_response['name']=faculty_data_row.name
+		JSON_response['mobile']=faculty_data_row.mobile
+		JSON_response['email']=faculty_data_row.email
+		JSON_response['designation']=faculty_data_row.designation
+		photo=str(faculty_data_row.photo)
+		photo_url='<img src='+'"/media/'+photo+'"'+'>'
+		JSON_response['photo']=photo_url
+		print photo_url
+		JSON_response['education']=faculty_data_row.education
+		JSON_response['area_of_interest']=faculty_data_row.area_of_interest
+		JSON_response['other_details']=faculty_data_row.other_details
+		return render (request,'edit_faculty_profile.html',JSON_response)
+
+
 
 # Create your views here.
 

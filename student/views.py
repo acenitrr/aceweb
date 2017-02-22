@@ -121,8 +121,38 @@ def student_group_profile(request):
 		return HttpResponse('something occur please try again')
 
 
-			
-
-
-
+@login_required
+@csrf_exempt
+def edit_student_profile(request):
+	if request.method=='POST':
+		try:
+			student_data_row=student_data.objects.get(roll_no=str(request.user))
+			skill=str(request.POST.get('skill'))
+			linkedin_url=str(request.POST.get('linkedin_url'))
+			github_url=str(request.POST.get('github_url'))
+			#image pending
+			setattr(student_data_row,'skill',skill)
+			setattr(student_data_row,'linkedin_url',linkedin_url)
+			setattr(student_data_row,'github_url',github_url)
+			#image pending
+			alumni_data_row.save()
+			return HttpResponse('redirect him to his own profile')
+		except:
+			return HttpResponse('something occur please try again')
+	else:
+		student_data_row=student_data.objects.get(roll_no=str(request.user))
+		JSON_response={}
+		JSON_response['roll_no']=student_data_row.roll_no
+		JSON_response['name']=student_data_row.name
+		JSON_response['mobile']=student_data_row.mobile
+		JSON_response['email']=student_data_row.email
+		JSON_response['sem']=student_data_row.sem
+		photo=str(student_data_row.photo)
+		photo_url='<img src='+'"/media/'+photo+'"'+'>'
+		JSON_response['photo']=photo_url
+		print photo_url
+		JSON_response['skill']=student_data_row.skill
+		JSON_response['linkedin_url']=student_data_row.linkedin_url
+		JSON_response['github_url']=student_data_row.github_url
+		return render (request,'edit_student_profile.html',JSON_response)
 # Create your views here.

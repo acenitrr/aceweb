@@ -167,8 +167,51 @@ def alumni_group_profile(request):
 		return HttpResponse('something occur please try again')
 
 
-			
-
-
+@login_required
+@csrf_exempt
+def edit_alumni_profile(request):
+	if request.method=='POST':
+		try:
+			alumni_data_row=alumni_data.objects.get(roll_no=str(request.user))
+			current_status=str(request.POST.get('current_status'))
+			company_institue=str(request.POST.get('company_institue'))
+			designation=str(request.POST.get('designation'))
+			skill=str(request.POST.get('skill'))
+			other=str(request.POST.get('other'))
+			linkedin_url=str(request.POST.get('linkedin_url'))
+			github_url=str(request.POST.get('github_url'))
+			#image pending
+			setattr(alumni_data_row,'current_status',current_status)
+			setattr(alumni_data_row,'company_institue',company_institue)
+			setattr(alumni_data_row,'designation',designation)
+			setattr(alumni_data_row,'skill',skill)
+			setattr(alumni_data_row,'other',other)
+			setattr(alumni_data_row,'linkedin_url',linkedin_url)
+			setattr(alumni_data_row,'github_url',github_url)
+			#image pending
+			alumni_data_row.save()
+			return HttpResponse('redirect him to his own profile')
+		except:
+			return HttpResponse('something occur please try again')
+	else:
+		alumni_data_row=alumni_data.objects.get(roll_no=str(request.user))
+		JSON_response={}
+		JSON_response['roll_no']=alumni_data_row.roll_no
+		JSON_response['name']=alumni_data_row.name
+		JSON_response['mobile']=alumni_data_row.mobile
+		JSON_response['email']=alumni_data_row.email
+		JSON_response['batch']=alumni_data_row.batch
+		photo=str(alumni_data_row.photo)
+		photo_url='<img src='+'"/media/'+photo+'"'+'>'
+		JSON_response['photo']=photo_url
+		print photo_url
+		JSON_response['current_status']=alumni_data_row.current_status
+		JSON_response['linkedin_url']=alumni_data_row.linkedin_url
+		JSON_response['github_url']=alumni_data_row.github_url
+		JSON_response['company_institue']=alumni_data_row.company_institue
+		JSON_response['designation']=alumni_data_row.designation
+		JSON_response['skill']=alumni_data_row.skill
+		JSON_response['other']=alumni_data_row.other
+		return render (request,'edit_alumni_profile.html',JSON_response)
 
 # Create your views here.
