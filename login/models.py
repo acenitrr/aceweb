@@ -13,7 +13,6 @@ class login_data(models.Model):
 		)
 	group_id=models.IntegerField(choices=group_choices,default=0)
 	password=models.CharField(max_length=120,blank=True,null=True)
-	otp= models.CharField(max_length=10,blank=True,null=True)
 	email=models.CharField(max_length=200,blank=True,null=True)
 	email_flag=models.BooleanField(default=False)
 

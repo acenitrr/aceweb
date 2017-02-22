@@ -145,7 +145,7 @@ def change_password(request,login_id):
 				user_row.save()
 				return render(request,'change_password.html',{'msg':'password is changed'})
 			except:
-				return render(request,'change_password.html',{'msg':'somthing occur Please try again'})
+				return render(request,'change_password.html',{'msg':'something occur Please try again'})
 		else:
 			return render(request,'change_password.html')
 
