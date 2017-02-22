@@ -10,7 +10,7 @@ from internal_key.models import *
 from custom_key.models import *
 from django.core.mail import EmailMessage,get_connection
 from django.core.mail.backends.smtp import EmailBackend
-
+from django.contrib.auth.models import User
 
 @csrf_exempt
 def forgot_password_view(request):
@@ -115,6 +115,42 @@ def forgot_password_view(request):
 				return render(request,'forgot_email.html',{'msg':'invalid login_id'})
 		else:
 			return render(request,'forgot_email.html')
+
+
+@csrf_exempt
+def verify_forgot_password(request,value):
+	if request.user.is_authenticated():
+		return render (request,'welcome.html')
+	else:
+		try:
+			jwt_key=str(internal_key_data.objects.get(key='jwt_key').value)
+			login_JSON_decode=jwt.decode(value,jwt_key,algorithms=['HS256'])
+			login_id=login_JSON_decode['login_id']
+			print login_id
+			return change_password(request,login_id) 
+		except:
+			return HttpResponse('Failed')
+
+@csrf_exempt
+def change_password(request,login_id):
+	if request.user.is_authenticated():
+		return render (request,'welcome.html')
+	else:
+		if request.method=='POST':
+			try:
+				password=str(request.POST.get('password'))
+				print password
+				user_row=User.objects.get(username=str(login_id))
+				user_row.set_password(str(password))
+				user_row.save()
+				return render(request,'change_password.html',{'msg':'password is changed'})
+			except:
+				return render(request,'change_password.html',{'msg':'somthing occur Please try again'})
+		else:
+			return render(request,'change_password.html')
+
+
+
 
 
 
