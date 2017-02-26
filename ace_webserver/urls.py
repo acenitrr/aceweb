@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from login.views import import_login_table,email_verification,signup_view
-from student.views import student_profile,student_group_profile,edit_student_profile
+from login.views import import_login_table,email_verification,signup_view,login_view
+from student.views import student_profile,student_group_profile,edit_student_profile,signup_student
 from faculty.views import faculty_profile,faculty_group_profile,edit_faculty_profile
 from forgot_password.views import forgot_password_view,verify_forgot_password
+from announcement.views import add_announcement
 
 
 urlpatterns = [
@@ -34,6 +35,9 @@ urlpatterns = [
     url(r'^verify_forgot_password/(?P<value>.+)/$',verify_forgot_password),
     url(r'^edit_student_profile/$',edit_student_profile),
     url(r'^edit_faculty_profile/$',edit_faculty_profile),
+    url(r'^signup_student/$',signup_student),
+    url(r'^login/$',login_view),
+    url(r'^add_announcement/$',add_announcement),
 
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
     #url(r'^profile_search/',signup_view),

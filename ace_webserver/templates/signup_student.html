@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+	<title>
+		Signup_student
+</title>
+</head>
+<body>
+	<form action="/signup_student/" enctype="multipart/form-data"  method="POST">
+		<input type='text' name='roll_no' value={{login_id|safe}} readonly="readonly">
+		<input type='text' placeholder='sem' name='sem'>
+		<input type='text' placeholder='github_url' name='github_url'>
+		<input type='text' placeholder='linkedin_url' name='linkedin_url'>
+		<input type='text' placeholder='skill' name='skill'>
+		<input type='password' placeholder='password' name='password'>
+		<input type="submit">
+	</form>
+	{{msg|safe}}
+</body>
+</html>

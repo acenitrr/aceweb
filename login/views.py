@@ -15,6 +15,7 @@ from internal_key.models import *
 from student.models import *
 from faculty.models import *
 from alumni.models import *
+from student.views import signup_student
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
@@ -70,7 +71,7 @@ def email_verification(request,value):
 			setattr(login_data_row,'email_flag',True)
 			login_data_row.save()
 			if group_id==1:
-				return HttpResponse("student signup")
+				return render(request,'signup_student.html',{'login_id':roll_no})
 			else:
 				if group_id==2:
 					return HttpResponse("faculty signup")
@@ -85,35 +86,36 @@ def email_verification(request,value):
 		return HttpResponse("Failed")
 
 # http://127.0.0.1:8000/verify_email?email=arpitj938@gmail.com&otp=123456
-
+@csrf_exempt
 def login_view(request):
 	if request.user.is_authenticated():
 		return render(request,'main.html',{'logout':'logout'})
 	else:
 		if request.method=='POST':
 			login_id=str(request.POST.get('login_id'))
+			print login_id
 			password=str(request.POST.get('password'))
+			print password
 			# password=jwt.decode(password,'secret',algorithms=['HS256'])
 			try:
 				login_data_row=login_data.objects.get(login_id=login_id)
 				print login_id
-				if login_data_row.password==password:
-					if login_data_row.email_flag==1:
-						user = authenticate(username=login_id, password=password)
-						if user is not None:
-							login(request, user)
-							print 'login done'
-							return HttpResponseRedirect("/welcome/")
-						else:
-							return render(request,'main.html',{'login_status':'wrong login_id or password'})
+				if login_data_row.email_flag==1:
+					print 105
+					user = authenticate(username=login_id, password=password)
+					if user is not None:
+						login(request, user)
+						print 'login done'
+						return HttpResponse('you are log]')
+						# return HttpResponseRedirect("/welcome/")
 					else:
-						return render(request,'main.html',{'login_status':'complete your email verification'})
+						return render(request,'login.html',{'login_status':'wrong login_id or password'})
 				else:
-					return render(request,'main.html',{'login_status':'wrong login_id or password'})
+					return render(request,'login.html',{'login_status':'complete your email verification'})
 			except:
-				return render(request,'main.html',{'login_status':'wrong login_id or password'})
+				return render(request,'login.html',{'login_status':'wrong login_id or password'})
 		else:
-			return render(request,'main.html')
+			return render(request,'login.html')
 
 @csrf_exempt
 def signup_view(request):
@@ -177,10 +179,10 @@ def signup_view(request):
 						setattr(login_data_row,'email',str(email))
 						login_data_row.save()
 						print '160'
-						host_email=str(custom_keys_data.objects.get(key='host').value)
-						port_email=custom_keys_data.objects.get(key='port').value
-						username_email=str(custom_keys_data.objects.get(key='username').value)
-						password_email=str(custom_keys_data.objects.get(key='password').value)
+						host_email=str(custom_key_data.objects.get(key='host').value)
+						port_email=custom_key_data.objects.get(key='port').value
+						username_email=str(custom_key_data.objects.get(key='username').value)
+						password_email=str(custom_key_data.objects.get(key='password').value)
 						print host_email
 						email_json={'email':str(email),
 						'roll_no':str(roll_no)}

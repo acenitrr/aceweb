@@ -15,11 +15,13 @@ def signup_student(request):
 			try:
 				response={}
 				login_id=str(request.POST.get('roll_no'))
+				print login_id
 				sem=str(request.POST.get('sem'))
+				print sem
 				github_url=str(request.POST.get('github_url'))
 				linkedin_url=str(request.POST.get('linkedin_url'))
 				# image=request.FILES.get('photo').name
-				# try:
+				try:
 				# 	folder = 'media/student_images/'+roll_no+'/'
 				# 	os.mkdir(os.path.join(folder))
 				# 	break
@@ -30,9 +32,9 @@ def signup_student(request):
 				# file_content = request.FILES.get('photo').read()
 				# fout.write(file_content)
 				# fout.close()
-				skill=str(request.POST.get('skill'))
-				password=str(request.POST.get('password'))
-				try:
+					skill=str(request.POST.get('skill'))
+					password=str(request.POST.get('password'))
+					# try:
 					student_data_row=student_data.objects.get(roll_no=login_id)
 					setattr(student_data_row,'sem',str(sem))
 					setattr(student_data_row,'github_url',str(github_url))
@@ -45,8 +47,6 @@ def signup_student(request):
 					return HttpResponse('Invalid login id')
 			except:
 				return HttpResponse("Data not get")
-		else:
-			return render(request,'signup_student.html')
 
 
 @login_required
@@ -135,7 +135,7 @@ def edit_student_profile(request):
 			setattr(student_data_row,'linkedin_url',linkedin_url)
 			setattr(student_data_row,'github_url',github_url)
 			#image pending
-			alumni_data_row.save()
+			student_data_row.save()
 			return HttpResponse('redirect him to his own profile')
 		except:
 			return HttpResponse('something occur please try again')
