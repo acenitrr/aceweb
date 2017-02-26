@@ -20,6 +20,7 @@ from student.views import student_profile,student_group_profile,edit_student_pro
 from faculty.views import faculty_profile,faculty_group_profile,edit_faculty_profile
 from forgot_password.views import forgot_password_view,verify_forgot_password
 from announcement.views import add_announcement
+from notice.views import add_notice
 
 
 urlpatterns = [
@@ -38,6 +39,7 @@ urlpatterns = [
     url(r'^signup_student/$',signup_student),
     url(r'^login/$',login_view),
     url(r'^add_announcement/$',add_announcement),
+    url(r'^add_notice/$',add_notice),
 
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
     #url(r'^profile_search/',signup_view),
