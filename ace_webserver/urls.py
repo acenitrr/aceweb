@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from login.views import import_login_table,email_verification,signup_view,login_view
 from student.views import student_profile,student_group_profile,edit_student_profile,signup_student
-from faculty.views import faculty_profile,faculty_group_profile,edit_faculty_profile
+from faculty.views import faculty_profile,faculty_group_profile,edit_faculty_profile,signup_faculty
 from forgot_password.views import forgot_password_view,verify_forgot_password
 from announcement.views import add_announcement
 from notice.views import add_notice
@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^edit_student_profile/$',edit_student_profile),
     url(r'^edit_faculty_profile/$',edit_faculty_profile),
     url(r'^signup_student/$',signup_student),
+    url(r'^signup_faculty/$',signup_faculty),
     url(r'^login/$',login_view),
     url(r'^add_announcement/$',add_announcement),
     url(r'^add_notice/$',add_notice),

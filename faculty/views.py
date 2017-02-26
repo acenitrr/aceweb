@@ -17,7 +17,7 @@ def signup_faculty(request):
 				login_id=str(request.POST.get('roll_no'))
 				designation=str(request.POST.get('designation'))
 				education=str(request.POST.get('education'))
-				area_of_interest=str(request.POST.get('linkedin_url'))
+				area_of_interest=str(request.POST.get('area_of_interest'))
 				# image=request.FILES.get('photo').name
 				# try:
 				# 	folder = 'media/student_images/'+roll_no+'/'
@@ -30,7 +30,7 @@ def signup_faculty(request):
 				# file_content = request.FILES.get('photo').read()
 				# fout.write(file_content)
 				# fout.close()
-				other_details=str(request.POST.get('skill'))
+				other_details=str(request.POST.get('other_details'))
 				password=str(request.POST.get('password'))
 				try:
 					faculty_data_row=faculty_data.objects.get(faculty_id=login_id)
@@ -41,12 +41,11 @@ def signup_faculty(request):
 					#image pending
 					faculty_data_row.save()
 					User.objects.create_user(username=login_id,password=password)
+					return HttpResponse('signup_faculty done')
 				except:
 					return HttpResponse('Invalid login id')
 			except:
 				return HttpResponse("Data not get")
-		else:
-			return render(request,'signup_student.html')
 
 
 @login_required

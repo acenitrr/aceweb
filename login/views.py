@@ -74,10 +74,10 @@ def email_verification(request,value):
 				return render(request,'signup_student.html',{'login_id':roll_no})
 			else:
 				if group_id==2:
-					return HttpResponse("faculty signup")
+					return render(request,'signup_faculty.html',{'login_id':roll_no})
 				else:
 					if group_id==3:
-						return HttpResponse("alumni signup")
+						return render(request,'signup_alumni.html',{'login_id':roll_no})
 					else:
 						return HttpResponse("ok")
 		except:
