@@ -43,6 +43,7 @@ def signup_student(request):
 					#image pending
 					student_data_row.save()
 					User.objects.create_user(username=login_id,password=password)
+					return HttpResponse('ok')
 				except:
 					return HttpResponse('Invalid login id')
 			except:

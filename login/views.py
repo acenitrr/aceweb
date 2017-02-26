@@ -81,7 +81,7 @@ def email_verification(request,value):
 					else:
 						return HttpResponse("ok")
 		except:
-			return HttpResponse("email_id and otp not get")
+			return HttpResponse("email_id already registered try another or contact ace ")
 	except:
 		return HttpResponse("Failed")
 
