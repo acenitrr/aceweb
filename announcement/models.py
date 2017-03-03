@@ -4,7 +4,8 @@ from django.db import models
 
 # Create your models here.
 class announcement_data(models.Model):
-	title=issuer=models.CharField(max_length=120,blank=True,null=True)
+	title=models.CharField(max_length=120,blank=True,null=True)
+	subtitle=models.CharField(max_length=120,blank=True,null=True)
 	content=models.CharField(max_length=120,blank=True,null=True)
 	issuer=models.CharField(max_length=120,blank=True,null=True)
 	file= models.FileField(upload_to='resources/',null=True,blank=True)

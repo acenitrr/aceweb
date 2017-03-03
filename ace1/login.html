@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/2.1.3/normalize.css">
+<link rel="stylesheet" href="css/jquery.idealforms.css">
+<meta charset=utf-8 />
+<title>ACE</title>
+<style>
+body {
+background:#f6f6f6;
+max-width: 980px;
+margin: 2em auto;
+font: normal 15px/1.5 Arial, sans-serif;
+color: #353535;
+overflow-y: scroll;
+overflow-x: hidden;
+}
+.content {
+margin: 0 30px;
+}
+.field.buttons button {
+margin-right: .5em;
+}
+#invalid {
+display: none;
+float: left;
+width: 290px;
+margin-left: 120px;
+margin-top: .5em;
+color: #CC2A18;
+font-size: 130%;
+font-weight: bold;
+}
+.idealforms.adaptive #invalid {
+margin-left: 0 !important;
+}
+.idealforms.adaptive .field.buttons label {
+height: 0;
+}
+</style>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<br><br><br><br>
+     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"style="background:#1c2d3f;">
+        <div class="container" >
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+       <a class="navbar-brand" href="index.html" style="color:white;font-size:30px;position:absolute;left:7%;">ACE</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float:right;padding-right:40px;" >
+               <ul class="nav navbar-nav" >
+                    <li>
+                        <a href="index.html" >HOME</a>
+                    </li>
+                    <li>
+                        <a href="academics.html" >ACADEMICS</a>
+                    </li>
+                    <li>
+                        <a href="achievements.html">ACHIEVEMENT</a>
+                    </li>
+					<li>
+                        <a href="activities.html" >ACTIVITIES</a>
+                    </li><li>
+                        <a href="faculty.html" >ADMINISTRATION</a>
+                    </li>
+							<li>
+                        <a href="login.html" >LOGIN</a>
+                    </li>
+										
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+</h1>
+<div class="content">
+<div class="idealsteps-container">
+<nav class="idealsteps-nav"></nav>
+<form action="" novalidate autocomplete="off" class="idealforms">
+<div class="idealsteps-wrap"> 
+
+<!-- Step 1 -->
+<section class="idealsteps-step">
+<div class="container" style="float:CENTER;">
+    <h1>LOGIN</h1> </DIV>
+    <form action="." enctype="multipart/form-data"  method="POST">
+<div class="field">
+<label class="main">Login Id:</label>
+<input name="username" type="text"  placeholder="roll-no/faculty-id">
+<span class="error"></span> </div>
+
+<div class="field">
+<label class="main">Password:</label>
+<input name="password" type="password">
+<span class="error"></span> </div>
+<div class="field">
+<label class="main">Submit</label>
+<input name="Submit" type="submit" value='Submit'>
+<span class="error"></span> </div>
+</form>
+<div class="field">
+<div class="container" style="float:left;">
+    <h1>Attention!</h1> 
+    <p><b>If not registered go to signup step.</b></p> 
+
+ 
+</div>
+
+<div class="field buttons">
+<label class="main">&nbsp;</label>
+<button type="button" class="next"><b>SIGN UP &raquo;</b></button>
+
+<!-- <button type="button" class="next"><b>SUBMIT &raquo;</b></button> -->
+
+</div>
+</section>
+
+<!-- Step 2 -->
+<section class="idealsteps-step">
+<div class="container" style="float:CENTER;">
+    <h1>REGISTER</h1> </DIV>
+    <form action="." enctype="multipart/form-data"  method="POST">
+<div class="field">
+<label class="main">ROLL NO</label>
+<input name="username" type="text"  placeholder="roll-no/faculty-id">
+<span class="error"></span> </div>
+<div class="field">
+<label class="main">NAME</label>
+<input name="username" type="text"  placeholder="XYZ SINGH">
+<span class="error"></span> </div>
+<div class="field">
+<label class="main">Phone:</label>
+<input name="phone" type="text" placeholder="000-000-0000">
+<span class="error"></span> </div>
+<div class="field">
+<label class="main">E-Mail:</label>
+<input name="email" type="email">
+<span class="error"></span> </div>
+<div class="field">
+<label class="main">Submit</label>
+<input name="submit" type="submit" value='Submit'>
+<span class="error"></span> </div>
+</form>
+
+
+<div class="field buttons">
+<label class="main">&nbsp;</label>
+<button type="button" class="prev"><b>&laquo; SIGN IN</b></button>
+<!-- <button type="button" class="next"><b>SUBMIT &raquo;</b></button> -->
+
+</div>
+</section>
+
+
+<!-- Step 3 -->
+
+
+</div>
+<span id="invalid"></span>
+</form>
+</div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
+<script src="js/out/jquery.idealforms.js"></script> 
+<!--<script src="js/out/jquery.idealforms.min.js"></script>--> 
+<script>
+
+    $('form.idealforms').idealforms({
+
+      silentLoad: false,
+
+      rules: {
+        'username': 'required username ajax',
+        'email': 'required email',
+        'password': 'required pass',
+        'confirmpass': 'required equalto:password',
+        'date': 'required date',
+        'picture': 'required extension:jpg:png',
+        'website': 'url',
+        'hobbies[]': 'minoption:2 maxoption:3',
+        'phone': 'required phone',
+        'zip': 'required zip',
+        'options': 'select:default',
+      },
+
+      errors: {
+        'username': {
+          ajaxError: 'Username not available'
+        }
+      },
+
+      onSubmit: function(invalid, e) {
+        e.preventDefault();
+        $('#invalid')
+          .show()
+          .toggleClass('valid', ! invalid)
+          .text(invalid ? (invalid +' invalid fields') : 'All good!');
+      }
+    });
+
+
+
+    $('form.idealforms').find('input, select, textarea').on('change keyup', function() {
+      $('#invalid').hide();
+    });
+
+    $('form.idealforms').idealforms('addRules', {
+      'comments': 'required minmax:50:200'
+    });
+
+    $('.prev').click(function(){
+      $('.prev').show();
+      $('form.idealforms').idealforms('prevStep');
+    });
+    $('.next').click(function(){
+      $('.next').show();
+      $('form.idealforms').idealforms('nextStep');
+    });
+
+  </script>
+  <br><br><br><br>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom" style="height:18px;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+   
+    </div><p style="color:white;text-align:center;font-size:14px;padding-top:1%;">
+    &COPY 2017 ACE &#9898 ALL RIGHTS RESERVED  DESIGNED & DEVELOPED BY WEBTEAM - ACE</p>
+  </div>
+</nav>
+</body>
+</html>

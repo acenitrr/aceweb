@@ -89,7 +89,7 @@ def email_verification(request,value):
 @csrf_exempt
 def login_view(request):
 	if request.user.is_authenticated():
-		return render(request,'main.html',{'logout':'logout'})
+		return render(request,'index.html',{'logout':'logout'})
 	else:
 		if request.method=='POST':
 			login_id=str(request.POST.get('login_id'))

@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^signup_faculty/$',signup_faculty),
     url(r'^login/$',login_view),
     url(r'^announcement/$',get_announcement),
-    url(r'^notice/$',get_notice),
+    url(r'^home/$',get_notice),
 
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
     #url(r'^profile_search/',signup_view),
