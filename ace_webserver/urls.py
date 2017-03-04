@@ -42,7 +42,7 @@ urlpatterns = [
     url(r'^login/$',login_view),
     url(r'^announcement/$',get_announcement),
     url(r'^$',get_notice),
-    url(r'^.*$', RedirectView.as_view(url='/', permanent=False), name='index')
+    # url(r'^.*$', RedirectView.as_view(url='/', permanent=False), name='index')
 
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
     #url(r'^profile_search/',signup_view),

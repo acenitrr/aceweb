@@ -79,15 +79,15 @@ height: 0;
                     <li>
                         <a href="achievements.html">ACHIEVEMENT</a>
                     </li>
-					<li>
+          <li>
                         <a href="activities.html" >ACTIVITIES</a>
                     </li><li>
                         <a href="faculty.html" >ADMINISTRATION</a>
                     </li>
-							<li>
+              <li>
                         <a href="login.html" >LOGIN</a>
                     </li>
-										
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -102,14 +102,14 @@ height: 0;
 <div class="content">
 <div class="idealsteps-container">
 <nav class="idealsteps-nav"></nav>
-<form action="" novalidate autocomplete="off" class="idealforms">
+<!-- <form action="" novalidate autocomplete="off" > -->
 <div class="idealsteps-wrap"> 
 
 <!-- Step 1 -->
 <section class="idealsteps-step">
 <div class="container" style="float:CENTER;">
     <h1>LOGIN</h1> </DIV>
-    <form action="/login/" enctype="multipart/form-data"  method="POST">
+    <form action="." enctype="multipart/form-data"  method="POST" class="idealforms">
 <div class="field">
 <label class="main">Login Id:</label>
 <input name="username" type="text"  placeholder="roll-no/faculty-id">
@@ -145,18 +145,18 @@ height: 0;
 <section class="idealsteps-step">
 <div class="container" style="float:CENTER;">
     <h1>REGISTER</h1> </DIV>
-    <form action="/signup/" enctype="multipart/form-data"  method="POST">
+    <form action="." enctype="multipart/form-data"  method="POST">
 <div class="field">
 <label class="main">ROLL NO</label>
-<input name="roll_no" type="text"  placeholder="roll-no/faculty-id">
+<input name="username" type="text"  placeholder="roll-no/faculty-id">
 <span class="error"></span> </div>
 <div class="field">
 <label class="main">NAME</label>
-<input name="name" type="text"  placeholder="XYZ SINGH">
+<input name="username" type="text"  placeholder="XYZ SINGH">
 <span class="error"></span> </div>
 <div class="field">
 <label class="main">Phone:</label>
-<input name="mobile" type="text" placeholder="000-000-0000">
+<input name="phone" type="text" placeholder="000-000-0000">
 <span class="error"></span> </div>
 <div class="field">
 <label class="main">E-Mail:</label>
@@ -170,10 +170,8 @@ height: 0;
 
 
 <div class="field buttons">
-	<label class="main"></label>
-<!-- <label class="main">&nbsp;</label> -->
-<button type="button" class="prev"><b> SIGN IN</b></button>
-<!-- <button type="button" class="prev"><b>&laquo; SIGN IN</b></button> -->
+<label class="main">&nbsp;</label>
+<button type="button" class="prev"><b>&laquo; SIGN IN</b></button>
 <!-- <button type="button" class="next"><b>SUBMIT &raquo;</b></button> -->
 
 </div>
@@ -188,8 +186,8 @@ height: 0;
 </form>
 </div>
 </div>
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>  -->
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>  -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
 <script src="/static/js/out/jquery.idealforms.js"></script> 
 <!--<script src="js/out/jquery.idealforms.min.js"></script>--> 
 <script>
@@ -199,7 +197,7 @@ height: 0;
       silentLoad: false,
 
       rules: {
-        'name': 'required username ajax',
+        'username': 'required username ajax',
         'email': 'required email',
         'password': 'required pass',
         'confirmpass': 'required equalto:password',
@@ -207,7 +205,7 @@ height: 0;
         'picture': 'required extension:jpg:png',
         'website': 'url',
         'hobbies[]': 'minoption:2 maxoption:3',
-        'mobile': 'required phone',
+        'phone': 'required phone',
         'zip': 'required zip',
         'options': 'select:default',
       },
@@ -218,14 +216,14 @@ height: 0;
         }
       },
 
-      // onSubmit: function(invalid, e) {
-      //   e.preventDefault();
-      //   $('#invalid')
-      //     .show()
-      //     .toggleClass('valid', ! invalid)
-      //     .text(invalid ? (invalid +' invalid fields') : 'All good!');
-      // }
-    });
+//       onSubmit: function(invalid, e) {
+//         e.preventDefault();
+//         $('#invalid')
+//           .show()
+//           .toggleClass('valid', ! invalid)
+//           .text(invalid ? (invalid +' invalid fields') : 'All good!');
+//       }
+     });
 
 
 
@@ -246,7 +244,7 @@ height: 0;
       $('form.idealforms').idealforms('nextStep');
     });
 
-  </script>
+//   </script>
   <br><br><br><br>
   <nav class="navbar navbar-inverse navbar-fixed-bottom" style="height:18px;">
   <div class="container-fluid">
