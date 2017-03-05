@@ -29,3 +29,6 @@ def home(request):
 
 def academics(request):
 	return render(request,'academics.html')
+
+def administration(request):
+	return render(request,'faculty.html')
