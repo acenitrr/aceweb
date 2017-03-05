@@ -20,7 +20,7 @@ from student.views import student_profile,student_group_profile,edit_student_pro
 from faculty.views import faculty_profile,faculty_group_profile,edit_faculty_profile,signup_faculty
 from forgot_password.views import forgot_password_view,verify_forgot_password
 from announcement.views import announcement
-from notice.views import get_notice,home,academics,administration
+from notice.views import get_notice,home,academics,administration,logout_view
 from django.views.generic.base import RedirectView
 
 
@@ -45,6 +45,7 @@ urlpatterns = [
     url(r'^$',home),
     url(r'^academics/$',academics),
     url(r'^administration/$',administration),
+    url(r'^logout/$',logout_view),
     # url(r'^.*$', RedirectView.as_view(url='/', permanent=False), name='index')
 
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
