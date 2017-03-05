@@ -34,6 +34,7 @@ def signup_student(request):
 				fout.write(file_content)
 				fout.close()
 				skill=str(request.POST.get('skill'))
+				print skill
 				password=str(request.POST.get('password'))
 				try:
 					student_data_row=student_data.objects.get(roll_no=login_id)
@@ -51,6 +52,7 @@ def signup_student(request):
 			except Exception,e:
 				print e
 				return HttpResponse("Data not get")
+		return render (request,'signup_student.html')
 
 
 @login_required
@@ -118,22 +120,27 @@ def edit_student_profile(request):
 		try:
 			student_data_row=student_data.objects.get(roll_no=str(request.user))
 			skill=str(request.POST.get('skill'))
+			print skill
 			linkedin_url=str(request.POST.get('linkedin_url'))
 			github_url=str(request.POST.get('github_url'))
-			image_name=request.FILES.get('photo').name
+			print github_url
 			try:
-				folder = 'media/student_images/'
-				os.mkdir(os.path.join(folder))
-			except Exception,e:
-				print e
+				image_name=request.FILES.get('photo').name
+				try:
+					folder = 'media/student_images/'
+					os.mkdir(os.path.join(folder))
+				except Exception,e:
+					print e
+					pass
+				print "image=",image_name
+				url=folder+student_data_row.roll_no+image_name
+				fout = open(url, 'wb+')
+				file_content = request.FILES.get('photo').read()
+				fout.write(file_content)
+				fout.close()
+				setattr(student_data_row,'photo',url)
+			except:
 				pass
-			print "image=",image_name
-			url=folder+student_data_row.roll_no+image_name
-			fout = open(url, 'wb+')
-			file_content = request.FILES.get('photo').read()
-			fout.write(file_content)
-			fout.close()
-			setattr(student_data_row,'photo',url)
 			setattr(student_data_row,'skill',skill)
 			setattr(student_data_row,'linkedin_url',linkedin_url)
 			setattr(student_data_row,'github_url',github_url)
@@ -154,6 +161,7 @@ def edit_student_profile(request):
 		photo_url='<img src='+'"/'+str(student_data_row.photo)+'"'+'>'
 		JSON_response['photo']=photo_url
 		print photo_url
+		JSON_response['photo_name']=str(student_data_row.photo)
 		JSON_response['skill']=student_data_row.skill
 		JSON_response['linkedin_url']=student_data_row.linkedin_url
 		JSON_response['github_url']=student_data_row.github_url
