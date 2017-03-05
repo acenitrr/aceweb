@@ -15,20 +15,18 @@ from django.http import HttpResponseRedirect, HttpResponse,JsonResponse
 # 		if(o.active==True):
 # 			tmp_json={}
 # 			tmp_json['title']=o.title
+# 			tmp_json['subtitle']=o.title
 # 			tmp_json['content']=o.content
-# 			tmp_json['issuer']=o.issuer
-# 			tmp_json['file']=o.file
-# 			tmp_json['date_issued']=o.date_issued
 # 			tmp_json['created']=o.created
 # 			json_list.append(tmp_json)
-# 			response.append(json_list)
-
+	
+# 	response['list']=json_list
 # 	return JsonResponse(response)
 
-def get_announcement(request):
+def announcement(request):
 	# try:
 	announcement_string=''
-	for o in announcement_data.objects.all():
+	for o in announcement_data.objects.all().order_by('title'):
 		if(o.active==True):
 			announcement_temp_string="""
 			<li>

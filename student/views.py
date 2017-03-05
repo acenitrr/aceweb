@@ -137,7 +137,6 @@ def edit_student_profile(request):
 			setattr(student_data_row,'skill',skill)
 			setattr(student_data_row,'linkedin_url',linkedin_url)
 			setattr(student_data_row,'github_url',github_url)
-			#image pending
 			student_data_row.save()
 			return HttpResponse('redirect him to his own profile')
 		except Exception,e:
@@ -151,7 +150,7 @@ def edit_student_profile(request):
 		JSON_response['mobile']=student_data_row.mobile
 		JSON_response['email']=student_data_row.email
 		JSON_response['sem']=student_data_row.sem
-		#photo=str(student_data_row.photo)
+
 		photo_url='<img src='+'"/'+str(student_data_row.photo)+'"'+'>'
 		JSON_response['photo']=photo_url
 		print photo_url
@@ -159,4 +158,4 @@ def edit_student_profile(request):
 		JSON_response['linkedin_url']=student_data_row.linkedin_url
 		JSON_response['github_url']=student_data_row.github_url
 		return render (request,'edit_student_profile.html',JSON_response)
-# Create your views here.
+
