@@ -18,6 +18,7 @@ from django.contrib import admin
 from login.views import import_login_table,email_verification,signup_view,login_view
 from student.views import student_profile,student_group_profile,edit_student_profile,signup_student
 from faculty.views import faculty_profile,faculty_group_profile,edit_faculty_profile,signup_faculty
+from alumni.views import alumni_profile,alumni_group_profile,edit_alumni_profile,signup_alumni
 from forgot_password.views import forgot_password_view,verify_forgot_password
 from announcement.views import announcement
 from notice.views import get_notice,home,academics,administration,logout_view
@@ -31,14 +32,18 @@ urlpatterns = [
     url(r'^signup/',signup_view),
     url(r'^student_view/(?P<roll_no>.+)/$',student_profile),
     url(r'^faculty_view/(?P<faculty_id>.+)/$',faculty_profile),
+    url(r'^alumni_view/(?P<roll_no>.+)/$',alumni_profile),
     url(r'^students_profile/$',student_group_profile),
     url(r'^faculty_profile/$',faculty_group_profile),
+    url(r'^alumni_profile/$',alumni_group_profile),
     url(r'^forgot_password/$',forgot_password_view),
     url(r'^verify_forgot_password/(?P<value>.+)/$',verify_forgot_password),
     url(r'^edit_student_profile/$',edit_student_profile),
     url(r'^edit_faculty_profile/$',edit_faculty_profile),
+    url(r'^edit_alumni_profile/$',edit_alumni_profile),
     url(r'^signup_student/$',signup_student),
     url(r'^signup_faculty/$',signup_faculty),
+    url(r'^signup_alumni/$',signup_alumni),
     url(r'^login/$',login_view),
     url(r'^announcement/$',announcement),
     url(r'^notice_get$',get_notice),

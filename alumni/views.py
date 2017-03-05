@@ -7,55 +7,6 @@ from django.contrib.auth.decorators import login_required
 import os
 
 @csrf_exempt
-def signup_new_alumni(request):
-	if request.user.is_authenticated():
-		return render (request,'welcome.html')
-	else:
-		if request.method=="POST":
-			try:
-				response={}
-				login_id=str(request.POST.get('roll_no'))
-				current_status=str(request.POST.get('current_status'))
-				batch=str(request.POST.get('batch'))
-				company_institue=str(request.POST.get('company_institue'))
-				##########################################################################33
-				image_name=request.FILES.get('photo').name
-				try:
-					folder = 'media/alumni_images/'
-					os.mkdir(os.path.join(folder))
-				except Exception,e:
-					print e
-					pass
-				print "image=",image
-				fout = open(folder+roll_no+image_name, 'wb+')
-				file_content = request.FILES.get('photo').read()
-				fout.write(file_content)
-				fout.close()
-				###################################################################################3
-				designation=str(request.POST.get('designation'))
-				other=str(request.POST.get('other'))
-				password=str(request.POST.get('password'))
-				try:
-					alumni_data_row=alumni_data.objects.get(roll_no=login_id)
-					setattr(alumni_data_row,'current_status',str(current_status))
-					setattr(alumni_data_row,'github_url',str(github_url))
-					setattr(alumni_data_row,'linkedin_url',str(linkedin_url))
-					setattr(alumni_data_row,'batch',str(batch))
-					setattr(alumni_data_row,'company_institue',str(company_institue))
-					setattr(alumni_data_row,'designation',str(designation))
-					setattr(alumni_data_row,'other',str(other))
-					setattr(alumni_data_row,'flag',True)
-					#image pending
-					alumni_data_row.save()
-					User.objects.create_user(username=login_id,password=password)
-				except:
-					return HttpResponse('Invalid login id')
-			except:
-				return HttpResponse("Data not get")
-		else:
-			return render(request,'signup_alumni1.html')
-
-@csrf_exempt
 def signup_alumni(request):
 	if request.user.is_authenticated():
 		return render (request,'welcome.html')
@@ -67,8 +18,28 @@ def signup_alumni(request):
 				current_status=str(request.POST.get('current_status'))
 				batch=str(request.POST.get('batch'))
 				company_institue=str(request.POST.get('company_institue'))
+				github_url=str(request.POST.get('github_url'))
+				linkedin_url=str(request.POST.get('linkedin_url'))
+				print 21
+				##########################################################################33
+				image_name=request.FILES.get('photo').name
+				try:
+					folder = 'media/alumni_images/'
+					os.mkdir(os.path.join(folder))
+				except Exception,e:
+					print e
+					pass
+				print "image=",image_name
+				url=folder+login_id+image_name
+				fout = open(url, 'wb+')
+				file_content = request.FILES.get('photo').read()
+				fout.write(file_content)
+				fout.close()
+				###################################################################################3
 				designation=str(request.POST.get('designation'))
 				other=str(request.POST.get('other'))
+				password=str(request.POST.get('password'))
+				print password
 				try:
 					alumni_data_row=alumni_data.objects.get(roll_no=login_id)
 					setattr(alumni_data_row,'current_status',str(current_status))
@@ -79,14 +50,52 @@ def signup_alumni(request):
 					setattr(alumni_data_row,'designation',str(designation))
 					setattr(alumni_data_row,'other',str(other))
 					setattr(alumni_data_row,'flag',True)
+					setattr(alumni_data_row,'photo',url)
 					#image pending
 					alumni_data_row.save()
-				except:
+					User.objects.create_user(username=login_id,password=password)
+					return render(request,'login.html',{'msg':'sign up done'})
+				except Exception,e:
+					print e
 					return HttpResponse('Invalid login id')
-			except:
+			except Exception,e:
+				print e
 				return HttpResponse("Data not get")
 		else:
-			return render(request,'signup_alumni1.html')
+			return render(request,'signup_alumni.html')
+
+# @csrf_exempt
+# def signup_alumni(request):
+# 	if request.user.is_authenticated():
+# 		return render (request,'welcome.html')
+# 	else:
+# 		if request.method=="POST":
+# 			try:
+# 				response={}
+# 				login_id=str(request.POST.get('roll_no'))
+# 				current_status=str(request.POST.get('current_status'))
+# 				batch=str(request.POST.get('batch'))
+# 				company_institue=str(request.POST.get('company_institue'))
+# 				designation=str(request.POST.get('designation'))
+# 				other=str(request.POST.get('other'))
+# 				try:
+# 					alumni_data_row=alumni_data.objects.get(roll_no=login_id)
+# 					setattr(alumni_data_row,'current_status',str(current_status))
+# 					setattr(alumni_data_row,'github_url',str(github_url))
+# 					setattr(alumni_data_row,'linkedin_url',str(linkedin_url))
+# 					setattr(alumni_data_row,'batch',str(batch))
+# 					setattr(alumni_data_row,'company_institue',str(company_institue))
+# 					setattr(alumni_data_row,'designation',str(designation))
+# 					setattr(alumni_data_row,'other',str(other))
+# 					setattr(alumni_data_row,'flag',True)
+# 					#image pending
+# 					alumni_data_row.save()
+# 				except:
+# 					return HttpResponse('Invalid login id')
+# 			except:
+# 				return HttpResponse("Data not get")
+# 		else:
+# 			return render(request,'signup_alumni.html')
 
 
 @login_required
@@ -102,7 +111,7 @@ def alumni_profile(request,roll_no):
 			JSON_response['email']=alumni_data_row.email
 			JSON_response['batch']=alumni_data_row.batch
 			photo=str(alumni_data_row.photo)
-			photo_url='<img src='+'"/media/'+photo+'"'+'>'
+			photo_url='<img src='+'"/'+photo+'"'+'>'
 			JSON_response['photo']=photo_url
 			print photo_url
 			JSON_response['current_status']=alumni_data_row.current_status
@@ -134,7 +143,7 @@ def alumni_profile(request,roll_no):
 			JSON_response['skill']=alumni_data_row.skill
 			JSON_response['other']=alumni_data_row.other
 		print JSON_response
-		return render(request,'show_profile.html',JSON_response)
+		return render(request,'show_alumni_profile.html',JSON_response)
 	except:
 		return HttpResponse("Wrong roll_no entered")
 
@@ -204,7 +213,7 @@ def edit_alumni_profile(request):
 		JSON_response['email']=alumni_data_row.email
 		JSON_response['batch']=alumni_data_row.batch
 		photo=str(alumni_data_row.photo)
-		photo_url='<img src='+'"/media/'+photo+'"'+'>'
+		photo_url='<img src='+'"/'+photo+'"'+'>'
 		JSON_response['photo']=photo_url
 		print photo_url
 		JSON_response['current_status']=alumni_data_row.current_status
