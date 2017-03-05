@@ -26,3 +26,6 @@ def get_notice(request):
 
 def home(request):
 	return render(request,'index.html')
+
+def academics(request):
+	return render(request,'academics.html')

@@ -145,7 +145,7 @@ height: 0;
 <section class="idealsteps-step">
 <div class="container" style="float:CENTER;">
     <h1>REGISTER</h1> </DIV>
-    <form action="." enctype="multipart/form-data"  method="POST">
+    <form action="." enctype="multipart/form-data"  method="POST" class="idealforms">
 <div class="field">
 <label class="main">ROLL NO</label>
 <input name="username" type="text"  placeholder="roll-no/faculty-id">
@@ -183,7 +183,6 @@ height: 0;
 
 </div>
 <span id="invalid"></span>
-</form>
 </div>
 </div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
@@ -232,7 +231,7 @@ height: 0;
     });
 
     $('form.idealforms').idealforms('addRules', {
-      'comments': 'required minmax:50:200'
+      //'comments': 'required minmax:50:200'
     });
 
     $('.prev').click(function(){

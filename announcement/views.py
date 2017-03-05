@@ -36,8 +36,7 @@ def announcement(request):
 					<div class="cbp_tmicon cbp_tmicon-screen"></div>
 					<div class="cbp_tmlabel" style="background:#1c2d3f;">
 						<h2>%s</h2>
-						<p >%s</p>
-					</div>
+						<p>%s</h2>
 				</li>"""
 			announcement_string+=announcement_temp_string % (o.title,o.subtitle,o.content)	
 	return render(request,'activities.html' ,{'announcement_string':announcement_string})
