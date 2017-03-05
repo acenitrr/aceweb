@@ -20,33 +20,36 @@ def signup_student(request):
 				print sem
 				github_url=str(request.POST.get('github_url'))
 				linkedin_url=str(request.POST.get('linkedin_url'))
-				# image=request.FILES.get('photo').name
+				image_name=request.FILES.get('photo').name
 				try:
-				# 	folder = 'media/student_images/'+roll_no+'/'
-				# 	os.mkdir(os.path.join(folder))
-				# 	break
-				# except:
-				# 	response['success']=False
-				# print "image=",image
-				# fout = open(folder+image, 'w')
-				# file_content = request.FILES.get('photo').read()
-				# fout.write(file_content)
-				# fout.close()
-					skill=str(request.POST.get('skill'))
-					password=str(request.POST.get('password'))
-					# try:
+					folder = 'media/student_images/'
+					os.mkdir(os.path.join(folder))
+				except Exception,e:
+					print e
+					pass
+				print "image=",image_name
+				url=folder+login_id+image_name
+				fout = open(url, 'wb+')
+				file_content = request.FILES.get('photo').read()
+				fout.write(file_content)
+				fout.close()
+				skill=str(request.POST.get('skill'))
+				password=str(request.POST.get('password'))
+				try:
 					student_data_row=student_data.objects.get(roll_no=login_id)
 					setattr(student_data_row,'sem',str(sem))
 					setattr(student_data_row,'github_url',str(github_url))
 					setattr(student_data_row,'linkedin_url',str(linkedin_url))
 					setattr(student_data_row,'skill',str(skill))
-					#image pending
+					setattr(student_data_row,'photo',url)
 					student_data_row.save()
 					User.objects.create_user(username=login_id,password=password)
 					return HttpResponse('ok')
-				except:
+				except Exception,e:
+					print e
 					return HttpResponse('Invalid login id')
-			except:
+			except Exception,e:
+				print e
 				return HttpResponse("Data not get")
 
 
@@ -55,37 +58,23 @@ def student_profile(request,roll_no):
 	try:
 		JSON_response={}
 		login_id=str(request.user)
+		JSON_response['login_id']=login_id
+		student_data_row=student_data.objects.get(roll_no=roll_no)
+		JSON_response['name']=student_data_row.name
+		JSON_response['mobile']=student_data_row.mobile
+		JSON_response['email']=student_data_row.email
+		JSON_response['sem']=student_data_row.sem
+		photo=str(student_data_row.photo)
+		photo_url='<img src='+'"/'+photo+'"'+'>'
+		JSON_response['photo']=photo_url
+		print photo_url
+		JSON_response['skill']=student_data_row.skill
+		JSON_response['linkedin_url']=student_data_row.linkedin_url
+		JSON_response['github_url']=student_data_row.github_url
+
 		if login_id==roll_no:
-			JSON_response['login_id']=login_id
-			student_data_row=student_data.objects.get(roll_no=roll_no)
-			JSON_response['name']=student_data_row.name
-			JSON_response['mobile']=student_data_row.mobile
-			JSON_response['email']=student_data_row.email
-			JSON_response['sem']=student_data_row.sem
-			photo=str(student_data_row.photo)
-			photo_url='<img src='+'"/media/'+photo+'"'+'>'
-			JSON_response['photo']=photo_url
-			print photo_url
-			JSON_response['skill']=student_data_row.skill
-			JSON_response['linkedin_url']=student_data_row.linkedin_url
-			JSON_response['github_url']=student_data_row.github_url
-			edit='<a href="'+str(request.scheme+'://'+request.get_host()+'/edit_student_profile/')+'">edit your profile</a>'
+			edit='<a href="'+'/edit_student_profile/">edit your profile</a>'
 			JSON_response['edit']=edit
-		else:
-			print login_id
-			JSON_response['login_id']=roll_no
-			student_data_row=student_data.objects.get(roll_no=roll_no)
-			JSON_response['name']=student_data_row.name
-			JSON_response['mobile']=student_data_row.mobile
-			JSON_response['email']=student_data_row.email
-			JSON_response['sem']=student_data_row.sem
-			photo=str(student_data_row.photo)
-			photo_url='<img src='+'"/media/'+photo+'"'+'>'
-			JSON_response['photo']=photo_url
-			print photo_url
-			JSON_response['skill']=student_data_row.skill
-			JSON_response['linkedin_url']=student_data_row.linkedin_url
-			JSON_response['github_url']=student_data_row.github_url
 		print JSON_response
 		return render(request,'show_profile.html',JSON_response)
 	except:
@@ -131,14 +120,28 @@ def edit_student_profile(request):
 			skill=str(request.POST.get('skill'))
 			linkedin_url=str(request.POST.get('linkedin_url'))
 			github_url=str(request.POST.get('github_url'))
-			#image pending
+			image_name=request.FILES.get('photo').name
+			try:
+				folder = 'media/student_images/'
+				os.mkdir(os.path.join(folder))
+			except Exception,e:
+				print e
+				pass
+			print "image=",image_name
+			url=folder+student_data_row.roll_no+image_name
+			fout = open(url, 'wb+')
+			file_content = request.FILES.get('photo').read()
+			fout.write(file_content)
+			fout.close()
+			setattr(student_data_row,'photo',url)
 			setattr(student_data_row,'skill',skill)
 			setattr(student_data_row,'linkedin_url',linkedin_url)
 			setattr(student_data_row,'github_url',github_url)
 			#image pending
 			student_data_row.save()
 			return HttpResponse('redirect him to his own profile')
-		except:
+		except Exception,e:
+			print e
 			return HttpResponse('something occur please try again')
 	else:
 		student_data_row=student_data.objects.get(roll_no=str(request.user))
@@ -148,8 +151,8 @@ def edit_student_profile(request):
 		JSON_response['mobile']=student_data_row.mobile
 		JSON_response['email']=student_data_row.email
 		JSON_response['sem']=student_data_row.sem
-		photo=str(student_data_row.photo)
-		photo_url='<img src='+'"/media/'+photo+'"'+'>'
+		#photo=str(student_data_row.photo)
+		photo_url='<img src='+'"/'+str(student_data_row.photo)+'"'+'>'
 		JSON_response['photo']=photo_url
 		print photo_url
 		JSON_response['skill']=student_data_row.skill

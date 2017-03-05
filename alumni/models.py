@@ -23,6 +23,6 @@ class alumni_data(models.Model):
 	github_url=models.CharField(max_length=500,blank=True,null=True)
 	modified= models.DateTimeField(auto_now=True,auto_now_add=False)
 	created= models.DateTimeField(auto_now=False,auto_now_add=True)
-	photo=models.ImageField(upload_to="alumni_images/",default="default.png")
+	photo=models.ImageField(upload_to="alumni_images/",default="/media/default.png")
 	flag=models.BooleanField(default=False)
 # Create your models here.
