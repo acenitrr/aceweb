@@ -50,7 +50,7 @@
 }
 
 .jspDrag {
-	background: #fff;
+	background: black;
 	position: relative;
 	box-shadow: inset -1px 0 8px rgba(0,0,0,0.05);
 	top: 0;
@@ -61,7 +61,7 @@
 }
 
 .jspCorner {
-	background: #fff;
+	background:black;
 	float: left;
 	height: 100%;
 }

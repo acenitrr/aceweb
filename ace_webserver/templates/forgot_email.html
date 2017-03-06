@@ -1,16 +1,62 @@
 <!doctype html>
-<html>
+<html lang="en" class="no-js">
 <head>
-	<title>
-		Forgot password
-	</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>ACE</title>
+
+  
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!-- Custom CSS -->
+
+       
+      
+<link rel="stylesheet" href="/static/css/login style1.css">
+  <link rel="stylesheet" href="/static/css/login reset.css"> <!-- CSS reset -->
+  <link rel="stylesheet" href="/static/css/login style.css"> <!-- Resource style -->
+  <script src="/static/js/login modernizr.js"></script> <!-- Modernizr -->
 </head>
-<body>
-	<form action="." enctype="multipart/form-data"  method="POST">
-		<input type='text' placeholder='roll_no' name='login_id'>
-		<input type='text' placeholder='email_id' name='email'>
-		<input type="submit">
-	</form>
-	{{msg|safe}}
+<body style="background:#f6f6f6;">
+   
+ {% include "base_head.html" %}
+{% block content %}
+
+  <br><br>
+  <form class="cd-form floating-labels" action="." enctype="multipart/form-data"  method="POST">
+    <fieldset>
+      <legend>Account</legend>
+
+
+      <div class="icon">
+      	 <label class="cd-label" for="cd-name">Roll-no</label>
+         <input class="user" type="text" id="cd-name" name='login_id' required>
+        </div> 
+
+		    <div class="icon">
+		    	<label class="cd-label" for="cd-email">Email</label>
+				<input class="email" type="email" name="email" id="cd-email" required>
+		    </div>
+
+        
+      {{msg|safe}}
+    
+
+<button type="submit" class="btn btn-info" style="float:right;"><b>Submit</b></button>
+        </div>
+          
+    </fieldset>
+  </form>
+<script src="/static/js/login jquery-2.1.1.js"></script>
+<script src="/static/js/login main.js"></script> <!-- Resource jQuery -->
+
+{% endblock content %}
+{% include "base_foot.html" %}  
 </body>
 </html>

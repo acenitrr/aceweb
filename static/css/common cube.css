@@ -484,7 +484,7 @@ main {
 	position: absolute;
 }
 
-.btn-back {
+.bc {
 	font-size: 2em;
 	line-height: 2;
 	position: absolute;
@@ -502,12 +502,12 @@ main {
 	background: none;
 }
 
-.btn-back:focus {
+.bc:focus {
 	outline: none;
 }
 
 .no-js .content__number,
-.no-js .btn-back {
+.no-js .bc {
 	display: none;
 }
 
@@ -515,7 +515,7 @@ main {
 .js .content__description,
 .js .content__meta,
 .js .content__number,
-.js .btn-back {
+.js .bc {
 	opacity: 0;
 }
 
@@ -574,7 +574,7 @@ main {
 		padding: 2em;
 		width: 100%;
 	}
-	.btn-back {
+	.bc {
 		font-size: 1.25em;
 		bottom: auto;
 		top: 0;

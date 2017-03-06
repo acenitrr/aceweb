@@ -25,7 +25,7 @@ body {
 	overflow: hidden;
 }
 
-a {
+/*a {
 	color: #555;
 	text-decoration: none;
 	outline: none;
@@ -33,7 +33,7 @@ a {
 
 a:hover {
 	color: #000;
-}
+}*/
 
 .container,
 .bb-custom-wrapper,
@@ -119,12 +119,12 @@ a:hover {
 	text-shadow: 0 1px rgba(255,255,255,0.2);
 } 
 
-.menu-panel div a:hover {
+/*.menu-panel div a:hover {
 	background: inherit;
 	color: #fff;
 	text-shadow: none;
 }
-
+*/
 .bb-custom-wrapper nav {
 	top: 20px;
 	left: 60px;

@@ -622,7 +622,7 @@
 		colortimeout,
 		contentEl = document.querySelector('.content'),
 		contents = contentEl.querySelectorAll('.content__block'),
-		backCtrl = contentEl.querySelector('.btn-back'),
+		backCtrl = contentEl.querySelector('.bc'),
 		contentNumber = contentEl.querySelector('.content__number'),
 		isMobile = mobilecheck();
 
