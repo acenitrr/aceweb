@@ -37,7 +37,7 @@ a:focus {
 
 .cube__side,
 .no-js .cube {
-	border: 3px solid #fff;
+	/*border: 3px solid #fff;*/
 	outline: 1px solid #fff;
 	background: #f0f0f0 url(../img/c1.png) no-repeat center center;
 }
