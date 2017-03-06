@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'notice',
     'announcement',
     'forgot_password',
+    'achievement',
 ]
 
 MIDDLEWARE_CLASSES = [

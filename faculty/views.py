@@ -18,18 +18,20 @@ def signup_faculty(request):
 				designation=str(request.POST.get('designation'))
 				education=str(request.POST.get('education'))
 				area_of_interest=str(request.POST.get('area_of_interest'))
-				# image=request.FILES.get('photo').name
-				# try:
-				# 	folder = 'media/student_images/'+roll_no+'/'
-				# 	os.mkdir(os.path.join(folder))
-				# 	break
-				# except:
-				# 	response['success']=False
-				# print "image=",image
-				# fout = open(folder+image, 'w')
-				# file_content = request.FILES.get('photo').read()
-				# fout.write(file_content)
-				# fout.close()
+				image_name=request.FILES.get('photo').name
+				try:
+					folder = 'media/faculty_images/'
+					os.mkdir(os.path.join(folder))
+				except Exception,e:
+					print e
+					pass
+				print "image=",image_name
+				url=folder+login_id+image_name
+				fout = open(url, 'wb+')
+				file_content = request.FILES.get('photo').read()
+				fout.write(file_content)
+				fout.close()
+				##########################################################33
 				other_details=str(request.POST.get('other_details'))
 				password=str(request.POST.get('password'))
 				try:
