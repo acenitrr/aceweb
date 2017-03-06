@@ -1,18 +1,112 @@
 <!doctype html>
-<html>
+<html lang="en" class="no-js">
 <head>
-	<title>
-		Signup
-</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="/static/css/login reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="/static/css/login style.css"> <!-- Resource style -->
+	<script src="/static/js/login modernizr.js"></script> <!-- Modernizr -->
+	 <title>ACE</title>
+
+  
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!-- Custom CSS -->
+<body style="background:#f6f6f6;">
+   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"style="background:#1c2d3f;">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+     <a class="navbar-brand" href="index.html" style="color:white;font-size:30px;position:absolute;left:7%;">ACE</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float:right;" >
+               <ul class="nav navbar-nav" >
+                    <li>
+                        <a href="index.html" >HOME</a>
+                    </li>
+                    <li>
+                        <a href="academics.html" >ACADEMICS</a>
+                    </li>
+                    <li>
+                        <a href="achievements.html">ACHIEVEMENT</a>
+                    </li>
+					<li>
+                        <a href="activities.html" >ACTIVITIES</a>
+                    </li><li>
+                        <a href="faculty.html" >ADMINISTRATION</a>
+                    </li>
+					<li>
+                        <a href="login.html">LOGIN</a>
+                    </li>
+					
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+	<br><br>
 </head>
 <body>
-	<form action="." enctype="multipart/form-data"  method="POST">
-		<input type='text' placeholder='roll_no' name='roll_no'>
-		<input type='text' placeholder='name' name='name'>
-		<input type='text' placeholder='mobile' name='mobile'>
-		<input type='text' placeholder='email_id' name='email'>
-		<input type="submit">
+	<form class="cd-form floating-labels" action="." enctype="multipart/form-data"  method="POST">
+		<fieldset>
+			<legend>Register</legend>
+
+
+			<div class="icon">
+				<label class="cd-label" for="cd-name">Roll-No</label>
+				<input class="user" type="text" name="roll_no" id="cd-name"  required>
+		    </div> 
+			<div class="icon">
+				<label class="cd-label" for="cd-name">Name</label>
+				<input class="user" type="text" name="name" id="cd-name"  required>
+		    </div> 
+
+		    <div class="icon">
+		    	<label class="cd-label" for="cd-company">Phone-No:</label>
+				<input class="company" type="text" name="mobile" id="cd-company">
+		    </div> 
+
+		    <div class="icon">
+		    	<label class="cd-label" for="cd-email">Email</label>
+				<input class="email" type="email" name="email" id="cd-email" required>
+		    </div>
+		</fieldset>
+		{{msg|safe}}
+
+<div>
+
+				<label class="cd-label" for="cd-name">
+				<u><a href="/login/">Already a User</a></u></label>
+		      	<input type="submit" value="Register">
+		    </div>
+		</fieldset>
 	</form>
-	{{msg|safe}}
+<script src="/static/js/login jquery-2.1.1.js"></script>
+<script src="/static/js/login main.js"></script> <!-- Resource jQuery -->
+<nav class="navbar navbar-inverse navbar-fixed-bottom" style="height:12px;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+   
+    </div><p style="color:white;text-align:center;font-size:14px;padding-top:1%;">
+    &COPY 2017 ACE &#9898 ALL RIGHTS RESERVED  DESIGNED & DEVELOPED BY WEBTEAM - ACE</p>
+  </div>
+</nav>
 </body>
 </html>

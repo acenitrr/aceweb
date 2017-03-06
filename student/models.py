@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from tinymce.models import HTMLField
 
 class student_data(models.Model):
 	roll_no=models.CharField(primary_key=True,null=False,blank=False,max_length=20)
@@ -20,8 +21,8 @@ class student_data(models.Model):
 	email=models.CharField(max_length=200,blank=True,null=True)
 	linkedin_url=models.CharField(max_length=500,blank=True,null=True)
 	github_url=models.CharField(max_length=500,blank=True,null=True)
-	photo=models.ImageField(upload_to='student_images/',default="default.png")
-	skill=models.CharField(max_length=200,blank=True,null=True)
+	photo=models.ImageField(upload_to='student_images/',default="media/default.png")
+	skill=HTMLField()
 
 # 	def __unicode__(self):
 # 		return str(self.roll_no)

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>
-		Signup_student
+		Edit Your Profile
 </title>
 <script src="http://cloud.tinymce.com/stable/tinymce.min.js?apiKey=w1v6psh8dyqghv1poy8yir1riciyfdzhbev0i9n34mo215um"></script>
 	<script>
@@ -19,16 +19,16 @@
 </head>
 <body>
 	<form action="." enctype="multipart/form-data"  method="POST">
-		<input type='text' placeholder='roll_no' name='roll_no' value={{roll_no|safe}} readonly="readonly">
+		<input type='text' placeholder='Faculty_id' name='faculty_id' value={{faculty_id|safe}} readonly="readonly">
 		<input type='text' placeholder='name' name='name' value={{name|safe}} readonly="readonly">
 		<input type='text' placeholder='mobile' name='mobile' value={{mobile|safe}} readonly="readonly">
 		<input type='text' placeholder='email' name='email' value={{email|safe}} readonly="readonly">
-		<input type='text' placeholder='sem' name='sem' value={{sem|safe}} readonly="readonly">
+		<input type='text' placeholder='designation' name='designation' value={{designation|safe}} readonly="readonly">
 		{{photo|safe}}
 		<input type='file'  name='photo' value={{photo_name|safe}}>
-		<input type='text' placeholder='github_url' name='github_url' value={{github_url|safe}} >
-		<input type='text' placeholder='linkedin_url' name='linkedin_url'  value={{linkedin_url|safe}}>
-		<textarea  name="skill" id="cd-textarea" value='NO Skill added' value={{skill|safe}}></textarea>
+		<input type='text' placeholder='education' name='education' value={{education|safe}} >
+		<input type='text' placeholder='area_of_interest' name='area_of_interest'  value={{area_of_interest|safe}}>
+		<textarea  name="other_details" id="cd-textarea" value='NO Skill added' value={{other_details|safe}}></textarea>
 		<input type="submit">
 	</form>
 	{{msg|safe}}

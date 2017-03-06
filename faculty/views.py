@@ -14,8 +14,9 @@ def signup_faculty(request):
 		if request.method=="POST":
 			try:
 				response={}
-				login_id=str(request.POST.get('roll_no'))
+				login_id=str(request.POST.get('faculty_id'))
 				designation=str(request.POST.get('designation'))
+				print designation
 				education=str(request.POST.get('education'))
 				area_of_interest=str(request.POST.get('area_of_interest'))
 				image_name=request.FILES.get('photo').name
@@ -31,20 +32,26 @@ def signup_faculty(request):
 				file_content = request.FILES.get('photo').read()
 				fout.write(file_content)
 				fout.close()
+<<<<<<< HEAD
 				##########################################################33
+=======
+>>>>>>> 678295a2d495b5bba4ed364ffb6d61f5de84c06a
 				other_details=str(request.POST.get('other_details'))
+				print other_details
 				password=str(request.POST.get('password'))
+				print password
 				try:
 					faculty_data_row=faculty_data.objects.get(faculty_id=login_id)
 					setattr(faculty_data_row,'designation',str(designation))
 					setattr(faculty_data_row,'education',str(education))
 					setattr(faculty_data_row,'area_of_interest',str(area_of_interest))
 					setattr(faculty_data_row,'other_details',str(other_details))
-					#image pending
+					setattr(faculty_data_row,'photo',url)
 					faculty_data_row.save()
 					User.objects.create_user(username=login_id,password=password)
-					return HttpResponse('signup_faculty done')
-				except:
+					return render(request,'login.html',{'msg':'Sign up done'})
+				except Exception,e:
+					print e
 					return HttpResponse('Invalid login id')
 			except:
 				return HttpResponse("Data not get")
@@ -63,7 +70,7 @@ def faculty_profile(request,faculty_id):
 			JSON_response['email']=faculty_data_row.email
 			JSON_response['designation']=faculty_data_row.designation
 			photo=str(faculty_data_row.photo)
-			photo_url='<img src='+'"/media/'+photo+'"'+'>'
+			photo_url='<img src='+'"/'+photo+'"'+'>'
 			JSON_response['photo']=photo_url
 			print photo_url
 			JSON_response['education']=faculty_data_row.education
@@ -108,17 +115,32 @@ def edit_faculty_profile(request):
 		try:
 			faculty_data_row=faculty_data.objects.get(faculty_id=str(request.user))
 			education=str(request.POST.get('education'))
+			print education
 			designation=str(request.POST.get('designation'))
 			area_of_interest=str(request.POST.get('area_of_interest'))
 			other_details=str(request.POST.get('other_details'))
-			#image pending
+			try:
+				image_name=request.FILES.get('photo').name
+				try:
+					folder = 'media/faculty_images/'
+					os.mkdir(os.path.join(folder))
+				except Exception,e:
+					print e
+					pass
+				print "image=",image_name
+				url=folder+faculty_data_row.faculty_id+image_name
+				fout = open(url, 'wb+')
+				file_content = request.FILES.get('photo').read()
+				fout.write(file_content)
+				fout.close()
+				setattr(faculty_data_row,'photo',url)
+			except:
+				pass
 			setattr(faculty_data_row,'education',education)
-			setattr(faculty_data_row,'company_institue',company_institue)
 			setattr(faculty_data_row,'designation',designation)
 			setattr(faculty_data_row,'area_of_interest',area_of_interest)
 			setattr(faculty_data_row,'other_details',other_details)
 			#resume pending
-			#image pending
 			faculty_data_row.save()
 			return HttpResponse('redirect him to his own profile')
 		except:
@@ -127,13 +149,12 @@ def edit_faculty_profile(request):
 		faculty_data_row=faculty_data.objects.get(faculty_id=str(request.user))
 		JSON_response={}
 		JSON_response['faculty_id']=faculty_data_row.faculty_id
-		faculty_data_row=faculty_data.objects.get(faculty_id=faculty_id)
 		JSON_response['name']=faculty_data_row.name
 		JSON_response['mobile']=faculty_data_row.mobile
 		JSON_response['email']=faculty_data_row.email
 		JSON_response['designation']=faculty_data_row.designation
 		photo=str(faculty_data_row.photo)
-		photo_url='<img src='+'"/media/'+photo+'"'+'>'
+		photo_url='<img src='+'"/'+photo+'"'+'>'
 		JSON_response['photo']=photo_url
 		print photo_url
 		JSON_response['education']=faculty_data_row.education

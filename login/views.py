@@ -191,17 +191,17 @@ def signup_view(request):
 						print email_encoded_url
 						link=str(request.scheme+"://"+request.get_host()+"/verify_email/"+email_encoded_url)
 						url='<a href='+link+'>verify email</a>'
-						image='<img src='+'"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTEgRR_jTgKgGkHyVYFbXHg51pzhpWmx1bsgREGMcV621HdH39q"'+'>'
+						# image='<img src='+'"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTEgRR_jTgKgGkHyVYFbXHg51pzhpWmx1bsgREGMcV621HdH39q"'+'>'
 						print url
 						# email_body=str(custom_keys_data.objects.get(key='email_test').value)
-						email_body=str(email_send_data.objects.get(key='email_verify').email_data)
-						print email_body % (image,name,url)
+						email_body=str(custom_key_data.objects.get(key='email_verify').value)
+						print email_body % (name,url)
 						backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
 			                       password=str(password_email), use_tls=True, fail_silently=True)
-						EmailMsg=EmailMessage("ACE",email_body % (image,name,url) ,'no-reply@gmail.com',[email] ,connection=backend)
+						EmailMsg=EmailMessage("ACE",email_body % (name,url) ,'no-reply@gmail.com',[email] ,connection=backend)
 						EmailMsg.content_subtype = "html"
 						EmailMsg.send()
-						return HttpResponse("done")
+						return render(request,"signup.html",{'msg':'email is send to your email account kindly verify it'})
 				except:
 					print 'enroll_no is not valid'
 					return render(request,"signup.html",{'msg':'enroll_no is not valid'})

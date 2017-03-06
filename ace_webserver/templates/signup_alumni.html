@@ -78,46 +78,47 @@
         <!-- /.container -->
     </nav>
 	<br><br>
-	<form class="cd-form floating-labels" action="/signup_student/" enctype="multipart/form-data"  method="POST">
+	<form class="cd-form floating-labels" action="/signup_alumni/" enctype="multipart/form-data"  method="POST">
 		<fieldset>
-			<legend>Student Login</legend>
+			<legend>Alumni Login</legend>
 
 
 			<div class="icon">
-				<label class="cd-label" for="cd-name">Roll-No</label>
+				<label class="cd-label" for="cd-name">Roll No</label>
 				<input class="user" type="text" name="roll_no" id="cd-name" value='{{login_id|safe}}' readonly='readonly'>
 		    </div> 
 
-		
-		
-
-			<div>
-				<h4>Semester</h4>
-
-				<p class="cd-select icon">
-					<select class="budget" name='sem'>
-						<option value="0">I</option>
-						<option value="1">II</option>
-						<option value="2">III</option>
-						<option value="3">IV</option>
-						<option value="4">V</option>
-						<option value="5">VI</option>
-						<option value="6">VII</option>
-						<option value="7">VIII</option>
-					</select>
-				</p>
-			</div> 
+		<div class="icon">
+				<label class="cd-label" for="cd-name">Designation</label>
+				<input class="user" type="text" name="designation" id="cd-name" required >
+		    </div>  
+		    <div class="icon">
+				<label class="cd-label" for="cd-name">batch</label>
+				<input class="user" type="text" name="batch" id="cd-name" required>
+		    </div>  
 <div class="icon">
 				<label class="cd-label" for="cd-name">Picture</label><BR><br><br>
 <input id="picture" name="photo" type="file" multiple></DIV>
 				<div class="icon">
-				<label class="cd-label" for="cd-name">GITHUB LINK</label>
-				<input class="user" type="text" name="github_url" id="cd-name"  >
+				<label class="cd-label" for="cd-name">Current Status</label>
+				<input class="user" type="text" name="current_status" id="cd-name"  >
 		    </div> 
 			
 			<div class="icon">
-				<label class="cd-label" for="cd-name">LINKDIN LINK</label>
+				<label class="cd-label" for="cd-name">Company or Institue</label>
+				<input class="user" type="text" name="company_institue" id="cd-name"  >
+		    </div> 
+		    <div class="icon">
+				<label class="cd-label" for="cd-name">skill</label>
+				<input class="user" type="text" name="skill" id="cd-name"  >
+		    </div> 
+		    <div class="icon">
+				<label class="cd-label" for="cd-name">linkedin_url</label>
 				<input class="user" type="text" name="linkedin_url" id="cd-name"  >
+		    </div> 
+		    <div class="icon">
+				<label class="cd-label" for="cd-name">github_url</label>
+				<input class="user" type="text" name="github_url" id="cd-name"  >
 		    </div> 
 			
 			<div class="icon">
@@ -136,7 +137,7 @@
 			</div>
 			<br>
 			<div class ='icon'>
-      			<textarea class="message" name="skill" id="cd-textarea" value='NO Skill added'></textarea>
+      			<textarea class="message" name="other" id="cd-textarea" value='NO Skill added'></textarea>
 			</div>
 
 			<div>

@@ -16,7 +16,7 @@ class faculty_data(models.Model):
 	education=models.CharField(max_length=300,blank=True,null=True)
 	email=models.CharField(max_length=300,blank=True,null=True)
 	mobile=models.CharField(max_length=20,blank=True,null=True)
-	photo=models.ImageField(upload_to="faculty_images/",default="default.png")
+	photo=models.ImageField(upload_to="faculty_images/",default="media/default.png")
 	modified= models.DateTimeField(auto_now=True,auto_now_add=False)
 	created= models.DateTimeField(auto_now=False,auto_now_add=True)
 	other_details=HTMLField()

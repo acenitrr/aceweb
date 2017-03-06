@@ -14,21 +14,10 @@
 	email id={{email|safe}}
 	github url= {{github_url|safe}}
 	linkedin url= {{linkedin_url|safe}}
+	other_data=
+	{{skill|safe}}
 	<br><br>
 	{{edit|safe}}
-skills=<p id='demo'></p>
- <script>
- window.onload = function() {
-  myFunction();
-};
-function myFunction() {
-	// document.getElementById("demo").innerHTML = skills;
-
-    var str ='{{skill|escapejs}}' ;
-    var res = str.split("&");
-    document.getElementById("demo").innerHTML = res;
-}
-</script>
 </body>
 
 </html>

@@ -5,6 +5,7 @@ from login.models import *
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect, HttpResponse,JsonResponse
+from django.contrib.auth.views import login,logout
 
 def get_notice(request):
 	response={}
@@ -32,3 +33,10 @@ def academics(request):
 
 def activities(request):
 	return render(request,'activities.html')
+
+def administration(request):
+	return render(request,'faculty.html')
+
+def logout_view(request):
+	logout(request)
+	return HttpResponseRedirect('/')
