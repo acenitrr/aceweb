@@ -45,7 +45,7 @@ def signup_student(request):
 					setattr(student_data_row,'photo',url)
 					student_data_row.save()
 					User.objects.create_user(username=login_id,password=password)
-					return HttpResponse('ok')
+					return render(request,'login',{'msg':'sign up done'})
 				except Exception,e:
 					print e
 					return HttpResponse('Invalid login id')
@@ -67,7 +67,7 @@ def student_profile(request,roll_no):
 		JSON_response['email']=student_data_row.email
 		JSON_response['sem']=student_data_row.sem
 		photo=str(student_data_row.photo)
-		photo_url='<img src='+'"/'+photo+'"'+'>'
+		photo_url='<img width="120" height="100" src='+'"/'+photo+'"'+'>'
 		JSON_response['photo']=photo_url
 		print photo_url
 		JSON_response['skill']=student_data_row.skill
@@ -158,7 +158,7 @@ def edit_student_profile(request):
 		JSON_response['email']=student_data_row.email
 		JSON_response['sem']=student_data_row.sem
 
-		photo_url='<img src='+'"/'+str(student_data_row.photo)+'"'+'>'
+		photo_url='<img width="80" height="80" src='+'"/'+str(student_data_row.photo)+'"'+'>'
 		JSON_response['photo']=photo_url
 		print photo_url
 		JSON_response['photo_name']=str(student_data_row.photo)
