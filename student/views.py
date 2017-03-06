@@ -45,13 +45,13 @@ def signup_student(request):
 					setattr(student_data_row,'photo',url)
 					student_data_row.save()
 					User.objects.create_user(username=login_id,password=password)
-					return render(request,'login',{'msg':'sign up done'})
+					return render(request,'login.html',{'msg':'sign up done'})
 				except Exception,e:
 					print e
-					return HttpResponse('Invalid login id')
+					return render(request,'signup_student.html',{'msg':'Invalid login id'})
 			except Exception,e:
 				print e
-				return HttpResponse("Data not get")
+				return render(request,'signup_student.html',{'msg':'Data not get'})
 		return render (request,'signup_student.html')
 
 
@@ -80,7 +80,7 @@ def student_profile(request,roll_no):
 		print JSON_response
 		return render(request,'show_profile.html',JSON_response)
 	except:
-		return HttpResponse("Wrong roll_no entered")
+		return render(request,'show_profile.html',{'msg':'Wrong Login Id'})
 
 
 @login_required
@@ -145,10 +145,11 @@ def edit_student_profile(request):
 			setattr(student_data_row,'linkedin_url',linkedin_url)
 			setattr(student_data_row,'github_url',github_url)
 			student_data_row.save()
-			return HttpResponse('redirect him to his own profile')
+			redirect_url='/student_view/'+request.user
+			return HttpResponseRedirect(str(redirect_url))
 		except Exception,e:
 			print e
-			return HttpResponse('something occur please try again')
+			return render (request,'edit_student_profile.html',{'msg':'something occur please try again'})
 	else:
 		student_data_row=student_data.objects.get(roll_no=str(request.user))
 		JSON_response={}

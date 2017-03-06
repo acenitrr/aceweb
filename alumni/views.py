@@ -57,10 +57,10 @@ def signup_alumni(request):
 					return render(request,'login.html',{'msg':'sign up done'})
 				except Exception,e:
 					print e
-					return HttpResponse('Invalid login id')
+					return render(request,'login.html',{'msg':'Invalid login id'})
 			except Exception,e:
 				print e
-				return HttpResponse("Data not get")
+				return render(request,'login.html',{'msg':'Data not get'})
 		else:
 			return render(request,'signup_alumni.html')
 
@@ -145,8 +145,7 @@ def alumni_profile(request,roll_no):
 		print JSON_response
 		return render(request,'show_alumni_profile.html',JSON_response)
 	except:
-		return HttpResponse("Wrong roll_no entered")
-
+		return render(request,'show_alumni_profile.html',{'msg':'Wrong roll_no entered'})
 
 @login_required
 def alumni_group_profile(request):
@@ -201,9 +200,10 @@ def edit_alumni_profile(request):
 			setattr(alumni_data_row,'github_url',github_url)
 			#image pending
 			alumni_data_row.save()
-			return HttpResponse('redirect him to his own profile')
+			redirect_url='/alumni_view/'+request.user
+			return HttpResponseRedirect(str(redirect_url))
 		except:
-			return HttpResponse('something occur please try again')
+			return render (request,'edit_alumni_profile.html',{'msg':'something occur please try again'})
 	else:
 		alumni_data_row=alumni_data.objects.get(roll_no=str(request.user))
 		JSON_response={}

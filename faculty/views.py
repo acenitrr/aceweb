@@ -48,9 +48,9 @@ def signup_faculty(request):
 					return render(request,'login.html',{'msg':'Sign up done'})
 				except Exception,e:
 					print e
-					return HttpResponse('Invalid login id')
+					return render(request,'login.html',{'msg':'Invalid login id'})
 			except:
-				return HttpResponse("Data not get")
+				return render(request,'login.html',{'msg':'Data not get'})
 
 
 @login_required
@@ -92,7 +92,7 @@ def faculty_profile(request,faculty_id):
 		print JSON_response
 		return render(request,'show_faculty_profile.html',JSON_response)
 	except:
-		return HttpResponse("failed")
+		return render(request,'show_faculty_profile.html',{'msg':'something occur try again'})
 
 
 @login_required
@@ -138,9 +138,10 @@ def edit_faculty_profile(request):
 			setattr(faculty_data_row,'other_details',other_details)
 			#resume pending
 			faculty_data_row.save()
-			return HttpResponse('redirect him to his own profile')
+			redirect_url='/faculty_view/'+request.user
+			return HttpResponseRedirect(str(redirect_url))
 		except:
-			return HttpResponse('something occur please try again')
+			return render (request,'edit_faculty_profile.html',{'msg':'something occur please try again'})
 	else:
 		faculty_data_row=faculty_data.objects.get(faculty_id=str(request.user))
 		JSON_response={}
