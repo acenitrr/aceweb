@@ -38,45 +38,9 @@
 </head>
 <body>
 <body style="background:#f6f6f6;">
-   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"style="background:#1c2d3f;">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-     <a class="navbar-brand" href="index.html" style="color:white;font-size:30px;position:absolute;left:7%;">ACE</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float:right;" >
-               <ul class="nav navbar-nav" >
-                    <li>
-                        <a href="index.html" >HOME</a>
-                    </li>
-                    <li>
-                        <a href="academics.html" >ACADEMICS</a>
-                    </li>
-                    <li>
-                        <a href="achievements.html">ACHIEVEMENT</a>
-                    </li>
-					<li>
-                        <a href="activities.html" >ACTIVITIES</a>
-                    </li><li>
-                        <a href="faculty.html" >ADMINISTRATION</a>
-                    </li>
-					<li>
-                        <a href="login.html">LOGIN</a>
-                    </li>
-					
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+   {% include "base_head.html" %}
+{% block content %}
+
 	<br><br>
 	<form class="cd-form floating-labels" action="/signup_alumni/" enctype="multipart/form-data"  method="POST">
 		<fieldset>
@@ -147,13 +111,11 @@
 	</form>
 <script src="/static/js/login jquery-2.1.1.js"></script>
 <script src="/static/js/login main.js"></script> <!-- Resource jQuery -->
-<nav class="navbar navbar-inverse navbar-fixed-bottom" style="height:12px;">
-  <div class="container-fluid">
-    <div class="navbar-header">
-   
-    </div><p style="color:white;text-align:center;font-size:14px;padding-top:1%;">
-    &COPY 2017 ACE &#9898 ALL RIGHTS RESERVED  DESIGNED & DEVELOPED BY WEBTEAM - ACE</p>
-  </div>
-</nav>
+{% include "base_head.html" %}
+{% block content %}
+
+
+{% endblock content %}
+{% include "base_foot.html" %}	
 </body>
 </html>

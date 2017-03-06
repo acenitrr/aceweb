@@ -142,46 +142,10 @@ html {
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"style="background:#1c2d3f;">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-     <a class="navbar-brand" href="index.html" style="color:white;font-size:30px;position:absolute;left:7%;">ACE</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float:right;" >
-               <ul class="nav navbar-nav" >
-                    <li>
-                        <a href="/" >HOME</a>
-                    </li>
-                    <li>
-                        <a href="/academics/" >ACADEMICS</a>
-                    </li>
-                    <li>
-                        <a href="achievements.html">ACHIEVEMENT</a>
-                    </li>
-					<li>
-                        <a href="/announcement/" >ACTIVITIES</a>
-                    </li><li>
-                        <a href="/administration/" >ADMINISTRATION</a>
-                    </li>
-					<li>
-                        <a href="/login/">LOGIN</a>
-                    </li>
-					
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav><br><BR>
+{% include "base_head.html" %}
+{% block content %}
+
+   <br><BR>
 <div class="wrapper wrapper--demo">
   <div class="carousel">
     <div class="carousel__content">
@@ -406,15 +370,9 @@ Year 2000
 
 			} );
 		</script>
-	
-	 <nav class="navbar navbar-inverse navbar-fixed-bottom" style="height:12px;">
-  <div class="container-fluid">
-    <div class="navbar-header">
-   
-    </div><p style="color:white;text-align:center;font-size:14px;padding-top:1%;">
-    &COPY 2017 ACE &#9898 ALL RIGHTS RESERVED  DESIGNED & DEVELOPED BY WEBTEAM - ACE</p>
-  </div>
-</nav>
+{% endblock content %}
+{% include "base_foot.html" %}	
+
 </body>
 
 </html>
