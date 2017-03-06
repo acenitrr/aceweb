@@ -32,10 +32,6 @@ def signup_faculty(request):
 				file_content = request.FILES.get('photo').read()
 				fout.write(file_content)
 				fout.close()
-<<<<<<< HEAD
-				##########################################################33
-=======
->>>>>>> 678295a2d495b5bba4ed364ffb6d61f5de84c06a
 				other_details=str(request.POST.get('other_details'))
 				print other_details
 				password=str(request.POST.get('password'))

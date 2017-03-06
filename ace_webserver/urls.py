@@ -22,7 +22,7 @@ from alumni.views import alumni_profile,alumni_group_profile,edit_alumni_profile
 from forgot_password.views import forgot_password_view,verify_forgot_password
 from announcement.views import announcement
 
-from notice.views import get_notice,home,academics,administration,logout_view
+from notice.views import get_notice,home,academics,administration,logout_view,activities
 from django.views.generic.base import RedirectView
 from achievement.views import achievements
 
