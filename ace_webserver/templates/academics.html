@@ -24,49 +24,10 @@
 		<script src="/static/js/modernizr.custom.79639 academics.js"></script>
 	</head>
 	<body>
-   <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"style="background:#1c2d3f;font-size:1.6em; ">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-     <a class="navbar-brand" href="/" style="color:white;font-size:30px;position:absolute;left:7%;">ACE</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1" style="padding-right:75px;">
-               <ul class="nav navbar-nav" >
-                    <li>
-                        <a href="/" >HOME</a>
-                    </li>
-                    <li>
-                        <a href="/academics/" >ACADEMICS</a>
-                    </li>
-                    <li>
-                        <a href="/achievements">ACHIEVEMENT</a>
-                    </li>
-					<li>
-                        <a href="/announcement/" >ACTIVITIES</a>
-                    </li><li>
-                        <a href="/administration/" >ADMINISTRATION</a>
-                    </li>
-                    <li>
-                        {{link1|safe}}
-                    </li>
-					<li>
-                        {{link2|safe}}
-                    </li>
-					
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+   <!-- Navigation --><div style="font-size: 1.6em;">
+    		  {% include "base_head.html" %}
+{% block content %}
+</div>
 	<br><br><br>
 		
 		<div id="container" class="container">	
@@ -344,7 +305,8 @@ Subject covered under this semester:<br>
 		</script>
 		
 
-{% include "base_foot.html" %}	
+		{% endblock content %}
+{% include "base_foot.html" %}  
 				
 	</body>
 </html>

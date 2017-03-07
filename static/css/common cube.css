@@ -9,6 +9,8 @@ body {
 	color: #3f3f45;
 	background: #f0f0f3;
 	transition: background-color 0.8s;
+	width:100%;
+
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -16,7 +18,7 @@ body {
 a {
 	color: #777785;
 	outline: none;
-
+	display: inline-block;
 	position: relative;
 	text-decoration: none;
 	-webkit-transition: color 0.2s;
@@ -206,7 +208,7 @@ main {
 .calendar {
 	position: relative;
 	width: 100%;
-	height: 100%;
+	height: 85%;
 	margin: 0 auto;
 	overflow: hidden;
 	/* we always want 7 boxes in a row */
@@ -423,7 +425,7 @@ main {
 	left: 0;
 	overflow: hidden;
 	width: 100%;
-	height: 100%;
+	height: 80%;
 	pointer-events: none;
 }
 
