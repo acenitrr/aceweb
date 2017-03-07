@@ -89,7 +89,7 @@ def email_verification(request,value):
 @csrf_exempt
 def login_view(request):
 	if request.user.is_authenticated():
-		return render(request,'index.html',{'logout':'logout'})
+		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=='POST':
 			login_id=str(request.POST.get('login_id'))
@@ -106,7 +106,7 @@ def login_view(request):
 					if user is not None:
 						login(request, user)
 						print 'login done'
-						return HttpResponse('you are log]')
+						return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 						# return HttpResponseRedirect("/welcome/")
 					else:
 						return render(request,'login.html',{'login_status':'wrong login_id or password'})
@@ -120,7 +120,7 @@ def login_view(request):
 @csrf_exempt
 def signup_view(request):
 	if request.user.is_authenticated():
-		return render(request,'welcome.html')
+		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=='POST':
 			try:
@@ -143,7 +143,7 @@ def signup_view(request):
 					if login_data_row.email_flag==True:
 						print 'your account is registered already'
 						# return HttpResponse("your account is registered already")
-						return render(request,"signup.html",{'msg':'your account is registered already'})	
+						return render(request,"signup.html",{'msg':'your account is registered already','link2':'<a href="/login/">LOGIN</a>'})	
 					else:
 						print roll_no
 						if group_id==1:
@@ -201,12 +201,12 @@ def signup_view(request):
 						EmailMsg=EmailMessage("ACE",email_body % (name,url) ,'no-reply@gmail.com',[email] ,connection=backend)
 						EmailMsg.content_subtype = "html"
 						EmailMsg.send()
-						return render(request,"signup.html",{'msg':'email is send to your email account kindly verify it'})
+						return render(request,"signup.html",{'msg':'email is send to your email account kindly verify it','link2':'<a href="/login/">LOGIN</a>'})
 				except:
 					print 'enroll_no is not valid'
-					return render(request,"signup.html",{'msg':'enroll_no is not valid'})
+					return render(request,"signup.html",{'msg':'enroll_no is not valid','link2':'<a href="/login/">LOGIN</a>'})
 			except:
 				print 'enroll_no not get'
-				return render(request,"signup.html",{'msg':'enroll_no not get'})
+				return render(request,"signup.html",{'msg':'enroll_no not get','link2':'<a href="/login/">LOGIN</a>'})
 		else:
-			return render(request,"signup.html")
+			return render(request,"signup.html",{'link2':'<a href="/login/">LOGIN</a>'})

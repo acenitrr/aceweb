@@ -37,4 +37,7 @@ def achievements(request):
 	except Exception,e:
 		data=e
 		print e
-	return render(request,'achievements.html',{'datahead':data3+'</style>','data1':data1,'data2':data2})
+	if request.user.is_authenticated():
+		return render(request,'achievements.html' ,{'datahead':data3+'</style>','data1':data1,'data2':data2,'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+	else:
+		return render(request,'achievements.html',{'datahead':data3+'</style>','data1':data1,'data2':data2,'link2':'<a href="/login/">LOGIN</a>'})

@@ -6,10 +6,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import os
 
+
 @csrf_exempt
 def signup_alumni(request):
 	if request.user.is_authenticated():
-		return render (request,'welcome.html')
+		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=="POST":
 			try:
@@ -54,15 +55,15 @@ def signup_alumni(request):
 					#image pending
 					alumni_data_row.save()
 					User.objects.create_user(username=login_id,password=password)
-					return render(request,'login.html',{'msg':'sign up done'})
+					return render(request,'login.html',{'msg':'sign up done','link2':'<a href="/login/">LOGIN</a>'})
 				except Exception,e:
 					print e
-					return render(request,'login.html',{'msg':'Invalid login id'})
+					return render(request,'login.html',{'msg':'Invalid login id','link2':'<a href="/login/">LOGIN</a>'})
 			except Exception,e:
 				print e
-				return render(request,'login.html',{'msg':'Data not get'})
+				return render(request,'login.html',{'msg':'Data not get','link2':'<a href="/login/">LOGIN</a>'})
 		else:
-			return render(request,'signup_alumni.html')
+			return render(request,'signup_alumni.html',{'link2':'<a href="/login/">LOGIN</a>'})
 
 # @csrf_exempt
 # def signup_alumni(request):
@@ -121,6 +122,8 @@ def alumni_profile(request,roll_no):
 			JSON_response['designation']=alumni_data_row.designation
 			JSON_response['skill']=alumni_data_row.skill
 			JSON_response['other']=alumni_data_row.other
+			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
+			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 			edit='<a href="'+str(request.scheme+'://'+request.get_host()+'/edit_alumni_profile/')+'">edit your profile</a>'
 			JSON_response['edit']=edit
 		else:
@@ -142,6 +145,8 @@ def alumni_profile(request,roll_no):
 			JSON_response['designation']=alumni_data_row.designation
 			JSON_response['skill']=alumni_data_row.skill
 			JSON_response['other']=alumni_data_row.other
+			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
+			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 		print JSON_response
 		return render(request,'show_alumni_profile.html',JSON_response)
 	except:
@@ -203,7 +208,7 @@ def edit_alumni_profile(request):
 			redirect_url='/alumni_view/'+request.user
 			return HttpResponseRedirect(str(redirect_url))
 		except:
-			return render (request,'edit_alumni_profile.html',{'msg':'something occur please try again'})
+			return render (request,'edit_alumni_profile.html',{'msg':'something occur please try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/login/">LOGIN</a>'})
 	else:
 		alumni_data_row=alumni_data.objects.get(roll_no=str(request.user))
 		JSON_response={}
@@ -223,6 +228,8 @@ def edit_alumni_profile(request):
 		JSON_response['designation']=alumni_data_row.designation
 		JSON_response['skill']=alumni_data_row.skill
 		JSON_response['other']=alumni_data_row.other
+		JSON_response['link1']='<a href="/profile/">PROFILE</a>'
+		JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 		return render (request,'edit_alumni_profile.html',JSON_response)
 
 # Create your views here.

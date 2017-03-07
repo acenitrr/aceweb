@@ -76,6 +76,9 @@ def announcement(request):
 							</div>"""
 					announcement_string+=announcement_temp_string % (o.title,o.subtitle,o.content)
 					temp_obj=o
-	return render(request,'activities.html' ,{'announcement_string':announcement_string})
+	if request.user.is_authenticated():
+		return render(request,'activities.html' ,{'announcement_string':announcement_string,'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+	else:
+		return render(request,'activities.html',{'announcement_string':announcement_string,'link2':'<a href="/login/">LOGIN</a>'})
 	# except:
 	# 	return render(request,'activities.html' ,{'announcement_string':'No upcoming activities'})

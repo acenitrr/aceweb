@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 @csrf_exempt
 def forgot_password_view(request):
 	if request.user.is_authenticated():
-		return render (request,'welcome.html')
+		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=='POST':
 			login_id=str(request.POST.get('login_id'))
@@ -49,11 +49,11 @@ def forgot_password_view(request):
 							EmailMsg=EmailMessage("ACE",body % (student_name,url) ,'no-reply@gmail.com',[student_email] ,connection=backend)
 							EmailMsg.content_subtype = "html"
 							EmailMsg.send()
-							return render(request,'forgot_email.html',{'msg':'email is send to your register email_id'})
+							return render(request,'forgot_email.html',{'msg':'email is send to your register email_id','link2':'<a href="/login/">LOGIN</a>'})
 						else:
-							return render (request,'forgot_email.html',{'msg':'Please enter registered email_id'})
+							return render (request,'forgot_email.html',{'msg':'Please enter registered email_id','link2':'<a href="/login/">LOGIN</a>'})
 					except:
-						return render (request,'forgot_email.html',{'msg':'Invalid login_id'})
+						return render (request,'forgot_email.html',{'msg':'Invalid login_id','link2':'<a href="/login/">LOGIN</a>'})
 				else:
 					if group_id==2:
 						try:
@@ -77,11 +77,11 @@ def forgot_password_view(request):
 								EmailMsg=EmailMessage("ACE",body % (faculty_name,url) ,'no-reply@gmail.com',[faculty_email] ,connection=backend)
 								EmailMsg.content_subtype = "html"
 								EmailMsg.send()
-								return render(request,'forgot_email.html',{'msg':'email is send to your register email_id'})
+								return render(request,'forgot_email.html',{'msg':'email is send to your register email_id','link2':'<a href="/login/">LOGIN</a>'})
 							else:
-								return render (request,'forgot_email.html',{'msg':'Please enter registered email_id'})
+								return render (request,'forgot_email.html',{'msg':'Please enter registered email_id','link2':'<a href="/login/">LOGIN</a>'})
 						except:
-							return render (request,'forgot_email.html',{'msg':'Invalid login_id'})
+							return render (request,'forgot_email.html',{'msg':'Invalid login_id','link2':'<a href="/login/">LOGIN</a>'})
 					else:
 						if group_id==3:
 							try:
@@ -105,23 +105,23 @@ def forgot_password_view(request):
 									EmailMsg=EmailMessage("ACE",body % (alumni_name,url) ,'no-reply@gmail.com',[alumni_email] ,connection=backend)
 									EmailMsg.content_subtype = "html"
 									EmailMsg.send()
-									return render(request,'forgot_email.html',{'msg':'email is send to your register email_id'})
+									return render(request,'forgot_email.html',{'msg':'email is send to your register email_id','link2':'<a href="/login/">LOGIN</a>'})
 								else:
-									return render (request,'forgot_email.html',{'msg':'Please enter registered email_id'})
+									return render (request,'forgot_email.html',{'msg':'Please enter registered email_id','link2':'<a href="/login/">LOGIN</a>'})
 							except:
-								return render (request,'forgot_email.html',{'msg':'Invalid login_id'})
+								return render (request,'forgot_email.html',{'msg':'Invalid login_id','link2':'<a href="/login/">LOGIN</a>'})
 						else:
-							return render(request,'forgot_email.html',{'msg':'invalid login_id'})
+							return render(request,'forgot_email.html',{'msg':'invalid login_id','link2':'<a href="/login/">LOGIN</a>'})
 			except:
-				return render(request,'forgot_email.html',{'msg':'invalid login_id'})
+				return render(request,'forgot_email.html',{'msg':'invalid login_id','link2':'<a href="/login/">LOGIN</a>'})
 		else:
-			return render(request,'forgot_email.html')
+			return render(request,'forgot_email.html',{'link2':'<a href="/login/">LOGIN</a>'})
 
 
 @csrf_exempt
 def verify_forgot_password(request,value):
 	if request.user.is_authenticated():
-		return render (request,'welcome.html')
+		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		try:
 			jwt_key=str(internal_key_data.objects.get(key='jwt_key').value)
@@ -135,7 +135,7 @@ def verify_forgot_password(request,value):
 @csrf_exempt
 def change_password(request,login_id):
 	if request.user.is_authenticated():
-		return render (request,'welcome.html')
+		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=='POST':
 			try:
@@ -144,11 +144,11 @@ def change_password(request,login_id):
 				user_row=User.objects.get(username=str(login_id))
 				user_row.set_password(str(password))
 				user_row.save()
-				return render(request,'change_password.html',{'msg':'password is changed'})
+				return render(request,'change_password.html',{'msg':'password is changed','link2':'<a href="/login/">LOGIN</a>'})
 			except:
-				return render(request,'change_password.html',{'msg':'something occur Please try again'})
+				return render(request,'change_password.html',{'msg':'something occur Please try again','link2':'<a href="/login/">LOGIN</a>'})
 		else:
-			return render(request,'change_password.html')
+			return render(request,'change_password.html',{'link2':'<a href="/login/">LOGIN</a>'})
 
 
 

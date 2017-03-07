@@ -26,16 +26,25 @@ def get_notice(request):
 	return JsonResponse(response)
 
 def home(request):
-	return render(request,'index.html')
+	if request.user.is_authenticated():
+		return render(request,'index.html' ,{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+	else:
+		return render(request,'index.html',{'link2':'<a href="/login/">LOGIN</a>'})
 
-def academics(request):
-	return render(request,'academics.html')
+# def academics(request):
+# 	return render(request,'academics.html')
 
 def activities(request):
-	return render(request,'activities.html')
+	if request.user.is_authenticated():
+		return render(request,'activities.html' ,{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+	else:
+		return render(request,'activities.html',{'link2':'<a href="/login/">LOGIN</a>'})
 
 def administration(request):
-	return render(request,'faculty.html')
+	if request.user.is_authenticated():
+		return render(request,'faculty.html' ,{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+	else:
+		return render(request,'faculty.html',{'link2':'<a href="/login/">LOGIN</a>'})
 
 def logout_view(request):
 	logout(request)

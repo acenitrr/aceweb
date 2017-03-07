@@ -9,7 +9,7 @@ import os
 @csrf_exempt
 def signup_student(request):
 	if request.user.is_authenticated():
-		return render (request,'welcome.html')
+		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=="POST":
 			try:
@@ -73,14 +73,15 @@ def student_profile(request,roll_no):
 		JSON_response['skill']=student_data_row.skill
 		JSON_response['linkedin_url']=student_data_row.linkedin_url
 		JSON_response['github_url']=student_data_row.github_url
-
+		JSON_response['link1']='<a href="/profile/">PROFILE</a>'
+		JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 		if login_id==roll_no:
 			edit='<a href="'+'/edit_student_profile/">edit your profile</a>'
 			JSON_response['edit']=edit
 		print JSON_response
 		return render(request,'show_profile.html',JSON_response)
 	except:
-		return render(request,'show_profile.html',{'msg':'Wrong Login Id'})
+		return render(request,'show_profile.html',{'msg':'Wrong Login Id','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 
 
 @login_required
@@ -95,7 +96,7 @@ def student_group_profile(request):
 			if key=='name':
 				count = student_data.objects.filter(name=value).count()
 				if count==0:
-					return render(request,'profile.html',{'msg':'no profile found for such name'})
+					return render(request,'profile.html',{'msg':'no profile found for such name','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 				else:
 					for o in student_data.objects.filter(name=value):
 						return HttpResponse('profile html code will be passed as context in render')
@@ -103,7 +104,7 @@ def student_group_profile(request):
 				if key=='sem':
 					count = student_data.objects.filter(sem=value).count()
 					if count==0:
-						return render(request,'profile.html',{'msg':'please enter correct semester'})
+						return render(request,'profile.html',{'msg':'please enter correct semester','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 					else:
 						for o in student_data.objects.filter(sem=value):
 							return HttpResponse('profile html code will be passed as context in render')
@@ -149,7 +150,7 @@ def edit_student_profile(request):
 			return HttpResponseRedirect(str(redirect_url))
 		except Exception,e:
 			print e
-			return render (request,'edit_student_profile.html',{'msg':'something occur please try again'})
+			return render (request,'edit_student_profile.html',{'msg':'something occur please try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		student_data_row=student_data.objects.get(roll_no=str(request.user))
 		JSON_response={}
@@ -166,5 +167,7 @@ def edit_student_profile(request):
 		JSON_response['skill']=student_data_row.skill
 		JSON_response['linkedin_url']=student_data_row.linkedin_url
 		JSON_response['github_url']=student_data_row.github_url
+		JSON_response['link1']='<a href="/profile/">PROFILE</a>'
+		JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 		return render (request,'edit_student_profile.html',JSON_response)
 
