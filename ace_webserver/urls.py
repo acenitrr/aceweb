@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from login.views import import_login_table,email_verification,signup_view,login_view
+from login.views import import_login_table,email_verification,signup_view,login_view,ping,ping_send
 from student.views import student_profile,student_group_profile,edit_student_profile,signup_student
 from faculty.views import faculty_profile,faculty_group_profile,edit_faculty_profile,signup_faculty
 from alumni.views import alumni_profile,alumni_group_profile,edit_alumni_profile,signup_alumni
@@ -53,9 +53,11 @@ urlpatterns = [
     url(r'^home/$',home),
     url(r'^academics/$',project),
     url(r'^activities/$',activities),
-        url(r'^achievements/$',achievements),
+    url(r'^achievements/$',achievements),
     url(r'^administration/$',administration),
     url(r'^logout/$',logout_view),
+    url(r'^ping/(?P<id>.+)/$',ping),
+    url(r'^ping_send/$',ping_send),
 
     # url(r'^.*$', RedirectView.as_view(url='/', permanent=False), name='index')
 

@@ -107,8 +107,6 @@ def alumni_profile(request,roll_no):
 			JSON_response['login_id']=login_id
 			alumni_data_row=alumni_data.objects.get(roll_no=roll_no)
 			JSON_response['name']=alumni_data_row.name
-			JSON_response['mobile']=alumni_data_row.mobile
-			JSON_response['email']=alumni_data_row.email
 			JSON_response['batch']=alumni_data_row.batch
 			photo=str(alumni_data_row.photo)
 			photo_url='<img src='+'"/'+photo+'"'+'>'
@@ -119,19 +117,17 @@ def alumni_profile(request,roll_no):
 			JSON_response['github_url']=alumni_data_row.github_url
 			JSON_response['company_institue']=alumni_data_row.company_institue
 			JSON_response['designation']=alumni_data_row.designation
-			JSON_response['skill']=alumni_data_row.skill
 			JSON_response['other']=alumni_data_row.other
 			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
 			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
-			edit='<a href="'+str(request.scheme+'://'+request.get_host()+'/edit_alumni_profile/')+'">edit your profile</a>'
+			edit_url=str(request.scheme+'://'+request.get_host()+'/edit_alumni_profile/')
+			edit='<a href="'+edit_url+'"'+' class="btn btn-default" style="float:right">Edit</a>'
 			JSON_response['edit']=edit
 		else:
 			print login_id
 			JSON_response['login_id']=roll_no
 			alumni_data_row=alumni_data.objects.get(roll_no=roll_no)
 			JSON_response['name']=alumni_data_row.name
-			JSON_response['mobile']=alumni_data_row.mobile
-			JSON_response['email']=alumni_data_row.email
 			JSON_response['batch']=alumni_data_row.batch
 			photo=str(alumni_data_row.photo)
 			photo_url='<img src='+'"/'+photo+'"'+'>'
@@ -142,11 +138,12 @@ def alumni_profile(request,roll_no):
 			JSON_response['github_url']=alumni_data_row.github_url
 			JSON_response['company_institue']=alumni_data_row.company_institue
 			JSON_response['designation']=alumni_data_row.designation
-			JSON_response['skill']=alumni_data_row.skill
 			JSON_response['other']=alumni_data_row.other
 			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
 			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
-			JSON_response['ping']='<a href="/ping/">Ping</a>'
+			ping='<a href="/ping/'+roll_no+'"'+ 'class="btn btn-default" style="float:right">Ping</a>'
+			# ping='<a href="'+'/ping/'+roll_no+'"'+'>Contact</a>'
+			JSON_response['ping']=ping
 		print JSON_response
 		return render(request,'show_alumni_profile.html',JSON_response)
 	except:

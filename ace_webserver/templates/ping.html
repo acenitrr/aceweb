@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>ACE</title>
+
+  
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!-- Custom CSS -->
+
+       
+      
+<link rel="stylesheet" href="/static/css/login style1.css">
+  <link rel="stylesheet" href="/static/css/login reset.css"> <!-- CSS reset -->
+  <link rel="stylesheet" href="/static/css/login style.css"> <!-- Resource style -->
+  <script src="/static/js/login modernizr.js"></script> <!-- Modernizr -->
+</head>
+<body style="background:#f6f6f6;">
+   
+ {% include "base_head.html" %}
+{% block content %}
+
+  <br><br>
+  <form class="cd-form floating-labels" action="/ping_send/" enctype="multipart/form-data"  method="POST">
+    <fieldset>
+      <legend>Account</legend>
+
+      <div class="icon">
+        <input class="user" type="hidden" name="roll_no" id="cd-name" value={{roll_no|safe}}>
+        </div> 
+
+      <div class="icon">
+        <label class="cd-label" for="cd-name">MESSAGE</label><br><br><br>
+        <input class="user" type="text" name="msg" id="cd-name"  required>
+        </div> 
+
+        
+      {{msg|safe}}
+    
+
+<button type="submit" class="btn btn-info" style="float:right;"><b>Submit</b></button>
+          
+    </fieldset>
+  </form>
+<script src="/static/js/login jquery-2.1.1.js"></script>
+<script src="/static/js/login main.js"></script> <!-- Resource jQuery -->
+
+{% endblock content %}
+{% include "base_foot.html" %}  
+</body>
+</html>

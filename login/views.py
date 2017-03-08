@@ -210,13 +210,56 @@ def signup_view(request):
 				return render(request,"signup.html",{'msg':'enroll_no not get','link2':'<a href="/login/">LOGIN</a>'})
 		else:
 			return render(request,"signup.html",{'link2':'<a href="/login/">LOGIN</a>'})
-
-# @login_required
-# def ping(request,id):
-# 	try:
-# 		if request.method=='POST':
-# 			msg=str(request.POST.get('msg'))
-# 			login_id=str(request.user)
-# 			login_data_row=login_data.objects.get(login_id=login_id)
-# 			login_data_row_2=login_data.objects.get(login_id=id)
-			
+@login_required
+def ping(request,id):
+	return render (request,'ping.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>','roll_no':id})
+	
+@login_required
+@csrf_exempt
+def ping_send(request):
+	try:
+		if request.method=='POST':
+			msg=str(request.POST.get('msg'))
+			id=str(request.POST.get('roll_no'))
+			login_id=str(request.user)
+			login_data_row=login_data.objects.get(login_id=login_id)
+			login_data_row_2=login_data.objects.get(login_id=id)
+			sender_group_id=login_data_row.group_id
+			reciver_group_id=login_data_row_2.group_id
+			if sender_group_id==1:
+				sender_data_row=student_data.objects.get(roll_no=login_id)
+				sender_name=sender_data_row.name
+				sender_mobile=sender_data_row.mobile
+			else:
+				if sender_group_id==2:
+					sender_data_row=faculty_data.objects.get(faculty_id=login_id)
+					sender_name=sender_data_row.name
+					sender_mobile=sender_data_row.mobile
+				else:
+					if sender_group_id==3:
+						sender_data_row=alumni_data.objects.get(roll_no=login_id)
+						sender_name=sender_data_row.name
+						sender_mobile=sender_data_row.mobile
+			if reciver_group_id==1:
+						reciver_data_row=student_data.objects.get(roll_no=id)
+						reciver_name=reciver_data_row.name
+			else:
+				if reciver_group_id==3:
+					reciver_data_row=alumni_data.objects.get(roll_no=id)
+					reciver_name=reciver_data_row.name
+			reciver_email=login_data_row_2.email
+			sender_email=login_data_row.email
+			host_email=str(custom_key_data.objects.get(key='host').value)
+			port_email=custom_key_data.objects.get(key='port').value
+			username_email=str(custom_key_data.objects.get(key='username').value)
+			password_email=str(custom_key_data.objects.get(key='password').value)
+			email_body=str(custom_key_data.objects.get(key='email_connect').value)
+			print email_body % (reciver_name,sender_name,msg,sender_mobile,sender_email)
+			backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
+	                   password=str(password_email), use_tls=True, fail_silently=True)
+			EmailMsg=EmailMessage("ACE",email_body % (reciver_name,sender_name,msg,sender_mobile,sender_email) ,'no-reply@gmail.com',[reciver_email] ,connection=backend)
+			EmailMsg.content_subtype = "html"
+			EmailMsg.send()
+			return render (request,'ping.html',{'msg':'email is send, kindly wait for reply','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+	except:
+		return render (request,'ping.html',{'msg':'Something occur please try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})

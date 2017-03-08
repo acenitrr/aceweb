@@ -72,7 +72,8 @@ def faculty_profile(request,faculty_id):
 		if request.user.is_authenticated():
 			login_id=str(request.user)
 			if login_id==faculty_id:
-				edit='<a href="'+str(request.scheme+'://'+request.get_host()+'/edit_faculty_profile/')+'">edit your profile</a>'
+				edit_url=str(request.scheme+'://'+request.get_host()+'/edit_faculty_profile/')
+				edit='<a href="'+edit_url+'"'+' class="btn btn-default" style="float:right">Edit</a>'
 				JSON_response['edit']=edit
 				JSON_response['link1']='<a href="/profile/">PROFILE</a>'
 				JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
