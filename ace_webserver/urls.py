@@ -22,7 +22,7 @@ from alumni.views import alumni_profile,alumni_group_profile,edit_alumni_profile
 from forgot_password.views import forgot_password_view,verify_forgot_password
 from announcement.views import announcement
 from project.views import project
-from notice.views import get_notice,home,administration,logout_view,activities
+from notice.views import get_notice,notice_read,home,administration,logout_view,activities
 from django.views.generic.base import RedirectView
 from achievement.views import achievements
 
@@ -48,6 +48,7 @@ urlpatterns = [
     url(r'^login/$',login_view),
     url(r'^announcement/$',announcement),
     url(r'^notice_get$',get_notice),
+    url(r'^notice_read$',notice_read),
     url(r'^$',home),
     url(r'^home/$',home),
     url(r'^academics/$',project),

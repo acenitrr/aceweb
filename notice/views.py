@@ -14,16 +14,36 @@ def get_notice(request):
 		if(o.active==True):
 			tmp_json={}
 			tmp_json['title']=o.title
-			tmp_json['content']=o.content
-			tmp_json['issuer']=o.issuer
-			tmp_json['file']=str(o.file)
-			tmp_json['date']=o.date_issued
-			tmp_json['created']=o.created
+			tmp_json['url']='/notice_read?id='+str(o.id)
 			json_list.append(tmp_json)
 
 	response['list']=json_list
 	print response
 	return JsonResponse(response)
+
+def notice_read(request):
+	tmp_json={}
+	tmp_json['title']=''
+	tmp_json['content']=''
+	tmp_json['issuer']=''
+	tmp_json['file']=''
+	tmp_json['date']=''
+	tmp_json['created']=''
+	try:
+		notice_row=notice_data.objects.get(id=int(request.GET.get('id')))
+		if(notice_row.active==True):
+			tmp_json['title']=notice_row.title
+			tmp_json['content']=notice_row.content
+			tmp_json['issuer']=notice_row.issuer
+			tmp_json['file']=''
+			if(notice_row.file!=None):
+				tmp_json['file']='file:<a href="'+str(request.scheme+'://'+request.get_host())+'/'+str(notice_row.file)+'" download>Download File</a>'
+
+			tmp_json['date']=notice_row.date_issued
+			tmp_json['created']=str(notice_row.created)[:19]
+	except Exception,e:
+		print e
+	return render(request,'notice.html',tmp_json)
 
 def home(request):
 	if request.user.is_authenticated():
