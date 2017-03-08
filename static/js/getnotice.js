@@ -11,7 +11,7 @@ request.onreadystatechange = function(response) {
       for(var x=0;x<NoticeJsonList['list'].length;x++)
       {
 
-          document.getElementById("notice_marquee").innerHTML+= '<div class=row><div class="col-sm-12" >'+NoticeJsonList['list'][x].title+'</div></div></br>';
+          document.getElementById("notice_marquee").innerHTML+= '<div class=row><div class="col-sm-12" >'+'<a style="color:#252627" href="'+NoticeJsonList['list'][x].url+'">'+NoticeJsonList['list'][x].title+'</a></div></div></br>';
       }
 //                document.getElementById("notice_marquee").innerHTML+='</ul>';
 

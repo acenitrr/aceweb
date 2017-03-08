@@ -29,11 +29,12 @@ def achievements(request):
 				data1+='<div class="cube" data-bg-color="'+c2+'" data-title="'+o.title+'"></div>'
 
 			data2+="""<div class="content__block">
-						<h3 class="content__title" style="position:absolute;top:20px;">"""+o.title+"""</h3>
-						<p style="position:absolute;top:100px;font-size:25px;"><b>"""+o.description+"""</b></p>
-					</div>"""
+						<h3 class="content__title" style="opacity: 1; transform: translateY(0px);">"""+o.title+"""</h3>
+						<p class="content__description" style="opacity: 1; transform: translateY(0px);">"""+o.description+"""</p>
+					<p class="content__meta">ace</p></div>"""
 			data3+=""".cube:not(.cube--inactive):nth-child("""+str(i)+""") .cube__side,
 			.no-js .cube:not(.cube--inactive):nth-child("""+str(i)+""") {	background-image: url(/media/"""+str(o.photo)+""");}"""
+			print "data3"
 	except Exception,e:
 		data=e
 		print e

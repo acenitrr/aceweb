@@ -140,7 +140,7 @@ html {
    
 </head>
 
-<body>
+<body> 
 
 {% include "base_head.html" %}
 {% block content %}
@@ -287,42 +287,45 @@ html {
     <!-- Page Content -->
    <br><br><br><br><br><br><br><br><br><br><br>
    		
-			<div class="container" style="color:black;font-size:14px;">
+			<div class="container" style="color:black;">
  <section style="position:relative;top:-220px;background-color:#f6f6f6;left:0px;width:100%;height:100%;padding-left:0px;    
  ">
   
   <div class="row">
-    <div class="col-sm-6" style="border-style:solid  ;border-width:6px;border-color:white;border-color:white;background:gray;height:500px;" ><h3 STYLE="COLOR:black;text-align:center;">@CSE-LATEST</H3><hr>
-      <marquee direction="up" onmouseover="this.stop();" onmouseout="this.start();">
-<div id="notice_marquee">
+    <div class="col-sm-6" style="border-style:solid  ;border-width:6px;border-color:white;border-color:white;background:gray;height:530px;" ><h3 STYLE="COLOR:black;text-align:center;">@CSE-LATEST</H3><hr>
+      <marquee direction="up" scroll="continuous" height=70% onmouseover="this.stop();" onmouseout="this.start();">
+<div id="notice_marquee" style="font-size:18px">
 </div>
       </marquee>
     </div>
 	
     <div class="col-sm-6" style="border-style:solid;border-width:0px;color:black;height:100%;padding-top:0px;border-style:solid  ;border-width:6px;border-color:white;background:gray;">
 	<h3 STYLE="COLOR:black;text-align:center;"><B>ABOUT-US</B></H3><hr>
+     
       <p> <u><B>Vision -</B></u><br>
-
+<div style="font-size: 14px">
 &#9733To promote Research and Development in the frontier areas of Computer Science & Engineering.<br>
 &#9733To generate Competent Professionals to become part of the industry and Research Organizations at the National and International levels.<br>
-&#9733To provide necessary strengths to enable the students to Innovate and to become Entrepreneurs.<br><BR>
+&#9733To provide necessary strengths to enable the students to Innovate and to become Entrepreneurs.<br>
+</div>
+<BR>
 <u><B>Mission -</B></u><BR>
-
+<div style="font-size: 14px">
 &#9733To impart effective education at undergraduate levels in the field of Computer Science and Engineering<br>
 &#9733To conduct Research and Development and offer consultancy services.<br>
 &#9733To improve continuously the quality of teaching-learning process.<br>
 &#9733To strive steadily for the overall growth and development of intellect and personality of the students who,
  as professionals, would be confident to face the challenges of the world of work.<br>
-&#9733To empower the faculty and staff for overall development of students.
-<BR><BR>
+&#9733To empower the faculty and staff for overall development of students.</div>
+<br>
 <U><B>Year Of Establishment :</B></U><BR>
 Year 2000
 	  </p>
     </div>
 	 
   </div>
-</div><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
-<div class="container" >
+</div><!-- <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR> -->
+<!-- <div class="container" >
 			
 			
 				<div id="cbp-qtrotator" class="cbp-qtrotator" style="width:49em;position:relative;" >
@@ -359,7 +362,7 @@ Year 2000
  
   
 
-			</div>
+			</div> -->
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="/static/js/jquery.cbpQTRotator.min rotator.js"></script>

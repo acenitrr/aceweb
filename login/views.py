@@ -95,7 +95,6 @@ def login_view(request):
 			login_id=str(request.POST.get('login_id'))
 			print login_id
 			password=str(request.POST.get('password'))
-			print password
 			# password=jwt.decode(password,'secret',algorithms=['HS256'])
 			try:
 				login_data_row=login_data.objects.get(login_id=login_id)
