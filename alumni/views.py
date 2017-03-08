@@ -36,7 +36,6 @@ def signup_alumni(request):
 				file_content = request.FILES.get('photo').read()
 				fout.write(file_content)
 				fout.close()
-				###################################################################################3
 				designation=str(request.POST.get('designation'))
 				other=str(request.POST.get('other'))
 				password=str(request.POST.get('password'))
@@ -135,7 +134,7 @@ def alumni_profile(request,roll_no):
 			JSON_response['email']=alumni_data_row.email
 			JSON_response['batch']=alumni_data_row.batch
 			photo=str(alumni_data_row.photo)
-			photo_url='<img src='+'"/media/'+photo+'"'+'>'
+			photo_url='<img src='+'"/'+photo+'"'+'>'
 			JSON_response['photo']=photo_url
 			print photo_url
 			JSON_response['current_status']=alumni_data_row.current_status
@@ -147,6 +146,7 @@ def alumni_profile(request,roll_no):
 			JSON_response['other']=alumni_data_row.other
 			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
 			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
+			JSON_response['ping']='<a href="/ping/">Ping</a>'
 		print JSON_response
 		return render(request,'show_alumni_profile.html',JSON_response)
 	except:

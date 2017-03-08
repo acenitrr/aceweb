@@ -80,7 +80,8 @@ def email_verification(request,value):
 						return render(request,'signup_alumni.html',{'login_id':roll_no})
 					else:
 						return HttpResponse("ok")
-		except:
+		except Exception,e:
+			print e
 			return HttpResponse("email_id already registered try another or contact ace ")
 	except:
 		return HttpResponse("Failed")
@@ -209,3 +210,13 @@ def signup_view(request):
 				return render(request,"signup.html",{'msg':'enroll_no not get','link2':'<a href="/login/">LOGIN</a>'})
 		else:
 			return render(request,"signup.html",{'link2':'<a href="/login/">LOGIN</a>'})
+
+# @login_required
+# def ping(request,id):
+# 	try:
+# 		if request.method=='POST':
+# 			msg=str(request.POST.get('msg'))
+# 			login_id=str(request.user)
+# 			login_data_row=login_data.objects.get(login_id=login_id)
+# 			login_data_row_2=login_data.objects.get(login_id=id)
+			

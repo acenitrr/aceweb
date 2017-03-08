@@ -1,4 +1,110 @@
-<!doctype html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ACE</title>
+		<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"style="background:#1c2d3f;">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+<a class="navbar-brand" href="index.html" style="color:white;font-size:30px;position:absolute;left:8%;">ACE</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="float:right;" >
+               <ul class="nav navbar-nav" >
+                    <li>
+                        <a href="index.html" >HOME</a>
+                    </li>
+                    <li>
+                        <a href="academics.html" >ACADEMICS</a>
+                    </li>
+                    <li>
+                        <a href="achievements.html">ACHIEVEMENT</a>
+                    </li>
+					<li>
+                        <a href="activities.html" >ACTIVITIES</a>
+                    </li><li>
+                        <a href="faculty.html" >ADMINISTRATION</a>
+                    </li>
+					<li>
+                        <a href="login.html" >LOGIN</a>
+                    </li>
+										
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+	<br><br><br><br>
+	<div class="container-fluid" >
+  
+  <div class="row">
+    <div class="col-sm-3" >
+	<img class="img-responsive" {{photo|safe}} />
+      </div>
+    <div class="col-sm-9" style="">
+	<B>Alumni_id -> {{login_id|safe}} </b>
+	<br><br><br><br><br>
+	<B>Name -> {{name|safe}}</b>
+	<br><br><br><br><br>
+	<B>Designation -> {{designation|safe}}</b>
+	<br><br><br><br><br>
+	<B>mobile -> {{mobile|safe}}</b>
+	<br><br><br><br><br>
+	<B>Email id -> {{email|safe}}</b>
+    <br><br><br><br><br>
+    <B>Batch -> {{batch|safe}}</b>
+    <br><br><br><br><br>
+    <B>Current_status -> {{current_status|safe}}</b>
+    <br><br><br><br><br>
+    <B>Company_institue -> {{company_institue|safe}}</b>
+    <br><br><br><br><br>
+    <B>Batch -> {{batch|safe}}</b>
+    <br><br><br><br><br>
+    <B>Skill -> {{skill|safe}}</b>
+    <br><br><br><br><br>
+    <B>other_data -> </b><br><br>{{other|safe}}
+    <br><br><br><br><br>
+    {{edit|safe}}
+	<br>
+	
+         </div>
+  </div>
+</div>
+ <nav class="navbar navbar-inverse navbar-fixed-bottom" style="height:18px;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+   
+    </div><p style="color:white;text-align:center;font-size:14px;padding-top:1%;">
+    &COPY 2017 ACE &#9898 ALL RIGHTS RESERVED  DESIGNED & DEVELOPED BY WEBTEAM - ACE</p>
+  </div>
+</nav>
+	</body>
+	</html>
+
+
+
+
+<!-- <!doctype html>
 <html>
 <head>
 	<title>
@@ -12,15 +118,14 @@
 	designation= {{designation|safe}}
 	mobile= {{mobile|safe}}
 	email id={{email|safe}}
-	education= {{education|safe}}
 	current_status={{current_status|safe}}
 	company_institue={{company_institue|safe}}
 	skill={{skill|safe}}
 	linkedin_url={{linkedin_url|safe}}
 	github_url={{github_url|safe}}
+	batch={{batch|safe}}
 	
 
-	area_of_interest= {{area_of_interest|safe}}
 	<br><br><br>
 
 	{{other|safe}}
@@ -28,4 +133,4 @@
 	{{edit|safe}}
 </body>
 
-</html>
+</html> -->

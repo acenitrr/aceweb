@@ -43,8 +43,13 @@ def notice_read(request):
 			tmp_json['created']=str(notice_row.created)[:19]
 	except Exception,e:
 		print e
-	return render(request,'notice.html',tmp_json)
-
+	if request.user.is_authenticated():
+		tmp_json['link1']='<a href="/profile/">PROFILE</a>'
+		tmp_json['link2']='<a href="/logout/">LOGOUT</a>'
+		return render(request,'notice.html' ,tmp_json)
+	else:
+		tmp_json['link2']='<a href="/login/">LOGIN</a>'
+		return render(request,'notice.html',tmp_json)
 def home(request):
 	if request.user.is_authenticated():
 		return render(request,'index.html' ,{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
