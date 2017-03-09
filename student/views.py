@@ -60,14 +60,12 @@ def student_profile(request,roll_no):
 	try:
 		JSON_response={}
 		login_id=str(request.user)
-		JSON_response['login_id']=login_id
+		JSON_response['login_id']=roll_no
 		student_data_row=student_data.objects.get(roll_no=roll_no)
 		JSON_response['name']=student_data_row.name
-		JSON_response['mobile']=student_data_row.mobile
-		JSON_response['email']=student_data_row.email
 		JSON_response['sem']=student_data_row.sem
 		photo=str(student_data_row.photo)
-		photo_url='<img width="120" height="100" src='+'"/'+photo+'"'+'>'
+		photo_url='width="120px" height="80px" src='+'"/'+photo+'"'
 		JSON_response['photo']=photo_url
 		print photo_url
 		JSON_response['skill']=student_data_row.skill
@@ -76,8 +74,12 @@ def student_profile(request,roll_no):
 		JSON_response['link1']='<a href="/profile/">PROFILE</a>'
 		JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 		if login_id==roll_no:
-			edit='<a href="'+'/edit_student_profile/">edit your profile</a>'
+			edit_url=str(request.scheme+'://'+request.get_host()+'/edit_student_profile/')
+			edit='<a href="'+edit_url+'"'+' class="btn btn-default" style="float:right">Edit</a>'
 			JSON_response['edit']=edit
+		else:
+			ping='<a href="/ping/'+roll_no+'"'+ 'class="btn btn-default" style="float:right">Ping</a>'
+			JSON_response['ping']=ping
 		print JSON_response
 		return render(request,'profile2.html',JSON_response)
 	except:

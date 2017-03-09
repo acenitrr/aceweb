@@ -53,47 +53,33 @@ def signup_faculty(request):
 				return render(request,'login.html',{'msg':'Data not get','link2':'<a href="/login/">LOGIN</a>'})
 
 
-@login_required
 def faculty_profile(request,faculty_id):
 	try:
 		JSON_response={}
-		login_id=str(request.user)
-		if login_id==faculty_id:
-			JSON_response['login_id']=login_id
-			faculty_data_row=faculty_data.objects.get(faculty_id=faculty_id)
-			JSON_response['name']=faculty_data_row.name
-			JSON_response['mobile']=faculty_data_row.mobile
-			JSON_response['email']=faculty_data_row.email
-			JSON_response['designation']=faculty_data_row.designation
-			photo=str(faculty_data_row.photo)
-			photo_url='<img src='+'"/'+photo+'"'+'>'
-			JSON_response['photo']=photo_url
-			print photo_url
-			JSON_response['education']=faculty_data_row.education
-			JSON_response['area_of_interest']=faculty_data_row.area_of_interest
-			JSON_response['other_details']=faculty_data_row.other_details
-			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
-			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
-			edit='<a href="'+str(request.scheme+'://'+request.get_host()+'/edit_faculty_profile/')+'">edit your profile</a>'
-			JSON_response['edit']=edit
+		JSON_response['login_id']=faculty_id
+		faculty_data_row=faculty_data.objects.get(faculty_id=faculty_id)
+		JSON_response['name']=faculty_data_row.name
+		JSON_response['mobile']=faculty_data_row.mobile
+		JSON_response['email']=faculty_data_row.email
+		JSON_response['designation']=faculty_data_row.designation
+		photo=str(faculty_data_row.photo)
+		photo_url='<img src='+'"/'+photo+'"'+'>'
+		JSON_response['photo']=photo_url
+		print photo_url
+		JSON_response['education']=faculty_data_row.education
+		JSON_response['area_of_interest']=faculty_data_row.area_of_interest
+		JSON_response['other_details']=faculty_data_row.other_details
+		if request.user.is_authenticated():
+			login_id=str(request.user)
+			if login_id==faculty_id:
+				edit_url=str(request.scheme+'://'+request.get_host()+'/edit_faculty_profile/')
+				edit='<a href="'+edit_url+'"'+' class="btn btn-default" style="float:right">Edit</a>'
+				JSON_response['edit']=edit
+				JSON_response['link1']='<a href="/profile/">PROFILE</a>'
+				JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 		else:
-			print login_id
-			faculty_data_row=faculty_data.objects.get(faculty_id=faculty_id)
-			JSON_response['login_id']=faculty_id
-			JSON_response['name']=faculty_data_row.name
-			JSON_response['mobile']=faculty_data_row.mobile
-			JSON_response['email']=faculty_data_row.email
-			JSON_response['designation']=faculty_data_row.designation
-			photo=str(faculty_data_row.photo)
-			photo_url='<img src='+'"/media/'+photo+'"'+'>'
-			JSON_response['photo']=photo_url
-			print photo_url
-			JSON_response['education']=faculty_data_row.education
-			JSON_response['area_of_interest']=faculty_data_row.area_of_interest
-			JSON_response['other_details']=faculty_data_row.other_details
-			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
-			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
-		print JSON_response
+			JSON_response['link2']='<a href="/login/">LOGIN</a>'
+		print JSON_response['edit']
 		return render(request,'show_faculty_profile.html',JSON_response)
 	except:
 		return render(request,'show_faculty_profile.html',{'msg':'something occur try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})

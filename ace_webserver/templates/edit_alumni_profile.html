@@ -25,15 +25,14 @@
 		<input type='text' placeholder='email' name='email' value={{email|safe}} readonly="readonly">
 		<input type='text' placeholder='designation' name='designation' value={{designation|safe}} 
 		readonly="readonly">
-		<input type='text' placeholder='batch' name='batch' value={batch|safe}}>
-		<input type='text' placeholder='current_status' name='current_status' value={current_status|safe}}>
+		<input type='text' placeholder='batch' name='batch' value={{batch|safe}} readonly="readonly">
+		<input type='text' placeholder='current_status' name='current_status' value={{current_status|safe}}>
 		<input type='text' placeholder='designation' name='designation' value={{designation|safe}}>
 		<input type='text' placeholder='company_institue' name='company_institue' value={{company_institue|safe}}>
-		<input type='text' placeholder='skill' name='skill' value={{skill|safe}}>
 		{{photo|safe}}
 		<input type='file'  name='photo' value={{photo_name|safe}}>
 		<input type='text' placeholder='linkedin_url' name='linkedin_url' value={{linkedin_url|safe}} >
-		<input type='text' placeholder='github_url' name='github_url'  value={{area_of_interest|safe}}>
+		<input type='text' placeholder='github_url' name='github_url'  value={{github_url|safe}}>
 		<textarea  name="other" id="cd-textarea" value='NO Skill added' value={{other|safe}}></textarea>
 		<input type="submit">
 	</form>
