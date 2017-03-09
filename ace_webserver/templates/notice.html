@@ -39,17 +39,24 @@
     <div style="color:black;font-size: 25px">Notice<br></div>
         <div style="color:black;font-size: 40px">{{title|safe}}</div> 
    </div>
-   <div style="text-align: right">{{created|safe}}</div>
+   <div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-body" style="float:right;">{{created|safe}}</div>
+  </div>
+  <div class="panel panel-info class">
+    <div class="panel-body"><b>Issued on:</b>{{date|safe}}<br><b>Issued by:</b>{{issuer|safe}}<br><b>{{file|safe}}</b></div>
+  </div>
+ 
+   <div class="panel panel-default">
+    <div class="panel-body"><b> {{content|safe}}</b></div>
+  </div>
+</div>
+   
  </div>
- <p >
- Issued on:{{date|safe}}</p>
+ 
+ 
 
- <p>Issued by:{{issuer|safe}}</p>
- <p>{{file|safe}}</p>
- <br>
- <br>
- <!-- content here--><p >
- {{content|safe}}</p>
+
 </div>
 {% endblock content %}
 {% include "base_foot.html" %}  
