@@ -65,7 +65,7 @@ def student_profile(request,roll_no):
 		JSON_response['name']=student_data_row.name
 		JSON_response['sem']=student_data_row.sem
 		photo=str(student_data_row.photo)
-		photo_url='width="120px" height="80px" src='+'"/'+photo+'"'
+		photo_url=' src='+'"/'+photo+'"'
 		JSON_response['photo']=photo_url
 		print photo_url
 		JSON_response['skill']=student_data_row.skill
@@ -81,9 +81,9 @@ def student_profile(request,roll_no):
 			ping='<a href="/ping/'+roll_no+'"'+ 'class="btn btn-default" style="float:right">Ping</a>'
 			JSON_response['ping']=ping
 		print JSON_response
-		return render(request,'profile2.html',JSON_response)
+		return render(request,'show_profile.html',JSON_response)
 	except:
-		return render(request,'profile2.html',{'msg':'Wrong Login Id','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render(request,'show_profile.html',{'msg':'Wrong Login Id','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 
 
 @login_required
@@ -148,8 +148,8 @@ def edit_student_profile(request):
 			setattr(student_data_row,'linkedin_url',linkedin_url)
 			setattr(student_data_row,'github_url',github_url)
 			student_data_row.save()
-			redirect_url='/student_view/'+request.user
-			return HttpResponseRedirect(str(redirect_url))
+			redirect_url='/student_view/'+str(request.user)
+			return HttpResponseRedirect(redirect_url)
 		except Exception,e:
 			print e
 			return render (request,'edit_student_profile.html',{'msg':'something occur please try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})

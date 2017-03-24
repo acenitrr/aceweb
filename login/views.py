@@ -194,7 +194,7 @@ def signup_view(request):
 						# image='<img src='+'"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTEgRR_jTgKgGkHyVYFbXHg51pzhpWmx1bsgREGMcV621HdH39q"'+'>'
 						print url
 						# email_body=str(custom_keys_data.objects.get(key='email_test').value)
-						email_body=str(custom_key_data.objects.get(key='email_verify').value)
+						email_body=str(email_key_data.objects.get(key='email_verify').value)
 						print email_body % (name,url)
 						backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
 			                       password=str(password_email), use_tls=True, fail_silently=True)
@@ -253,7 +253,7 @@ def ping_send(request):
 			port_email=custom_key_data.objects.get(key='port').value
 			username_email=str(custom_key_data.objects.get(key='username').value)
 			password_email=str(custom_key_data.objects.get(key='password').value)
-			email_body=str(custom_key_data.objects.get(key='email_connect').value)
+			email_body=str(email_key_data.objects.get(key='email_connect').value)
 			print email_body % (reciver_name,sender_name,msg,sender_mobile,sender_email)
 			backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
 	                   password=str(password_email), use_tls=True, fail_silently=True)

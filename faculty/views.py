@@ -63,7 +63,7 @@ def faculty_profile(request,faculty_id):
 		JSON_response['email']=faculty_data_row.email
 		JSON_response['designation']=faculty_data_row.designation
 		photo=str(faculty_data_row.photo)
-		photo_url='<img src='+'"/'+photo+'"'+'>'
+		photo_url=' src='+'"/'+photo+'"'
 		JSON_response['photo']=photo_url
 		print photo_url
 		JSON_response['education']=faculty_data_row.education
@@ -71,17 +71,17 @@ def faculty_profile(request,faculty_id):
 		JSON_response['other_details']=faculty_data_row.other_details
 		if request.user.is_authenticated():
 			login_id=str(request.user)
+			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
+			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 			if login_id==faculty_id:
 				edit_url=str(request.scheme+'://'+request.get_host()+'/edit_faculty_profile/')
 				edit='<a href="'+edit_url+'"'+' class="btn btn-default" style="float:right">Edit</a>'
 				JSON_response['edit']=edit
-				JSON_response['link1']='<a href="/profile/">PROFILE</a>'
-				JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 		else:
 			JSON_response['link2']='<a href="/login/">LOGIN</a>'
-		print JSON_response['edit']
 		return render(request,'show_faculty_profile.html',JSON_response)
-	except:
+	except Exception,e:
+		print e
 		return render(request,'show_faculty_profile.html',{'msg':'something occur try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 
 
@@ -128,8 +128,8 @@ def edit_faculty_profile(request):
 			setattr(faculty_data_row,'other_details',other_details)
 			#resume pending
 			faculty_data_row.save()
-			redirect_url='/faculty_view/'+request.user
-			return HttpResponseRedirect(str(redirect_url))
+			redirect_url='/faculty_view/'+str(request.user)
+			return HttpResponseRedirect(redirect_url)
 		except:
 			return render (request,'edit_faculty_profile.html',{'msg':'something occur please try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 	else:

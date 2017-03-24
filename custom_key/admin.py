@@ -6,8 +6,8 @@ class custom_key_dataAdmin(admin.ModelAdmin):
 
 admin.site.register(custom_key_data,custom_key_dataAdmin)
 
-class email_send_dataAdmin(admin.ModelAdmin):
-	list_display=["key","email_data"]
+class email_key_dataAdmin(admin.ModelAdmin):
+	list_display=["key","value"]
 
-admin.site.register(email_send_data,email_send_dataAdmin)
+admin.site.register(email_key_data,email_key_dataAdmin)
 # # Register your models here.

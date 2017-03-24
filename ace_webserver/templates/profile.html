@@ -4,14 +4,21 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>ACE</title>
-		<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all" /> 
+    <link rel="stylesheet" type="text/css" href="/static/css/resume.css" media="all" />
+		<!-- Latest compiled and minified CSS -->
+
+<!-- jQuery library -->
+
+<!-- Latest compiled JavaScript -->
 </head>
 <body>
 
@@ -44,8 +51,11 @@
                     </li><li>
                         <a href="faculty.html" >ADMINISTRATION</a>
                     </li>
-					<li>
-                        <a href="login.html" >LOGIN</a>
+					 <li>
+                        {{link1|safe}}
+                    </li>
+                    <li>
+                        {{link2|safe}}
                     </li>
 										
                 </ul>
@@ -55,41 +65,71 @@
         <!-- /.container -->
     </nav>
 	<br><br><br><br>
-	<div class="container-fluid" >
-  
-  <div class="row">
+<div id="doc2" class="yui-t7">
+    <div id="inner">
+    <div class="row">
     <div class="col-sm-3" >
-	<img class="img-responsive" src="{{photo|safe}}" width='10em' height='10em' alt="Chania"/>
+    <img class="img-responsive" {{photo|safe}} width='100%' height="100%"/>
+      </div>
+        <div id="hd">
+            <div class="yui-gc">
+                <div class="yui-u first">
+                    <h1>{{name|safe}}</h1>
+                    <h2>Roll No : {{login_id|safe}}</h2>
+                    <h2>Semester : {{sem|safe}}</h2>
+                </div>
+
+                <div class="yui-u">
+                    <div class="contact-info">
+                        {{edit|safe}}
+                        {{ping|safe}}
+                        <h3><a href="{{github_url|safe}}">Github url</a></h3>
+                            <h3><a href="{{linkedin_url|safe}}">Linkedin url</a></h3>
+                <!--        <h3><a id="pdf" href="#">Download PDF</a></h3>
+                        <h3><a href="mailto:name@yourdomain.com">name@yourdomain.com</a></h3>
+                        <h3>(313) - 867-5309</h3> -->
+                    </div><!--// .contact-info -->
+                </div>
+            </div><!--// .yui-gc -->
+        </div><!--// hd -->
+
+        <div id="bd">
+            <div id="yui-main">
+                <div class="yui-b">
+                  {{skill|safe}}
+                </div><!--// .yui-b -->
+            </div><!--// yui-main -->
+        </div><!--// bd -->
+
+
+    </div><!-- // inner -->
+
+
+</div><!--// doc -->
+
+
+</body>
+	</html>
+
+ <div class="row">
+    <div class="col-sm-3" >
+    <img class="img-responsive" {{photo|safe}} 
       </div>
     <div class="col-sm-9" style="">
-	<B>Roll_no -> {{login_id|safe}} </b>
-	<br><br><br><br><br>
-	<B>Name -> {{name|safe}}</b>
-	<br><br><br><br><br>
-	<B>Semester -> {{sem|safe}}</b>
-	<br><br><br><br><br>
-	<B>mobile -> {{mobile|safe}}</b>
-	<br><br><br><br><br>
-	<B>Email id -> {{email|safe}}</b>
+        {{edit|safe}}
+    <B>Faculty_id -> {{login_id|safe}} </b>
     <br><br><br><br><br>
-    <B>Github url -> {{github_url|safe}}</b>
+    <B>Name -> {{name|safe}}</b>
     <br><br><br><br><br>
-    <B>Linkedin url -> {{linkedin_url|safe}}</b>
+    <B>Designation -> {{designation|safe}}</b>
     <br><br><br><br><br>
-    <B>other_data -> </b><br><br>{{skill|safe}}
+    <B>mobile -> {{mobile|safe}}</b>
     <br><br><br><br><br>
-	<br>
-	
-         </div>
-  </div>
-</div>
- <nav class="navbar navbar-inverse navbar-fixed-bottom" style="height:18px;">
-  <div class="container-fluid">
-    <div class="navbar-header">
-   
-    </div><p style="color:white;text-align:center;font-size:14px;padding-top:1%;">
-    &COPY 2017 ACE &#9898 ALL RIGHTS RESERVED  DESIGNED & DEVELOPED BY WEBTEAM - ACE</p>
-  </div>
-</nav>
-	</body>
-	</html>
+    <B>Email id -> {{email|safe}}</b>
+    <br><br><br><br><br>
+    <B>Education -> {{education|safe}}</b>
+    <br><br><br><br><br>
+    <B>area_of_interest -> {{area_of_interest|safe}}</b>
+    <br><br><br><br><br>
+    <B>other_data -> </b><br><br>{{other_details|safe}}
+    <br><br><br><br><br>

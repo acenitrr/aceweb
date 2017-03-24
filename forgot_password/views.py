@@ -42,7 +42,7 @@ def forgot_password_view(request):
 							port_email=str(custom_key_data.objects.get(key='port').value)
 							username_email=str(custom_key_data.objects.get(key='username').value)
 							password_email=str(custom_key_data.objects.get(key='password').value)
-							body=str(custom_key_data.objects.get(key='email_verify').value)
+							body=str(email_key_data.objects.get(key='email_forgot').value)
 							print body
 							backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
 			                       password=str(password_email), use_tls=True, fail_silently=True)
@@ -71,7 +71,7 @@ def forgot_password_view(request):
 								port_email=str(custom_key_data.objects.get(key='port').value)
 								username_email=str(custom_key_data.objects.get(key='username').value)
 								password_email=str(custom_key_data.objects.get(key='password').value)
-								body=str(email_send_data.objects.get(key='forgot_email').email_data)
+								body=str(email_key_data.objects.get(key='email_forgot').value)
 								backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
 				                       password=str(password_email), use_tls=True, fail_silently=True)
 								EmailMsg=EmailMessage("ACE",body % (faculty_name,url) ,'no-reply@gmail.com',[faculty_email] ,connection=backend)
@@ -99,7 +99,7 @@ def forgot_password_view(request):
 									port_email=str(custom_key_data.objects.get(key='port').value)
 									username_email=str(custom_key_data.objects.get(key='username').value)
 									password_email=str(custom_key_data.objects.get(key='password').value)
-									body=str(email_send_data.objects.get(key='forgot_email').email_data)
+									body=str(email_key_data.objects.get(key='email_forgot').value)
 									backend = EmailBackend(host=str(host_email), port=int(port_email), username=str(username_email), 
 					                       password=str(password_email), use_tls=True, fail_silently=True)
 									EmailMsg=EmailMessage("ACE",body % (alumni_name,url) ,'no-reply@gmail.com',[alumni_email] ,connection=backend)

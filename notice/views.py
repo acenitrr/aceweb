@@ -37,7 +37,7 @@ def notice_read(request):
 			tmp_json['issuer']=notice_row.issuer
 			tmp_json['file']=''
 			if(notice_row.file!=None):
-				tmp_json['file']='file:<a href="'+str(request.scheme+'://'+request.get_host())+'/'+str(notice_row.file)+'" download>Download File</a>'
+				tmp_json['file']='file:<a href="'+str(request.scheme+'://'+request.get_host())+'/media/'+str(notice_row.file)+'" download>Download File</a>'
 
 			tmp_json['date']=notice_row.date_issued
 			tmp_json['created']=str(notice_row.created)[:19]

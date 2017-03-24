@@ -22,7 +22,6 @@ def signup_alumni(request):
 				github_url=str(request.POST.get('github_url'))
 				linkedin_url=str(request.POST.get('linkedin_url'))
 				print 21
-				##########################################################################33
 				image_name=request.FILES.get('photo').name
 				try:
 					folder = 'media/alumni_images/'
@@ -109,7 +108,7 @@ def alumni_profile(request,roll_no):
 			JSON_response['name']=alumni_data_row.name
 			JSON_response['batch']=alumni_data_row.batch
 			photo=str(alumni_data_row.photo)
-			photo_url='<img src='+'"/'+photo+'"'+'>'
+			photo_url=' src='+'"/'+photo+'"'
 			JSON_response['photo']=photo_url
 			print photo_url
 			JSON_response['current_status']=alumni_data_row.current_status
@@ -130,7 +129,7 @@ def alumni_profile(request,roll_no):
 			JSON_response['name']=alumni_data_row.name
 			JSON_response['batch']=alumni_data_row.batch
 			photo=str(alumni_data_row.photo)
-			photo_url='<img src='+'"/'+photo+'"'+'>'
+			photo_url=' src='+'"/'+photo+'"'
 			JSON_response['photo']=photo_url
 			print photo_url
 			JSON_response['current_status']=alumni_data_row.current_status
@@ -192,7 +191,23 @@ def edit_alumni_profile(request):
 			other=str(request.POST.get('other'))
 			linkedin_url=str(request.POST.get('linkedin_url'))
 			github_url=str(request.POST.get('github_url'))
-			#image pending
+			try:
+				image_name=request.FILES.get('photo').name
+				try:
+					folder = 'media/faculty_images/'
+					os.mkdir(os.path.join(folder))
+				except Exception,e:
+					print e
+					pass
+				print "image=",image_name
+				url=folder+faculty_data_row.faculty_id+image_name
+				fout = open(url, 'wb+')
+				file_content = request.FILES.get('photo').read()
+				fout.write(file_content)
+				fout.close()
+				setattr(faculty_data_row,'photo',url)
+			except:
+				pass
 			setattr(alumni_data_row,'current_status',current_status)
 			setattr(alumni_data_row,'company_institue',company_institue)
 			setattr(alumni_data_row,'designation',designation)
@@ -202,8 +217,8 @@ def edit_alumni_profile(request):
 			setattr(alumni_data_row,'github_url',github_url)
 			#image pending
 			alumni_data_row.save()
-			redirect_url='/alumni_view/'+request.user
-			return HttpResponseRedirect(str(redirect_url))
+			redirect_url='/alumni_view/'+str(request.user)
+			return HttpResponseRedirect(redirect_url)
 		except:
 			return render (request,'edit_alumni_profile.html',{'msg':'something occur please try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/login/">LOGIN</a>'})
 	else:

@@ -9,9 +9,9 @@ class custom_key_data(models.Model):
 	modified= models.DateTimeField(auto_now=True,auto_now_add=False)
 	created= models.DateTimeField(auto_now=False,auto_now_add=True)
 
-class email_send_data(models.Model):
+class email_key_data(models.Model):
 	key=models.CharField(max_length=300,blank=False,null=False)
-	email_data=HTMLField()
+	value=HTMLField()
 	modified= models.DateTimeField(auto_now=True,auto_now_add=False)
 	created= models.DateTimeField(auto_now=False,auto_now_add=True)
 # # Create your models here.
