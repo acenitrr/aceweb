@@ -81,9 +81,9 @@ def student_profile(request,roll_no):
 			ping='<a href="/ping/'+roll_no+'"'+ 'class="btn btn-default" style="float:right">Ping</a>'
 			JSON_response['ping']=ping
 		print JSON_response
-		return render(request,'show_profile.html',JSON_response)
+		return render(request,'profile2.html',JSON_response)
 	except:
-		return render(request,'show_profile.html',{'msg':'Wrong Login Id','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render(request,'profile2.html',{'msg':'Wrong Login Id','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 
 
 @login_required
@@ -98,7 +98,7 @@ def student_group_profile(request):
 			if key=='name':
 				count = student_data.objects.filter(name=value).count()
 				if count==0:
-					return render(request,'profile.html',{'msg':'no profile found for such name','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+					return render(request,'profile2.html',{'msg':'no profile found for such name','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 				else:
 					for o in student_data.objects.filter(name=value):
 						return HttpResponse('profile html code will be passed as context in render')
