@@ -6,6 +6,14 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect, HttpResponse,JsonResponse
 from django.contrib.auth.views import login,logout
+from login.models import *
+
+#Group_id distributions
+# 1 - student
+# 2 - faculty
+# 3 - alumni
+# 4 - admin
+# 5 - developer
 
 def get_notice(request):
 	response={}
@@ -20,6 +28,32 @@ def get_notice(request):
 	response['list']=json_list
 	print response
 	return JsonResponse(response)
+
+def get_profile(request):
+	response={}
+	if request.user.is_authenticated():
+		login_id=str(request.user)
+		login_data_row=login_data.objects.get(login_id=login_id)
+		link1='<div class="dropdown"><button class="dropbtn">PROFILE</button><div class="dropdown-content">'
+		if login_data_row.group_id==1:
+			link1+='<a href="/student_view/'+str(request.user)+'" >MY PROFILE</a>'
+		else:
+			if login_data_row.group_id==2:
+				link1+='<a href="/faculty_view/'+str(request.user)+'" >MY PROFILE</a>'
+			else:
+				if login_data_row.group_id==3:
+					link1+='<a href="/alumni_view/'+str(request.user)+'" >MY PROFILE</a>'
+				else:
+					print 'you are admin or developer'
+					link1+='<a href="/" >MY PROFILE</a>'			
+		link1+='<a href="/students_profile">STUDENTS</a><a href="/alumni_profile">ALUMNI</a></div></div>'
+		print link1
+	else:
+		link1=''
+	print link1
+	response['list']=link1
+	return JsonResponse(response)
+
 
 def notice_read(request):
 	tmp_json={}
@@ -44,7 +78,7 @@ def notice_read(request):
 	except Exception,e:
 		print e
 	if request.user.is_authenticated():
-		tmp_json['link1']='<a href="/profile/">PROFILE</a>'
+		login_data_row=login_data.objects.get(login_id=str(request.user))
 		tmp_json['link2']='<a href="/logout/">LOGOUT</a>'
 		return render(request,'notice.html' ,tmp_json)
 	else:
@@ -52,7 +86,7 @@ def notice_read(request):
 		return render(request,'notice.html',tmp_json)
 def home(request):
 	if request.user.is_authenticated():
-		return render(request,'index.html' ,{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render(request,'index.html' ,{'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		return render(request,'index.html',{'link2':'<a href="/login/">LOGIN</a>'})
 
@@ -61,13 +95,13 @@ def home(request):
 
 def activities(request):
 	if request.user.is_authenticated():
-		return render(request,'activities.html' ,{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render(request,'activities.html' ,{'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		return render(request,'activities.html',{'link2':'<a href="/login/">LOGIN</a>'})
 
 def administration(request):
 	if request.user.is_authenticated():
-		return render(request,'faculty.html' ,{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render(request,'faculty.html' ,{'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		return render(request,'faculty.html',{'link2':'<a href="/login/">LOGIN</a>'})
 

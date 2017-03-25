@@ -77,7 +77,10 @@ def announcement(request):
 					announcement_string+=announcement_temp_string % (o.title,o.subtitle,o.content)
 					temp_obj=o
 	if request.user.is_authenticated():
-		return render(request,'activities.html' ,{'announcement_string':announcement_string,'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		link1='<div class="dropdown"><button class="dropbtn">PROFILE</button><div class="dropdown-content">'
+		link1+='<a href="/student_view/'+str(request.user)+'" >MY PROFILE</a>'
+		link1+='<a href="/students_profile">STUDENTS</a><a href="/alumni_profile">ALUMNI</a></div></div>'
+		return render(request,'activities.html' ,{'announcement_string':announcement_string,'link1':link1,'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		return render(request,'activities.html',{'announcement_string':announcement_string,'link2':'<a href="/login/">LOGIN</a>'})
 	# except:

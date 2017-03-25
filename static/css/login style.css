@@ -148,10 +148,10 @@ Form
 }
 .cd-form input[type=radio],
 .cd-form input[type=checkbox] {
-  /* hide original check and radio buttons */
-  position: absolute;
+   hide original check and radio buttons 
+  position:relative;
   left: 0;
-  top: 50%;
+  top: 0%;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -159,10 +159,10 @@ Form
   transform: translateY(-50%);
   margin: 0;
   padding: 0;
-  opacity: 0;
+  /*opacity: 0;*/
   z-index: 2;
 }
-.cd-form input[type="radio"] + label,
+/*.cd-form input[type="radio"] + label,
 .cd-form input[type="checkbox"] + label {
   padding-left: 24px;
 }
@@ -170,7 +170,6 @@ Form
 .cd-form input[type="radio"] + label::after,
 .cd-form input[type="checkbox"] + label::before,
 .cd-form input[type="checkbox"] + label::after {
-  /* custom radio and check boxes */
   content: '';
   display: block;
   position: absolute;
@@ -203,16 +202,15 @@ Form
   display: none;
 }
 .cd-form input[type="radio"] + label::after {
-  /* custom image for radio button */
+ 
   background-image: url("../img/cd-icon-radio.svg");
 }
 .cd-form input[type="checkbox"] + label::after {
-  /* custom image for checkbox */
+  
   background-image: url("../img/cd-icon-check.svg");
 }
 .cd-form input[type="radio"]:focus + label::before,
 .cd-form input[type="checkbox"]:focus + label::before {
-  /* add focus effect for radio and check buttons */
   box-shadow: 0 0 5px rgba(44, 151, 222, 0.6);
 }
 .cd-form input[type="radio"]:checked + label::after,
@@ -226,7 +224,7 @@ Form
   -webkit-animation: cd-bounce 0.3s;
   -moz-animation: cd-bounce 0.3s;
   animation: cd-bounce 0.3s;
-}
+}*/
 .cd-form textarea {
   min-height: 200px;
   resize: vertical;

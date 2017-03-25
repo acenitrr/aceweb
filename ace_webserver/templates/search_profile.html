@@ -30,32 +30,31 @@
 {% block content %}
 
   <br><br>
-  <form class="cd-form floating-labels" action="/login/" enctype="multipart/form-data"  method="POST">
+  <form class="cd-form floating-labels" action="." enctype="multipart/form-data"  method="POST">
     <fieldset>
-      <legend>Account</legend>
-
+      <legend>Search</legend>
+         <div class="icon">
+         <input class="user" type="radio" id="cd-name"  name='key' value='0' checked><label class="cd-labe" for="cd-name" style="padding:10px;">Roll No</label>
+           <input class="user" type="radio" id="cd-name" name='key' value='1'><label class="cd-labe" for="cd-name" style="padding:10px;"> Name</label> 
+         <input class="user" type="radio" id="cd-name2" name='key' value='2'><label class="cd-labe" for="cd-name2" style="padding:10px;"> {{keyword|safe}}</label>
+        </div> 
+  <!-- <div class="icon">
+         
+         </div>
+          <div class="icon">
+        
+         </div> -->
 
       <div class="icon">
-        <label class="cd-label" for="cd-name">Login-ID</label>
-        <input class="user" type="text" name="login_id" id="cd-name"  required>
+      	 <label class="cd-label" for="cd-name">Enter the KeyWord according  to your search choice above</label>
+         <input class="user" type="text" id="cd-name" name='value' required>
         </div> 
 
-        <div class="icon">
-          <label class="cd-label" for="cd-company">Password</label>
-        <input class="company" type="text" name="password" id="cd-company">
-        </div> 
-
-      <div><label class="cd-label" for="cd-name" >
-        <u><a href="/signup/">Not Yet Registered?</a></u></label>
-      </div><br>
-       <div><label class="cd-label" for="cd-name" >
-        <u><a href="/forgot_password/">Forget Password?</a></u></label>
-      </div>
-      <div class="icon" >
+        
       {{msg|safe}}
     
 
-<button type="submit" class="btn btn-info" style="float:right;"><b>login</b></button>
+<button type="submit" class="btn btn-info" style="float:right;"><b>Submit</b></button>
         </div>
           
     </fieldset>

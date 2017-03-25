@@ -10,7 +10,7 @@ import os
 @csrf_exempt
 def signup_alumni(request):
 	if request.user.is_authenticated():
-		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render (request,'index.html',{'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=="POST":
 			try:
@@ -117,7 +117,6 @@ def alumni_profile(request,roll_no):
 			JSON_response['company_institue']=alumni_data_row.company_institue
 			JSON_response['designation']=alumni_data_row.designation
 			JSON_response['other']=alumni_data_row.other
-			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
 			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 			edit_url=str(request.scheme+'://'+request.get_host()+'/edit_alumni_profile/')
 			edit='<a href="'+edit_url+'"'+' class="btn btn-default" style="float:right">Edit</a>'
@@ -138,7 +137,6 @@ def alumni_profile(request,roll_no):
 			JSON_response['company_institue']=alumni_data_row.company_institue
 			JSON_response['designation']=alumni_data_row.designation
 			JSON_response['other']=alumni_data_row.other
-			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
 			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 			ping='<a href="/ping/'+roll_no+'"'+ 'class="btn btn-default" style="float:right">Ping</a>'
 			# ping='<a href="'+'/ping/'+roll_no+'"'+'>Contact</a>'
@@ -150,32 +148,36 @@ def alumni_profile(request,roll_no):
 
 @login_required
 def alumni_group_profile(request):
-	try:
-		key=str(request.GET.get('key'))
-		value=str(request.GET.get('value'))
-		if(key=='roll_no'):
-			link='/alumni_view/'+value
-			return HttpResponseRedirect(str(link))
-		else:
-			if key=='name':
-				count = alumni_data.objects.filter(name=value).count()
-				if count==0:
-					return render(request,'profile.html',{'msg':'no profile found for such name'})
-				else:
-					for o in alumni_data.objects.filter(name=value):
-						return HttpResponse('profile html code will be passed as context in render')
+	if request.method=="POST":
+		try:
+			key=str(request.GET.get('key'))
+			value=str(request.GET.get('value'))
+			if(key=='0'):
+				link='/alumni_view/'+value
+				return HttpResponseRedirect(str(link))
 			else:
-				if key=='batch':
-					count = alumni_data.objects.filter(batch=value).count()
+				if key=='1':
+					count = alumni_data.objects.filter(name=value).count()
 					if count==0:
-						return render(request,'profile.html',{'msg':'please enter correct batch'})
+						return render(request,'profile.html',{'msg':'no profile found for such name'})
 					else:
-						for o in alumni_data.objects.filter(batch=value):
+						for o in alumni_data.objects.filter(name=value):
 							return HttpResponse('profile html code will be passed as context in render')
 				else:
-					return HttpResponse('please choose field from give list')
-	except:
-		return HttpResponse('something occur please try again')
+					if key=='2':
+						count = alumni_data.objects.filter(batch=value).count()
+						if count==0:
+							return render(request,'profile.html',{'msg':'please enter correct batch'})
+						else:
+							for o in alumni_data.objects.filter(batch=value):
+								return HttpResponse('profile html code will be passed as context in render')
+					else:
+						return HttpResponse('please choose field from give list')
+		except:
+			return HttpResponse('something occur please try again')
+	else:
+		return render(request,'search_profile.html',{'link2':'<a href="/logout/">LOGOUT</a>','keyword':'Batch'})
+
 
 
 @login_required
@@ -220,7 +222,10 @@ def edit_alumni_profile(request):
 			redirect_url='/alumni_view/'+str(request.user)
 			return HttpResponseRedirect(redirect_url)
 		except:
-			return render (request,'edit_alumni_profile.html',{'msg':'something occur please try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/login/">LOGIN</a>'})
+			link1='<div class="dropdown"><button class="dropbtn">PROFILE</button><div class="dropdown-content">'
+			link1+='<a href="/student_view/'+str(request.user)+'" >MY PROFILE</a>'
+			link1+='<a href="/students_profile">STUDENTS</a><a href="/alumni_profile">ALUMNI</a></div></div>'
+			return render (request,'edit_alumni_profile.html',{'msg':'something occur please try again','link1':link1,'link2':'<a href="/login/">LOGIN</a>'})
 	else:
 		alumni_data_row=alumni_data.objects.get(roll_no=str(request.user))
 		JSON_response={}
@@ -240,7 +245,6 @@ def edit_alumni_profile(request):
 		JSON_response['designation']=alumni_data_row.designation
 		JSON_response['skill']=alumni_data_row.skill
 		JSON_response['other']=alumni_data_row.other
-		JSON_response['link1']='<a href="/profile/">PROFILE</a>'
 		JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 		return render (request,'edit_alumni_profile.html',JSON_response)
 

@@ -39,6 +39,6 @@ def achievements(request):
 		data=e
 		print e
 	if request.user.is_authenticated():
-		return render(request,'achievements.html' ,{'datahead':data3+'</style>','data1':data1,'data2':data2,'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render(request,'achievements.html' ,{'datahead':data3+'</style>','data1':data1,'data2':data2,'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		return render(request,'achievements.html',{'datahead':data3+'</style>','data1':data1,'data2':data2,'link2':'<a href="/login/">LOGIN</a>'})

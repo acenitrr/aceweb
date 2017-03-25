@@ -9,7 +9,10 @@ import os
 @csrf_exempt
 def signup_faculty(request):
 	if request.user.is_authenticated():
-		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		link1='<div class="dropdown"><button class="dropbtn">PROFILE</button><div class="dropdown-content">'
+		link1+='<a href="/student_view/'+str(request.user)+'" >MY PROFILE</a>'
+		link1+='<a href="/students_profile">STUDENTS</a><a href="/alumni_profile">ALUMNI</a></div></div>'
+		return render (request,'index.html',{'link1':link1,'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=="POST":
 			try:
@@ -71,7 +74,10 @@ def faculty_profile(request,faculty_id):
 		JSON_response['other_details']=faculty_data_row.other_details
 		if request.user.is_authenticated():
 			login_id=str(request.user)
-			JSON_response['link1']='<a href="/profile/">PROFILE</a>'
+			link1='<div class="dropdown"><button class="dropbtn">PROFILE</button><div class="dropdown-content">'
+			link1+='<a href="/student_view/'+str(request.user)+'" >MY PROFILE</a>'
+			link1+='<a href="/students_profile">STUDENTS</a><a href="/alumni_profile">ALUMNI</a></div></div>'
+			JSON_response['link1']=link1
 			JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 			if login_id==faculty_id:
 				edit_url=str(request.scheme+'://'+request.get_host()+'/edit_faculty_profile/')
@@ -82,7 +88,10 @@ def faculty_profile(request,faculty_id):
 		return render(request,'show_faculty_profile.html',JSON_response)
 	except Exception,e:
 		print e
-		return render(request,'show_faculty_profile.html',{'msg':'something occur try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		link1='<div class="dropdown"><button class="dropbtn">PROFILE</button><div class="dropdown-content">'
+		link1+='<a href="/student_view/'+str(request.user)+'" >MY PROFILE</a>'
+		link1+='<a href="/students_profile">STUDENTS</a><a href="/alumni_profile">ALUMNI</a></div></div>'
+		return render(request,'show_faculty_profile.html',{'msg':'something occur try again','link1':link1,'link2':'<a href="/logout/">LOGOUT</a>'})
 
 
 @login_required
@@ -131,7 +140,10 @@ def edit_faculty_profile(request):
 			redirect_url='/faculty_view/'+str(request.user)
 			return HttpResponseRedirect(redirect_url)
 		except:
-			return render (request,'edit_faculty_profile.html',{'msg':'something occur please try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+			link1='<div class="dropdown"><button class="dropbtn">PROFILE</button><div class="dropdown-content">'
+			link1+='<a href="/student_view/'+str(request.user)+'" >MY PROFILE</a>'
+			link1+='<a href="/students_profile">STUDENTS</a><a href="/alumni_profile">ALUMNI</a></div></div>'
+			return render (request,'edit_faculty_profile.html',{'msg':'something occur please try again','link1':link1,'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		faculty_data_row=faculty_data.objects.get(faculty_id=str(request.user))
 		JSON_response={}
@@ -147,7 +159,10 @@ def edit_faculty_profile(request):
 		JSON_response['education']=faculty_data_row.education
 		JSON_response['area_of_interest']=faculty_data_row.area_of_interest
 		JSON_response['other_details']=faculty_data_row.other_details
-		JSON_response['link1']='<a href="/profile/">PROFILE</a>'
+		link1='<div class="dropdown"><button class="dropbtn">PROFILE</button><div class="dropdown-content">'
+		link1+='<a href="/student_view/'+str(request.user)+'" >MY PROFILE</a>'
+		link1+='<a href="/students_profile">STUDENTS</a><a href="/alumni_profile">ALUMNI</a></div></div>'
+		JSON_response['link1']=link1
 		JSON_response['link2']='<a href="/logout/">LOGOUT</a>'
 		return render (request,'edit_faculty_profile.html',JSON_response)
 

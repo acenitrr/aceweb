@@ -31,7 +31,7 @@ def project(request):
 			print "project added"
 	print project_string
 	if request.user.is_authenticated():
-		return render(request,'academics.html' ,{'project_string':project_string,'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render(request,'academics.html' ,{'project_string':project_string,'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		return render(request,'academics.html',{'project_string':project_string,'link2':'<a href="/login/">LOGIN</a>'})
 	# except:

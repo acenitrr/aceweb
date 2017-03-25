@@ -90,7 +90,7 @@ def email_verification(request,value):
 @csrf_exempt
 def login_view(request):
 	if request.user.is_authenticated():
-		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render (request,'index.html',{'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=='POST':
 			login_id=str(request.POST.get('login_id'))
@@ -106,7 +106,7 @@ def login_view(request):
 					if user is not None:
 						login(request, user)
 						print 'login done'
-						return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+						return render (request,'index.html',{'link2':'<a href="/logout/">LOGOUT</a>'})
 						# return HttpResponseRedirect("/welcome/")
 					else:
 						return render(request,'login.html',{'login_status':'wrong login_id or password'})
@@ -120,7 +120,7 @@ def login_view(request):
 @csrf_exempt
 def signup_view(request):
 	if request.user.is_authenticated():
-		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render (request,'index.html',{'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=='POST':
 			try:
@@ -212,7 +212,7 @@ def signup_view(request):
 			return render(request,"signup.html",{'link2':'<a href="/login/">LOGIN</a>'})
 @login_required
 def ping(request,id):
-	return render (request,'ping.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>','roll_no':id})
+	return render (request,'ping.html',{'link2':'<a href="/logout/">LOGOUT</a>','roll_no':id})
 	
 @login_required
 @csrf_exempt
@@ -260,6 +260,6 @@ def ping_send(request):
 			EmailMsg=EmailMessage("ACE",email_body % (reciver_name,sender_name,msg,sender_mobile,sender_email) ,'no-reply@gmail.com',[reciver_email] ,connection=backend)
 			EmailMsg.content_subtype = "html"
 			EmailMsg.send()
-			return render (request,'ping.html',{'msg':'email is send, kindly wait for reply','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+			return render (request,'ping.html',{'msg':'email is send, kindly wait for reply','link2':'<a href="/logout/">LOGOUT</a>'})
 	except:
-		return render (request,'ping.html',{'msg':'Something occur please try again','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render (request,'ping.html',{'msg':'Something occur please try again','link2':'<a href="/logout/">LOGOUT</a>'})

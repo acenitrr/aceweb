@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 @csrf_exempt
 def forgot_password_view(request):
 	if request.user.is_authenticated():
-		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render (request,'index.html',{'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=='POST':
 			login_id=str(request.POST.get('login_id'))
@@ -121,7 +121,7 @@ def forgot_password_view(request):
 @csrf_exempt
 def verify_forgot_password(request,value):
 	if request.user.is_authenticated():
-		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render (request,'index.html',{'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		try:
 			jwt_key=str(internal_key_data.objects.get(key='jwt_key').value)
@@ -135,7 +135,7 @@ def verify_forgot_password(request,value):
 @csrf_exempt
 def change_password(request,login_id):
 	if request.user.is_authenticated():
-		return render (request,'index.html',{'link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+		return render (request,'index.html',{'link2':'<a href="/logout/">LOGOUT</a>'})
 	else:
 		if request.method=='POST':
 			try:

@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all" /> 
     <link rel="stylesheet" type="text/css" href="/static/css/resume.css" media="all" />
+    <script src="/static/js/getprofile.js"></script>
         <!-- Latest compiled and minified CSS -->
 
 <!-- jQuery library -->
@@ -24,6 +25,8 @@
 
 {% include "base_head.html" %}
 {% block content %}
+
+{{msg|safe}}
 <div id="doc2" class="yui-t7">
     <div id="inner">
     <div class="row">
