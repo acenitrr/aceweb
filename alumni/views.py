@@ -145,35 +145,45 @@ def alumni_profile(request,roll_no):
 		return render(request,'show_alumni_profile.html',JSON_response)
 	except:
 		return render(request,'show_alumni_profile.html',{'msg':'Wrong roll_no entered'})
-
+@csrf_exempt
 @login_required
 def alumni_group_profile(request):
 	if request.method=="POST":
 		try:
-			key=str(request.GET.get('key'))
-			value=str(request.GET.get('value'))
+			key=str(request.POST.get('key'))
+			value=str(request.POST.get('value'))
 			if(key=='0'):
-				link='/alumni_view/'+value
-				return HttpResponseRedirect(str(link))
+				link='/alumni_view/'+str(value)
+				print link
+				return HttpResponseRedirect(link)
 			else:
 				if key=='1':
-					count = alumni_data.objects.filter(name=value).count()
+					count = alumni_data.objects.filter(name__iexact=value).count()
 					if count==0:
-						return render(request,'profile.html',{'msg':'no profile found for such name'})
+						return render(request,'search_profile.html',{'msg':'no profile found for such name','keyword':'Batch','link2':'<a href="/logout/">LOGOUT</a>'})
 					else:
-						for o in alumni_data.objects.filter(name=value):
-							return HttpResponse('profile html code will be passed as context in render')
+						alu_name_profile=''
+						for o in alumni_data.objects.filter(name__iexact=value):
+							alu_name_profile+="<tr><td><a href='/alumni_view/"+o.roll_no+"'>"+o.roll_no+"</a></td>"
+							alu_name_profile+="<td>"+o.name+"</td>"
+							alu_name_profile+="<td>"+str(o.batch)+"</td></tr>"
+						return render(request,'profiletable.html',{'data':alu_name_profile,'key':'Batch','link2':'<a href="/logout/">LOGOUT</a>'})
 				else:
 					if key=='2':
 						count = alumni_data.objects.filter(batch=value).count()
 						if count==0:
-							return render(request,'profile.html',{'msg':'please enter correct batch'})
+							return render(request,'search_profile.html',{'msg':'no profile found for such name', 'keyword':'Batch','link2':'<a href="/logout/">LOGOUT</a>'})
 						else:
+							alu_name_profile=''
 							for o in alumni_data.objects.filter(batch=value):
-								return HttpResponse('profile html code will be passed as context in render')
+								alu_name_profile+="<tr><td><a href='/alumni_view/"+o.roll_no+"'>"+o.roll_no+"</a></td>"
+								alu_name_profile+="<td>"+o.name+"</td>"
+								alu_name_profile+="<td>"+str(o.batch)+"</td></tr>"
+							return render(request,'profiletable.html',{'data':alu_name_profile,'key':'Batch','link2':'<a href="/logout/">LOGOUT</a>'})
 					else:
-						return HttpResponse('please choose field from give list')
-		except:
+						return render(request,'search_profile.html',{'msg':'Invalid request','keyword':'Batch','link2':'<a href="/logout/">LOGOUT</a>'})
+		except Exception,e:
+			print e
 			return HttpResponse('something occur please try again')
 	else:
 		return render(request,'search_profile.html',{'link2':'<a href="/logout/">LOGOUT</a>','keyword':'Batch'})

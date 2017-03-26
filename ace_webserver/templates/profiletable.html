@@ -1,0 +1,50 @@
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ACE</title>
+		<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+ <script src="/static/js/getprofile.js"></script>
+</head>
+<body>
+{% include "base_head.html" %}
+{% block content %}
+<br><br><br><br><br><br>
+	<div class="container">
+  <h2>Table</h2>
+      
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Login Id</th>
+        <th>Name</th>
+        <th>{{key|safe}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{data|safe}}
+    </tbody>
+  </table>
+</div>
+
+</div>
+ <nav class="navbar navbar-inverse navbar-fixed-bottom" style="height:18px;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+   
+    </div><p style="color:white;text-align:center;font-size:14px;padding-top:1%;">
+    &COPY 2017 ACE &#9898 ALL RIGHTS RESERVED  DESIGNED & DEVELOPED BY WEBTEAM - ACE</p>
+  </div>
+{% endblock content %}
+{% include "base_foot.html" %}  
+
+	</body>
+	</html>

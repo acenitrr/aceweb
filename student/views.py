@@ -99,22 +99,30 @@ def student_group_profile(request):
 				return HttpResponseRedirect(link)
 			else:
 				if key=='1':
-					count = student_data.objects.filter(name=value).count()
+					count = student_data.objects.filter(name__iexact=value).count()
 					if count==0:
-						return render(request,'profile2.html',{'msg':'no profile found for such name','link2':'<a href="/logout/">LOGOUT</a>'})
+						return render(request,'search_profile.html',{'msg':'no profile found for such name','keyword':'Semester','link2':'<a href="/logout/">LOGOUT</a>'})
 					else:
-						for o in student_data.objects.filter(name=value):
-							return HttpResponse('profile html code will be passed as context in render')
+						stu_name_profile=''
+						for o in student_data.objects.filter(name__iexact=value):
+							stu_name_profile+="<tr><td><a href='/student_view/"+o.roll_no+"'>"+o.roll_no+"</a></td>"
+							stu_name_profile+="<td>"+o.name+"</td>"
+							stu_name_profile+="<td>"+str(o.sem)+"</td></tr>"
+						return render(request,'profiletable.html',{'data':stu_name_profile,'key':'Semester','link2':'<a href="/logout/">LOGOUT</a>'})
 				else:
 					if key=='2':
 						count = student_data.objects.filter(sem=value).count()
 						if count==0:
-							return render(request,'profile.html',{'msg':'please enter correct semester','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
+							return render(request,'searchprofile.html',{'msg':'please enter correct semester','keyword':'Semester','link1':'<a href="/profile/">PROFILE</a>','link2':'<a href="/logout/">LOGOUT</a>'})
 						else:
+							stu_name_profile=''
 							for o in student_data.objects.filter(sem=value):
-								return HttpResponse('profile html code will be passed as context in render')
+								stu_name_profile+="<tr><td><a href='/student_view/"+o.roll_no+"'>"+o.roll_no+"</a></td>"
+								stu_name_profile+="<td>"+o.name+"</td>"
+								stu_name_profile+="<td>"+str(o.sem)+"</td></tr>"
+							return render(request,'profiletable.html',{'data':stu_name_profile,'key':'Semester','link2':'<a href="/logout/">LOGOUT</a>'})
 					else:
-						return HttpResponse('please choose field from give list')
+						return render(request,'search_profile.html',{'msg':'Invalid request','keyword':'Semester','link2':'<a href="/logout/">LOGOUT</a>'})
 		except Exception,e:
 			print e
 			return HttpResponse('something occur please try again')
