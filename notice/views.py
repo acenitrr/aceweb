@@ -34,7 +34,7 @@ def get_profile(request):
 	if request.user.is_authenticated():
 		login_id=str(request.user)
 		login_data_row=login_data.objects.get(login_id=login_id)
-		link1='<div class="dropdown"><button class="dropbtn">PROFILE</button><div class="dropdown-content">'
+		link1='<div class="dropdown"><button class="dropbtn"><div style="font-size:0.95em;color:#9d9d9d;font-family:arial;">PROFILE</div></button><div class="dropdown-content">'
 		if login_data_row.group_id==1:
 			link1+='<a href="/student_view/'+str(request.user)+'" >MY PROFILE</a>'
 		else:
