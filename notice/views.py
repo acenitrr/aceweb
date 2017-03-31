@@ -7,6 +7,9 @@ import datetime
 from django.http import HttpResponseRedirect, HttpResponse,JsonResponse
 from django.contrib.auth.views import login,logout
 from login.models import *
+from django.core.mail import EmailMessage,get_connection
+from custom_key.models import *
+from django.core.mail.backends.smtp import EmailBackend
 
 #Group_id distributions
 # 1 - student
@@ -108,3 +111,54 @@ def administration(request):
 def logout_view(request):
 	logout(request)
 	return HttpResponseRedirect('/')
+
+@csrf_exempt
+def contact_view(request):
+	try:
+		login_id="none"
+		if request.user.is_authenticated():
+			login_id=str(request.user)
+		else:
+			pass
+		if request.method=="POST":
+			name=str(request.POST.get('name'))
+			email=str(request.POST.get('email'))
+			mobile=str(request.POST.get('mobile'))
+			sub=str(request.POST.get('sub'))
+			msg=str(request.POST.get('msg'))
+			msg+="""
+
+
+By :
+name : %s
+email: %s
+mobile : %s
+login_id : %s"""
+
+			msg = msg %(name,email,mobile,login_id)
+			try:
+				host=custom_key_data.objects.get(key='host').value
+				print host
+				port=custom_key_data.objects.get(key='port').value
+				username=custom_key_data.objects.get(key='username').value
+				password=custom_key_data.objects.get(key='password').value
+				con_email=custom_key_data.objects.get(key='con_email').value
+				fac_email=custom_key_data.objects.get(key='fac_email').value
+				print fac_email
+				email=[]
+				email+=[username]+[con_email]+[fac_email]
+				print email
+				backend = EmailBackend(host=str(host), port=int(port), username=str(username), 
+				                       password=str(password), use_tls=True, fail_silently=True)
+				email_msg= EmailMessage(sub,msg,'no-reply@gmail.com',bcc=email,connection=backend)
+				email_msg.send()
+				return render (request,'contact.html',{'msg':'Your feedback/query is submitted'})
+			except Exception,e:
+				print e
+				return render(request,'contact.html',{'msg':'some error occur please try again'})
+		else:
+			return render(request,'contact.html')
+	except Exception,e:
+		print e
+		return render(request,'contact.html',{'msg':'some error occur please try again'})
+

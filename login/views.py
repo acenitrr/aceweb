@@ -51,6 +51,30 @@ def import_login_table(request):
 	else:
 		return HttpResponse("page not found")
 
+@login_required
+@csrf_exempt
+def import_overall_table(request):
+	if request.user.is_authenticated():
+		user=str(request.user)
+		try:
+			login_data_row=login_data.objects.get(login_id=str(user))
+			if login_data_row.group_id==5:
+			    if request.method == "POST":
+			    	print "27"
+			        form = UploadFileForm(request.POST,request.FILES)
+			        if form.is_valid():
+			        	print "30"
+			        	request.FILES['file'].save_to_database(model=overall_achievement_data,mapdict=['title','description'])
+			        	return HttpResponse("OK")
+			        else:
+			            return HttpResponseBadRequest()
+			    else:
+			        form = UploadFileForm()
+			        return render(request,'upload.html',{'form':form})
+		except:
+			return HttpResponse("Page not found")
+	else:
+		return HttpResponse("page not found")
 
 def email_verification(request,value):
 	try:
