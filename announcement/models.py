@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from tinymce.models import HTMLField
 # Create your models here.
 class announcement_title(models.Model):
 	title=models.CharField(max_length=120,blank=True,null=True)
@@ -11,7 +11,7 @@ class announcement_title(models.Model):
 class announcement_data(models.Model):
 	title=models.ForeignKey(announcement_title,null=True)
 	subtitle=models.CharField(max_length=120,blank=True,null=True)
-	content=models.CharField(max_length=120,blank=True,null=True)
+	content=HTMLField(blank=True)
 	issuer=models.CharField(max_length=120,blank=True,null=True)
 	active=models.BooleanField(default=True)
 	modified= models.DateTimeField(auto_now=True,auto_now_add=False)

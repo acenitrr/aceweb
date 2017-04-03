@@ -4,7 +4,7 @@ from django.db import models
 
 class  project_data(models.Model):
 	title=models.CharField(max_length=120,blank=True,null=True)
-	content=models.TextField(max_length=120,blank=True,null=True)
+	content=models.TextField(blank=True,null=True)
 	issuer=models.CharField(max_length=120,blank=True,null=True)
 	file= models.FileField(upload_to='resources/',null=True,blank=True)
 	date_issued=models.DateTimeField(blank=True,null=True)
