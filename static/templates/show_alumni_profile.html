@@ -1,0 +1,176 @@
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ACE</title>
+            <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all" /> 
+    <link rel="stylesheet" type="text/css" href="/static/css/resume.css" media="all" />
+    <script src="/static/js/getprofile.js"></script>
+        <!-- Latest compiled and minified CSS -->
+
+<!-- jQuery library -->
+
+<!-- Latest compiled JavaScript -->
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"style="background:#1c2d3f;">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+     <a class="navbar-brand" href="/" style="color:white;font-size:30px;position:absolute;left:7%;">ACE</a>
+            </div>
+          <style type="text/css">  
+            .dropbtn {
+    background-color:  #1c2d3f;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/*.dropdown:hover .dropbtn {*/
+    /*background-color: #3e8e41;*/
+}
+</style>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- /.navbar-collapse -->
+
+
+ <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1" >
+           
+            
+               <ul class="nav navbar-nav" >
+                    <li>
+                        <a href="/" >HOME</a>
+                    </li>
+                    <li>
+                        <a href="/academics/" >ACADEMICS</a>
+                    </li>
+                    <li>
+                        <a href="/achievements">ACHIEVEMENT</a>
+                    </li>
+          <li>
+                        <a href="/announcement/" >ACTIVITIES</a>
+                    </li><li>
+                        <a href="/administration/" >ADMINISTRATION</a>
+                    </li>
+                    <li>
+                        <a href="/contact/" >CONTACT_US</a>
+                    </li>
+                    <li id="profile">
+                    </li>
+          <li>
+                        {{link2|safe}}
+                    </li>
+          
+                </ul>
+         </div>
+
+          </div>
+        <!-- /.container -->
+    </nav>
+
+{{msg|safe}}
+<div id="doc2" class="yui-t7">
+    <div id="inner">
+    <div class="row">
+    <div class="col-sm-3" >
+    <img class="img-responsive" {{photo|safe}}/>
+      </div>
+        <div id="hd">
+            <div class="yui-gc">
+                <div class="yui-u first">
+                    <h1>{{name|safe}}</h1>
+                    <h2>Batch : {{batch|safe}}</h2>
+                </div>
+
+                <div class="yui-u">
+                    <div class="contact-info">
+                        {{edit|safe}}
+                        {{ping|safe}}
+                        <h3><a href="{{github_url|safe}}">Github url</a></h3>
+                            <h3><a href="{{linkedin_url|safe}}">Linkedin url</a></h3>
+                <!--        <h3><a id="pdf" href="#">Download PDF</a></h3>
+                        <h3><a href="mailto:name@yourdomain.com">name@yourdomain.com</a></h3>
+                        <h3>(313) - 867-5309</h3> -->
+                    </div><!--// .contact-info -->
+                </div>
+            </div><!--// .yui-gc -->
+        </div><!--// hd -->
+        <div class="yui-gf">
+                        <div class="yui-u first">
+                            <h2>Current Status </h2>
+                        </div>
+                        <div class="yui-u">
+                            <p class="enlarge">
+                                Status : {{current_status|safe}} <br>
+                                Company Institue : {{company_institue|safe}}<br>
+                                Designation : {{designation|safe}}
+                            </p>
+                        </div>
+                    </div><!--// .yui-gf -->
+
+        <div id="bd">
+            <div id="yui-main">
+                <div class="yui-b">
+                  {{other|safe}}
+                </div><!--// .yui-b -->
+            </div><!--// yui-main -->
+        </div><!--// bd -->
+
+
+    </div><!-- // inner -->
+
+
+</div><!--// doc -->
+
+
+{% include "base_foot.html" %}  
+</body>
+    </html>

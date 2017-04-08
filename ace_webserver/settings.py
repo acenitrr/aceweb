@@ -66,7 +66,7 @@ ROOT_URLCONF = 'ace_webserver.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [('ace_webserver/templates')],
+        'DIRS': [('aceweb/static/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,3 +141,5 @@ MEDIA_ROOT = "media/"
 
 FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
                         "django_excel.TemporaryExcelFileUploadHandler")
+import django
+django.setup()

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="/static/css/login reset.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="/static/css/login style.css"> <!-- Resource style -->
+	<script src="/static/js/login modernizr.js"></script> <!-- Modernizr -->
+	<script src="/static/js/getprofile.js"></script>
+	<!-- // <script type="text/javascript" src="/static/tiny_mce/tiny_mce.js"></script> -->
+	<script src="http://cloud.tinymce.com/stable/tinymce.min.js?apiKey=w1v6psh8dyqghv1poy8yir1riciyfdzhbev0i9n34mo215um"></script>
+	<script>
+  tinymce.init({
+  	// elements : "cd-textarea"
+    selector: '#cd-textarea',
+    height : 480,
+    menubar:false,
+    toolbar: false,
+    statusbar: false
+
+  });
+  </script>
+  	
+	<title>ACE</title>
+
+  
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!-- Custom CSS -->
+</head>
+<body>
+<body style="background:#f6f6f6;">
+  
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"style="background:#1c2d3f;">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+     <a class="navbar-brand" href="/" style="color:white;font-size:30px;position:absolute;left:7%;">ACE</a>
+            </div>
+          <style type="text/css">  
+            .dropbtn {
+    background-color:  #1c2d3f;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/*.dropdown:hover .dropbtn {*/
+    /*background-color: #3e8e41;*/
+}
+</style>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- /.navbar-collapse -->
+
+
+ <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1" >
+           
+            
+               <ul class="nav navbar-nav" >
+                    <li>
+                        <a href="/" >HOME</a>
+                    </li>
+                    <li>
+                        <a href="/academics/" >ACADEMICS</a>
+                    </li>
+                    <li>
+                        <a href="/achievements">ACHIEVEMENT</a>
+                    </li>
+          <li>
+                        <a href="/announcement/" >ACTIVITIES</a>
+                    </li><li>
+                        <a href="/administration/" >ADMINISTRATION</a>
+                    </li>
+                    <li>
+                        <a href="/contact/" >CONTACT_US</a>
+                    </li>
+                    <li id="profile">
+                    </li>
+          <li>
+                        {{link2|safe}}
+                    </li>
+          
+                </ul>
+         </div>
+
+          </div>
+        <!-- /.container -->
+    </nav>
+	<br><br>
+	<form class="cd-form floating-labels" action="/signup_alumni/" enctype="multipart/form-data"  method="POST">
+		<fieldset>
+			<legend>Alumni Login</legend>
+
+
+			<div class="icon">
+				<label class="cd-label" for="cd-name">Roll No</label>
+				<input class="user" type="text" name="roll_no" id="cd-name" value='{{login_id|safe}}' readonly='readonly'>
+		    </div> 
+
+		<div class="icon">
+				<label class="cd-label" for="cd-name">Designation</label>
+				<input class="user" type="text" name="designation" id="cd-name" required >
+		    </div>  
+		    <div class="icon">
+				<label class="cd-label" for="cd-name">batch</label>
+				<input class="user" type="text" name="batch" id="cd-name" required>
+		    </div>  
+<div class="icon">
+				<label class="cd-label" for="cd-name">Picture</label><BR><br><br>
+<input id="picture" name="photo" type="file" multiple></DIV>
+				<div class="icon">
+				<label class="cd-label" for="cd-name">Current Status</label>
+				<input class="user" type="text" name="current_status" id="cd-name"  >
+		    </div> 
+			
+			<div class="icon">
+				<label class="cd-label" for="cd-name">Company or Institue</label>
+				<input class="user" type="text" name="company_institue" id="cd-name"  >
+		    </div> 
+		    <div class="icon">
+				<label class="cd-label" for="cd-name">skill</label>
+				<input class="user" type="text" name="skill" id="cd-name"  >
+		    </div> 
+		    <div class="icon">
+				<label class="cd-label" for="cd-name">linkedin_url</label>
+				<input class="user" type="text" name="linkedin_url" id="cd-name"  >
+		    </div> 
+		    <div class="icon">
+				<label class="cd-label" for="cd-name">github_url</label>
+				<input class="user" type="text" name="github_url" id="cd-name"  >
+		    </div> 
+			
+			<div class="icon">
+				<label class="cd-label" for="cd-name">Password</label>
+				<input class="user" type="text" name="password" id="cd-name"  required>
+		    </div> 
+			
+			<div class="icon">
+				<label class="cd-label" for="cd-name">Confirm Password</label>
+				<input class="user" type="text" name="cd-name" id="cd-name"  required>
+		    </div> 
+			
+
+			<div class="icon">
+				<label class="cd-label">Other Details</label>
+			</div>
+			<br>
+			<div class ='icon'>
+      			<textarea class="message" name="other" id="cd-textarea" value='NO Skill added'></textarea>
+			</div>
+
+			<div>
+		      	<input type="submit" value="Login">
+		    </div>
+		</fieldset>
+	</form>
+<script src="/static/js/login jquery-2.1.1.js"></script>
+<script src="/static/js/login main.js"></script> <!-- Resource jQuery -->
+
+{% include "base_foot.html" %}	
+</body>
+</html>

@@ -1,0 +1,155 @@
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ACE</title>
+
+  
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="css/default rotator.css" />
+		<link rel="stylesheet" type="text/css" href="css/component rotator.css" />
+		<script src="js/modernizr.custom rotator.js"></script>
+		   <script src="/static/js/getprofile.js"></script>
+			</head>
+
+<body>
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"style="background:#1c2d3f;">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+     <a class="navbar-brand" href="/" style="color:white;font-size:30px;position:absolute;left:7%;">ACE</a>
+            </div>
+          <style type="text/css">  
+            .dropbtn {
+    background-color:  #1c2d3f;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/*.dropdown:hover .dropbtn {*/
+    /*background-color: #3e8e41;*/
+}
+</style>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- /.navbar-collapse -->
+
+
+ <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1" >
+           
+            
+               <ul class="nav navbar-nav" >
+                    <li>
+                        <a href="/" >HOME</a>
+                    </li>
+                    <li>
+                        <a href="/academics/" >ACADEMICS</a>
+                    </li>
+                    <li>
+                        <a href="/achievements">ACHIEVEMENT</a>
+                    </li>
+          <li>
+                        <a href="/announcement/" >ACTIVITIES</a>
+                    </li><li>
+                        <a href="/administration/" >ADMINISTRATION</a>
+                    </li>
+                    <li>
+                        <a href="/contact/" >CONTACT_US</a>
+                    </li>
+                    <li id="profile">
+                    </li>
+          <li>
+                        {{link2|safe}}
+                    </li>
+          
+                </ul>
+         </div>
+
+          </div>
+        <!-- /.container -->
+    </nav>
+  <br><BR>
+	<div class="container-fluid" style="background:#f6f6f6;height:100%;">
+	<div class="container-fluid">
+	
+  <div class="jumbotron">
+    <div style="color:black;font-size: 25px">Notice<br></div>
+        <div style="color:black;font-size: 40px">{{title|safe}}</div> 
+   </div>
+   <div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-body" style="float:right;">{{created|safe}}</div>
+  </div>
+  <div class="panel panel-info class">
+    <div class="panel-body"><b>Issued on:</b>{{date|safe}}<br><b>Issued by:</b>{{issuer|safe}}<br><b>{{file|safe}}</b></div>
+  </div>
+ 
+   <div class="panel panel-default">
+    <div class="panel-body"><b> {{content|safe}}</b></div>
+  </div>
+</div>
+   
+ </div>
+ 
+ 
+
+
+</div>
+
+{% include "base_foot.html" %}  
+</body>
+
+</html>

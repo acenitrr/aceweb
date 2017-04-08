@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<title>
+		Edit Your Profile
+</title>
+<script src="http://cloud.tinymce.com/stable/tinymce.min.js?apiKey=w1v6psh8dyqghv1poy8yir1riciyfdzhbev0i9n34mo215um"></script>
+
+	<script>
+
+  tinymce.init({
+  	// elements : "cd-textarea"
+    selector: '#cd-textarea',
+    height : 480,
+    menubar:false,
+    toolbar: false,
+    statusbar: false
+
+  });
+  </script>
+  <script src="/static/js/getprofile.js"></script>
+</head>
+<body>
+	<form action="." enctype="multipart/form-data"  method="POST">
+		<input type='text' placeholder='roll_no' name='roll_no' value={{roll_no|safe}} readonly="readonly">
+		<input type='text' placeholder='name' name='name' value={{name|safe}} readonly="readonly">
+		<input type='text' placeholder='mobile' name='mobile' value={{mobile|safe}} readonly="readonly">
+		<input type='text' placeholder='email' name='email' value={{email|safe}} readonly="readonly">
+		<input type='text' placeholder='designation' name='designation' value={{designation|safe}} 
+		readonly="readonly">
+		<input type='text' placeholder='batch' name='batch' value={{batch|safe}} readonly="readonly">
+		<input type='text' placeholder='current_status' name='current_status' value={{current_status|safe}}>
+		<input type='text' placeholder='designation' name='designation' value={{designation|safe}}>
+		<input type='text' placeholder='company_institue' name='company_institue' value={{company_institue|safe}}>
+		{{photo|safe}}
+		<input type='file'  name='photo' value={{photo_name|safe}}>
+		<input type='text' placeholder='linkedin_url' name='linkedin_url' value={{linkedin_url|safe}} >
+		<input type='text' placeholder='github_url' name='github_url'  value={{github_url|safe}}>
+		<textarea  name="other" id="cd-textarea" value='NO Skill added' value={{other|safe}}></textarea>
+		<input type="submit">
+	</form>
+	{{msg|safe}}
+</body>
+</html>
