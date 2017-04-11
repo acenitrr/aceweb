@@ -1,4 +1,4 @@
-#!/var/www/aceweb/env/bin/python
+#!/home/aditya/Django/aceweb/env/bin/python2.7
 """PILdriver, an image-processing calculator using PIL.
 
 An instance of class PILDriver is essentially a software stack machine

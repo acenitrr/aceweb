@@ -1,4 +1,4 @@
-#!/var/www/aceweb/env/bin/python
+#!/home/aditya/Django/aceweb/env/bin/python2.7
 #
 # The Python Imaging Library.
 # $Id$
