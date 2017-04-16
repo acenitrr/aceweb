@@ -45,7 +45,7 @@ def import_login_table(request):
 			            return HttpResponseBadRequest()
 			    else:
 			        form = UploadFileForm()
-			        return render(request,'upload.html',{'form':form})
+			        return render(request,'upload.html',{'form':form ,'msg':"Login table"})
 		except:
 			return HttpResponse("Page not found")
 	else:
@@ -70,7 +70,7 @@ def import_overall_table(request):
 			            return HttpResponseBadRequest()
 			    else:
 			        form = UploadFileForm()
-			        return render(request,'upload.html',{'form':form})
+			        return render(request,'upload.html',{'form':form ,'msg':"overall_achievement_data"})
 		except:
 			return HttpResponse("Page not found")
 	else:

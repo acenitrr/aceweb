@@ -157,7 +157,10 @@ login_id : %s"""
 				print e
 				return render(request,'contact.html',{'msg':'some error occur please try again'})
 		else:
-			return render(request,'contact.html')
+			if request.user.is_authenticated():
+				return render(request,'contact.html' ,{'link2':'<a href="/logout/">LOGOUT</a>'})
+			else:
+				return render(request,'contact.html',{'link2':'<a href="/login/">LOGIN</a>'})
 	except Exception,e:
 		print e
 		return render(request,'contact.html',{'msg':'some error occur please try again'})
