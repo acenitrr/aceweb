@@ -66,7 +66,7 @@ ROOT_URLCONF = 'ace_webserver.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [('aceweb/static/templates')],
+        'DIRS': [('static/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
