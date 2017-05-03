@@ -61,7 +61,7 @@ urlpatterns = [
     url(r'^ping/(?P<id>.+)/$',ping),
     url(r'^ping_send/$',ping_send),
     url(r'^contact/$',contact_view),
-    url(r'^.*$', RedirectView.as_view(url='/', permanent=False), name='index'),
+    # url(r'^.*$', RedirectView.as_view(url='/', permanent=False), name='index'),
 
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),
     #url(r'^profile_search/',signup_view),
