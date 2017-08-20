@@ -133,11 +133,12 @@ def login_view(request):
 						return render (request,'index.html',{'link2':'<a href="/logout/">LOGOUT</a>'})
 						# return HttpResponseRedirect("/welcome/")
 					else:
-						return render(request,'login.html',{'login_status':'wrong login_id or password'})
+						return render(request,'login.html',{'msg':'wrong login_id or password'})
 				else:
-					return render(request,'login.html',{'login_status':'complete your email verification'})
-			except:
-				return render(request,'login.html',{'login_status':'wrong login_id or password'})
+					return render(request,'login.html',{'msg':'complete your email verification'})
+			except Exception,e:
+				print e
+				return render(request,'login.html',{'msg':'wrong login_id or password'})
 		else:
 			return render(request,'login.html')
 

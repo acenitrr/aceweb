@@ -18,13 +18,14 @@ from django.contrib import admin
 from login.views import import_login_table,email_verification,signup_view,login_view,ping,ping_send,import_overall_table
 from student.views import student_profile,student_group_profile,edit_student_profile,signup_student
 from faculty.views import faculty_profile,faculty_group_profile,edit_faculty_profile,signup_faculty
-from alumni.views import alumni_profile,alumni_group_profile,edit_alumni_profile,signup_alumni
+from alumni.views import alumni_profile,alumni_group_profile,edit_alumni_profile,signup_alumni,whatsapp1,whatsapp
 from forgot_password.views import forgot_password_view,verify_forgot_password
 from announcement.views import announcement
 from project.views import project
 from notice.views import get_notice,notice_read,home,administration,logout_view,activities,get_profile,contact_view
 from django.views.generic.base import RedirectView
 from achievement.views import achievements
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -61,6 +62,8 @@ urlpatterns = [
     url(r'^ping/(?P<id>.+)/$',ping),
     url(r'^ping_send/$',ping_send),
     url(r'^contact/$',contact_view),
+    url(r'^whatsapp/$',whatsapp),
+    url(r'^whatsapp1/$',whatsapp1),
     # url(r'^.*$', RedirectView.as_view(url='/', permanent=False), name='index'),
 
     #url(r'^profile/(?P<value>.+)/(?P<value>.+)',signup_view),

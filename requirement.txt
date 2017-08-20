@@ -1,0 +1,5 @@
+django==1.9
+pyjwt
+django-tinymce
+django-excel
+Pillow

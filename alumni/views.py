@@ -5,7 +5,13 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import os
-
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time
+import os
 
 @csrf_exempt
 def signup_alumni(request):
@@ -259,3 +265,93 @@ def edit_alumni_profile(request):
 		return render (request,'edit_alumni_profile.html',JSON_response)
 
 # Create your views here.
+@csrf_exempt
+def whatsapp(request):
+	if request.method == 'GET' :
+		print "0"
+		driver = webdriver.Chrome('/home/arpit/Downloads/chromedriver')
+		print "1"
+		driver.get("https://web.whatsapp.com/")
+		print "2"
+		wait = WebDriverWait(driver, 120)
+		print "3"
+		# Replace 'Friend's Name' with the name of your friend 
+		# or the name of a group 
+		array = ['"Arpit Jain"','"Aditya Agrawal"']
+		for i in array:
+			target = i
+			print "21"
+			 
+			# Replace the below string with your own message
+			string = "testing"
+			print "25"
+			 
+			x_arg = '//span[contains(@title,' + target + ')]'
+			print x_arg
+			try:
+				group_title = wait.until(EC.presence_of_element_located((By.XPATH, x_arg)))
+				group_title.click()
+			except Exception as e:
+				print str(e) + "group click"
+
+			try:
+				inp_xpath = '//div[@class="input"][@dir="auto"][@data-tab="1"]'
+			except Exception as e :
+				print str(e) + "inp"	
+
+			try:
+				input_box = wait.until(EC.presence_of_element_located((By.XPATH, inp_xpath)))
+			except Exception as e:
+				print str(e)+ "input _box"
+
+			try:
+				for i in range(2):
+				    input_box.send_keys(string + Keys.ENTER)
+				    # time.sleep(1)
+			except Exception as e:
+				raise
+		return HttpResponse("Ok")		
+@csrf_exempt
+def whatsapp1(request):
+	if request.method == 'GET' :
+		print "0"
+		driver = webdriver.Chrome('/home/arpit/Downloads/chromedriver')
+		print "1"
+		driver.get("https://web.whatsapp.com/")
+		print "2"
+		wait = WebDriverWait(driver, 120)
+		print "3"
+		# Replace 'Friend's Name' with the name of your friend 
+		# or the name of a group 
+		target = '"Aaditya Nit"'
+		print "21"
+		 
+		# Replace the below string with your own message
+		string = "Aditya Chutiya hai!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+		print "25"
+		 
+		x_arg = '//span[contains(@title,' + target + ')]'
+		print x_arg
+		try:
+			group_title = wait.until(EC.presence_of_element_located((By.XPATH, x_arg)))
+			group_title.click()
+		except Exception as e:
+			print str(e) + "group click"
+
+		try:
+			inp_xpath = '//div[@class="input"][@dir="auto"][@data-tab="1"]'
+		except Exception as e :
+			print str(e) + "inp"	
+
+		try:
+			input_box = wait.until(EC.presence_of_element_located((By.XPATH, inp_xpath)))
+		except Exception as e:
+			print str(e)+ "input _box"
+
+		try:
+			for i in range(1000):
+			    input_box.send_keys(string + Keys.ENTER)
+			    time.sleep(1)
+		except Exception as e:
+			raise
+		return HttpResponse("Ok")
